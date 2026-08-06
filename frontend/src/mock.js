@@ -2,7 +2,7 @@
 // All of this will later be served/persisted by the backend where relevant.
 
 export const IMAGES = {
-  hero: "/cspl2main.jpg",
+  hero: "/hero-image.jpg",
   /* "https://images.unsplash.com/photo-1766066014237-00645c74e9c6?auto=format&fit=crop&w=900&q=80", */
   dashboard: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
   globalNumbers: "https://images.unsplash.com/photo-1684610529682-553625a1ffed?auto=format&fit=crop&w=1200&q=80",
