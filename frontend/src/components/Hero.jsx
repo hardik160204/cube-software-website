@@ -59,7 +59,7 @@ const AgentCard = () => (
 const OmnichannelFlow = () => {
   // 1. Array of images to cycle through
   const bgImages = [
-    "/cube-main.jpg",
+    "/cube-Main.jpg",
     "/cube-callcentimg1.jpg", 
     "/telephonecube.jpg", // <-- Replace with your 3rd image path
     "/guytalkingonphone.jpg"  // <-- Replace with your 4th image path
