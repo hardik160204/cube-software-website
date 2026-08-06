@@ -1,0 +1,70 @@
+/* Cube Software - light theme inspired by The Cloud Dial layout */
+
+.font-heading {
+  font-family: "Archivo", "Inter", sans-serif;
+}
+
+.hero-bg {
+  background:
+    radial-gradient(ellipse 60% 50% at 85% 20%, rgba(30, 136, 229, 0.08), transparent),
+    linear-gradient(180deg, #f5f8fd 0%, #ffffff 100%);
+}
+
+/* Floating cards */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+.animate-float-delayed {
+  animation: float 5s ease-in-out 2.5s infinite;
+}
+
+/* Slow spinning dashed ring */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 30s linear infinite;
+}
+
+/* Entrance animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fadeUp 0.7s ease-out both;
+}
+.animate-fade-up-delayed {
+  animation: fadeUp 0.7s ease-out 0.2s both;
+}
+
+/* Marquee banners */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-33.333%); }
+}
+.marquee-track {
+  animation: marquee 28s linear infinite;
+  width: max-content;
+}
+@keyframes marqueeSlow {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track-slow {
+  animation: marqueeSlow 40s linear infinite;
+  width: max-content;
+}
+.marquee-track:hover,
+.marquee-track-slow:hover {
+  animation-play-state: paused;
+}
+
+html {
+  scroll-behavior: smooth;
+}
