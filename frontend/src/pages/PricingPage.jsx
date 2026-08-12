@@ -13,8 +13,8 @@ const PRICING_TIERS = [
   {
     name: "Starter / Basic",
     description: "Ideal for small support teams and growing office desks looking for reliable cloud telephony.",
-    monthlyPrice: 19,
-    yearlyPrice: 15,
+    monthlyPrice: 1999,
+    yearlyPrice: 1599,
     highlight: false,
     badge: "",
     features: [
@@ -29,8 +29,8 @@ const PRICING_TIERS = [
   {
     name: "Professional / Contact Center",
     description: "Engineered for high-volume call centers needing predictive dialing and CRM integration.",
-    monthlyPrice: 49,
-    yearlyPrice: 39,
+    monthlyPrice: 2499,
+    yearlyPrice: 1999,
     highlight: true,
     badge: "Most Popular",
     features: [
@@ -176,7 +176,7 @@ export default function PricingPage() {
                       <div className="mt-6 mb-8 pb-6 border-b border-slate-100">
                         {typeof price === "number" ? (
                           <div className="flex items-baseline gap-1">
-                            <span className="text-4xl font-black text-slate-900">${price}</span>
+                            <span className="text-4xl font-black text-slate-900">Rs. {price}</span>
                             <span className="text-sm font-semibold text-slate-500">/ seat / month</span>
                           </div>
                         ) : (

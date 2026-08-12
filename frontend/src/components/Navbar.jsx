@@ -1,29 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Phone, ChevronDown, Menu, X, LogIn } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
-import { NAV_LINKS } from "@/constants/testIds";
 
-// --- HARDCODED CONTACT INFO ---
+// --- NAVIGATION DATA RESTRUCTURED EXACTLY TO YOUR NEEDS ---
+const MENU_ITEMS = [
+  { label: "Home", href: "#home" },
+  {
+    label: "Services",
+    href: "/services",
+    children: [
+      { label: "Contact Center Solution", href: "/services/cloud-contact-center" },
+      { label: "Auto Dialer", href: "/services/auto-dialer" },
+      { label: "IVRS Services", href: "/services/ivrs" },
+    ],
+  },
+  {
+    label: "Products",
+    href: "#products",
+    children: [
+      { label: "Callisto Voice Logger", href: "/services/voice-logger" },
+      { label: "Call Billing Software", href: "/services/call-billing" },
+      { label: "Screen Logger", href: "/services/screen-logger" },
+      { label: "Cube Voice Mail", href: "/services/voice-mail" },
+      { label: "Conference Bridge", href: "/services/conference-bridge" },
+      { label: "Voice Logger InSync", href: "/services/voice-logger-insync" },
+    ],
+  },
+  { label: "About", href: "/about" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Industries", href: "#industries" },
+  { label: "FAQ", href: "#faq" },
+  { label: "Contact", href: "#contact" },
+];
+
 const CONTACT_INFO = {
   expertLine: "+91 120 405 7109",
-  usTollFree: "+1 (1111) 1111-11111",
-  india: "+91 120 405 7109",
-  uk: "+44 1234 1111111",
-  email: "sales@cube-software.com",
-  usOffice: "USA",
-  indiaOffice: "A-26, Ground Floor, Sector 63, Noida, Uttar Pradesh 201301, India",
 };
 
 const Navbar = ({ onBookDemo }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [hoveredMenu, setHoveredMenu] = useState(null); // State for our new hover dropdowns
+  
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -35,6 +55,7 @@ const Navbar = ({ onBookDemo }) => {
 
   const go = (href) => {
     setMobileOpen(false);
+    setHoveredMenu(null); // Close dropdowns on navigation
     if (href.startsWith("/")) {
       navigate(href);
       return;
@@ -61,26 +82,9 @@ const Navbar = ({ onBookDemo }) => {
     return false;
   };
 
-  // Filter out "India SIP Channels" and "CRM" from the dropdown dynamically
-  const displayNavLinks = NAV_LINKS.map((link) => {
-    if (link.label === "Services" && link.children) {
-      return {
-        ...link,
-        children: link.children.filter(
-          (c) => c.label !== "India SIP Channels" && c.label !== "CRM"
-        ),
-      };
-    }
-    return link;
-  });
-
-  // For Desktop: Hide the secondary homepage anchor links to prevent congestion
-  const desktopLinks = displayNavLinks.filter(
-    (link) => !["Products", "Industries", "FAQ"].includes(link.label)
-  );
-
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
+      
       {/* PERFECTED MARQUEE CSS */}
       <style>
         {`
@@ -105,7 +109,7 @@ const Navbar = ({ onBookDemo }) => {
         `}
       </style>
 
-      {/* Top utility bar - Seamless Continuous Marquee */}
+      {/* Top utility bar */}
       <div className="bg-[#0A1F44] text-white text-xs sm:text-sm h-10 flex items-center overflow-hidden">
         <div className="animate-marquee">
           {[1, 2, 3, 4].map((index) => (
@@ -117,8 +121,6 @@ const Navbar = ({ onBookDemo }) => {
               <span className="font-semibold tracking-wide whitespace-nowrap">35+ Years of Telephony Excellence</span>
               <span className="text-yellow-400 text-lg leading-none">•</span>
               <span className="font-semibold tracking-wide whitespace-nowrap">Enterprise Features. Small Business Pricing.</span>
-              <span className="text-yellow-400 text-lg leading-none">•</span>
-              <span className="font-semibold tracking-wide whitespace-nowrap">Simply Better Telephony.</span>
               <span className="text-yellow-400 text-lg leading-none">•</span>
             </span>
           ))}
@@ -133,8 +135,8 @@ const Navbar = ({ onBookDemo }) => {
       >
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between h-20">
           
-          {/* 1. LEFT: LOGO SECTION */}
-          <span onClick={() => go("/")} className="cursor-pointer shrink-0 flex items-center group">
+          {/* 1. LOGO */}
+          <span onClick={() => go("/")} className="cursor-pointer shrink-0 flex items-center group mr-2 xl:mr-4">
             <img 
               src="/logo75.png" 
               alt="Cube Software Logo" 
@@ -142,35 +144,58 @@ const Navbar = ({ onBookDemo }) => {
             />
           </span>
 
-          {/* 2. CENTER: NAVIGATION LINKS (Using filtered desktopLinks) */}
-          <div className="hidden lg:flex flex-1 justify-center items-center gap-4 xl:gap-8">
-            {desktopLinks.map((link) =>
+          {/* 2. CENTER LINKS (Fitted perfectly with smart text sizing and gaps) */}
+          <div className="hidden lg:flex flex-1 justify-center items-center gap-1 xl:gap-4">
+            {MENU_ITEMS.map((link) =>
               link.children ? (
-                <DropdownMenu key={link.label}>
-                  <DropdownMenuTrigger
-                    className={`px-2 py-2 text-[15px] font-semibold rounded-md flex items-center gap-1.5 outline-none transition-colors whitespace-nowrap ${
-                      isActive(link) ? "text-blue-700" : "text-slate-700 hover:text-blue-700"
+                // --- CUSTOM HOVER DROPDOWN FOR SERVICES & PRODUCTS ---
+                <div
+                  key={link.label}
+                  className="relative h-20 flex items-center"
+                  onMouseEnter={() => setHoveredMenu(link.label)}
+                  onMouseLeave={() => setHoveredMenu(null)}
+                >
+                  <button
+                    onClick={() => go(link.href)}
+                    className={`px-2 xl:px-3 py-2 text-[13px] xl:text-[14px] font-bold rounded-md flex items-center gap-1 transition-colors whitespace-nowrap ${
+                      isActive(link) || hoveredMenu === link.label ? "text-blue-700" : "text-slate-700 hover:text-blue-700"
                     }`}
                   >
-                    {link.label} <ChevronDown size={14} className="mt-0.5" />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="bg-white max-h-96 overflow-y-auto rounded-xl shadow-lg border-slate-100">
-                    {link.children.map((c) => (
-                      <DropdownMenuItem
-                        key={c.label}
-                        className="cursor-pointer font-medium text-slate-700 focus:bg-blue-50 focus:text-blue-700"
-                        onClick={() => go(c.href)}
+                    {link.label} 
+                    <ChevronDown 
+                      size={14} 
+                      className={`mt-0.5 transition-transform duration-300 ${hoveredMenu === link.label ? "rotate-180" : ""}`} 
+                    />
+                  </button>
+
+                  <AnimatePresence>
+                    {hoveredMenu === link.label && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 15 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        className="absolute top-20 left-0 w-64 bg-white border border-slate-100 shadow-[0_20px_40px_rgba(0,0,0,0.1)] rounded-2xl overflow-hidden flex flex-col py-3 z-50"
                       >
-                        {c.label}
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                        {link.children.map((c) => (
+                          <button
+                            key={c.label}
+                            onClick={() => go(c.href)}
+                            className="text-left px-5 py-3 text-[14px] font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                          >
+                            {c.label}
+                          </button>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               ) : (
+                // --- STANDARD LINKS ---
                 <button
                   key={link.label}
                   onClick={() => go(link.href)}
-                  className={`px-2 py-2 text-[15px] font-semibold rounded-md transition-colors whitespace-nowrap ${
+                  className={`px-2 xl:px-3 py-2 text-[13px] xl:text-[14px] font-bold rounded-md transition-colors whitespace-nowrap ${
                     isActive(link) ? "text-blue-700" : "text-slate-700 hover:text-blue-700"
                   }`}
                 >
@@ -181,37 +206,30 @@ const Navbar = ({ onBookDemo }) => {
           </div>
 
           {/* 3. RIGHT: CTA & ACTIONS */}
-          <div className="hidden lg:flex items-center shrink-0 gap-4 xl:gap-6">
+          <div className="hidden lg:flex items-center shrink-0 gap-3 xl:gap-5 ml-2">
             <a 
               href={`tel:${CONTACT_INFO.expertLine.replace(/\s/g, "")}`} 
-              className="flex items-center gap-2 text-[15px] font-bold text-slate-700 hover:text-blue-700 transition-colors whitespace-nowrap"
+              className="flex items-center gap-2 text-[13px] xl:text-[14px] font-bold text-slate-700 hover:text-blue-700 transition-colors whitespace-nowrap"
             >
               <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center">
                 <Phone size={14} className="text-blue-600" />
               </div>
-              <span>{CONTACT_INFO.expertLine}</span>
+              <span className="hidden xl:inline">{CONTACT_INFO.expertLine}</span>
             </a>
 
-            <div className="w-px h-6 bg-slate-200"></div>
+            <div className="w-px h-5 bg-slate-200"></div>
 
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1.5 text-[15px] font-semibold text-slate-700 hover:text-blue-700 transition-colors outline-none whitespace-nowrap">
-                <LogIn size={16} className="text-blue-600" />
-                Login <ChevronDown size={14} className="text-slate-400" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="bg-white rounded-xl shadow-lg border-slate-100 mt-2">
-                <DropdownMenuItem 
-                  className="cursor-pointer font-medium focus:bg-blue-50 focus:text-blue-700"
-                  onClick={() => go("/login")}
-                >
-                  Customer Portal Login
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <button 
+              onClick={() => go("/login")}
+              className="flex items-center gap-1.5 text-[13px] xl:text-[14px] font-bold text-slate-700 hover:text-blue-700 transition-colors outline-none whitespace-nowrap"
+            >
+              <LogIn size={16} className="text-blue-600" />
+              Login
+            </button>
 
             <Button
               onClick={bookDemo}
-              className="ml-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 py-5 font-bold transition-transform hover:-translate-y-0.5 whitespace-nowrap shadow-md shadow-blue-600/20"
+              className="ml-1 xl:ml-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-5 xl:px-6 py-4 xl:py-5 text-[13px] xl:text-[14px] font-bold transition-transform hover:-translate-y-0.5 whitespace-nowrap shadow-md shadow-blue-600/20"
             >
               Book Demo
             </Button>
@@ -227,12 +245,12 @@ const Navbar = ({ onBookDemo }) => {
           </button>
         </div>
 
-        {/* Mobile menu dropdown (Still uses displayNavLinks to show all links) */}
+        {/* --- MOBILE DROPDOWN --- */}
         {mobileOpen && (
           <div className="lg:hidden bg-white border-t border-slate-100 shadow-2xl max-h-[80vh] overflow-y-auto">
             <div className="px-4 py-4 flex flex-col gap-2">
               
-              {displayNavLinks.map((link) =>
+              {MENU_ITEMS.map((link) =>
                 link.children ? (
                   <div key={link.label} className="mb-2">
                     <div className="px-3 pt-2 pb-2 text-xs font-bold uppercase tracking-widest text-blue-600/70">
@@ -254,7 +272,7 @@ const Navbar = ({ onBookDemo }) => {
                   <button
                     key={link.label}
                     onClick={() => go(link.href)}
-                    className="text-left px-3 py-3 text-[15px] font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors"
+                    className="text-left px-3 py-3 text-[15px] font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors"
                   >
                     {link.label}
                   </button>
@@ -273,17 +291,17 @@ const Navbar = ({ onBookDemo }) => {
                 {CONTACT_INFO.expertLine}
               </a>
 
-              <div className="px-3 pt-4 pb-2 text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2">
-                <LogIn size={14} /> Login Portals
-              </div>
               <button 
                 onClick={() => go("/login")}
-                className="w-full text-left px-5 py-2.5 text-[15px] font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors"
+                className="flex items-center gap-3 text-left px-3 py-3 text-[15px] font-bold text-slate-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors"
               >
+                <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center">
+                  <LogIn size={14} className="text-slate-600" />
+                </div>
                 Customer Portal Login
               </button>
 
-              <Button onClick={bookDemo} className="mt-6 mb-4 bg-blue-600 hover:bg-blue-700 text-white py-6 rounded-xl font-bold shadow-lg shadow-blue-600/20">
+              <Button onClick={bookDemo} className="mt-4 mb-4 bg-blue-600 hover:bg-blue-700 text-white py-6 rounded-xl font-bold shadow-lg shadow-blue-600/20">
                 Book Demo
               </Button>
             </div>
