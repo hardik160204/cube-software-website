@@ -15,10 +15,10 @@ import { Button } from "../components/ui/button";
 import Navbar from "../components/Navbar";
 import { Footer } from "../components/HomeSections2";
 
-// --- HARDCODED SERVICES DATA (Quick Call Dialer replaced with Cloud Contact Center Solution) ---
+// --- HARDCODED SERVICES DATA ---
 const SERVICES = {
   "cloud-contact-center": {
-    title: "Cloud Contact Center Solution",
+    title: "Contact Center Solution",
     tagline: "Get results with a powerful inbound, outbound and blended cloud contact center solution with full call disposition.",
     heroImage: "https://images.unsplash.com/photo-1560264280-88b68371db39?auto=format&fit=crop&w=1920&q=80",
     stats: [
@@ -367,13 +367,23 @@ const ServicePage = () => {
       <Navbar/>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${service.heroImage})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44]/95 via-[#0A1F44]/85 to-[#0A1F44]/60" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-44 pb-24">
+      <section className="relative overflow-hidden bg-[#0A1F44]">
+        
+        {/* --- NEW VIDEO BACKGROUND --- */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover z-0"
+        >
+          <source src="/contact-center-bg.mp4" type="video/mp4" />
+        </video>
+
+        {/* OVERLAY GRADIENT */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44]/75 via-[#0A1F44]/50 to-[#0A1F44]/25 z-10" />
+        
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 pt-44 pb-24">
           <nav className="flex items-center gap-1.5 text-xs text-blue-200 mb-6">
             <Link className="hover:text-white transition-colors" to="/">Home</Link>
             <ChevronRight size={13} />
@@ -398,14 +408,17 @@ const ServicePage = () => {
               </Button>
             </Link>
           </div>
-          <div className="mt-12 flex flex-wrap gap-0 divide-x divide-white/15">
+          
+          {/* UPDATED: Centered Stats Block */}
+          <div className="mt-16 w-full flex flex-wrap justify-center items-center divide-x divide-white/15 animate-fade-up">
             {service.stats.map((s, i) => (
-              <div key={s.label} className={i === 0 ? "pr-8" : "px-8"}>
-                <div className="font-heading font-black text-2xl sm:text-3xl text-white">{s.value}</div>
-                <div className="text-[11px] font-semibold tracking-wider uppercase text-blue-200 mt-1">{s.label}</div>
+              <div key={s.label} className="px-6 sm:px-12 text-center">
+                <div className="font-heading font-black text-3xl sm:text-4xl text-white">{s.value}</div>
+                <div className="text-[11px] font-semibold tracking-wider uppercase text-blue-200 mt-2">{s.label}</div>
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
@@ -414,8 +427,8 @@ const ServicePage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-16 lg:gap-20 xl:gap-28 items-center">
           <div className="relative z-10 order-1 lg:order-2 lg:pl-8 xl:pl-12">
             <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-4">— Overview</div>
-            <h2 className="font-heading font-bold text-3xl sm:text-4xl text-slate-900 leading-snug mb-5">
-              The Engine Powering <span className="text-blue-600">{service.title}</span>
+            <h2 className="font-heading font-bold text-3xl sm:text-3xl text-slate-900 leading-snug mb-5">
+              The Intelligence Behind Modern <span className="text-blue-600">{service.title}</span>
             </h2>
             <div className="space-y-4">
               {service.overview.map((p, i) => (

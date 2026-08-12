@@ -295,6 +295,7 @@ export const Footer = () => (
         <div className="font-heading font-bold text-white text-sm tracking-wider uppercase mb-4">Company</div>
         <ul className="space-y-2.5 text-sm">
           <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
+          <li><Link to="/pricing" className="hover:text-white transition-colors">Pricing</Link></li>
           {[
             { l: "Industries", h: "/#industries" },
             { l: "Client Voices", h: "/#home" },
@@ -320,6 +321,7 @@ export const Footer = () => (
         <span>© {new Date().getFullYear()} Cube Software Pvt. Ltd. All rights reserved.</span>
         <span>Smart. Scalable. Secure Cloud Telephony.</span>
       </div>
+      
     </div>
   </footer>
 );

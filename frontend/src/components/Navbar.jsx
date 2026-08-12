@@ -55,6 +55,7 @@ const Navbar = ({ onBookDemo }) => {
 
   const isActive = (link) => {
     if (link.href === "/about") return location.pathname === "/about";
+    if (link.href === "/pricing") return location.pathname === "/pricing";
     if (link.label === "Services") return location.pathname.startsWith("/services");
     if (link.href === "#home") return location.pathname === "/";
     return false;
@@ -72,6 +73,11 @@ const Navbar = ({ onBookDemo }) => {
     }
     return link;
   });
+
+  // For Desktop: Hide the secondary homepage anchor links to prevent congestion
+  const desktopLinks = displayNavLinks.filter(
+    (link) => !["Products", "Industries", "FAQ"].includes(link.label)
+  );
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -136,13 +142,13 @@ const Navbar = ({ onBookDemo }) => {
             />
           </span>
 
-          {/* 2. CENTER: NAVIGATION LINKS */}
-          <div className="hidden lg:flex flex-1 justify-center items-center gap-2 xl:gap-4">
-            {displayNavLinks.map((link) =>
+          {/* 2. CENTER: NAVIGATION LINKS (Using filtered desktopLinks) */}
+          <div className="hidden lg:flex flex-1 justify-center items-center gap-4 xl:gap-8">
+            {desktopLinks.map((link) =>
               link.children ? (
                 <DropdownMenu key={link.label}>
                   <DropdownMenuTrigger
-                    className={`px-3 py-2 text-[15px] font-semibold rounded-md flex items-center gap-1.5 outline-none transition-colors whitespace-nowrap ${
+                    className={`px-2 py-2 text-[15px] font-semibold rounded-md flex items-center gap-1.5 outline-none transition-colors whitespace-nowrap ${
                       isActive(link) ? "text-blue-700" : "text-slate-700 hover:text-blue-700"
                     }`}
                   >
@@ -164,7 +170,7 @@ const Navbar = ({ onBookDemo }) => {
                 <button
                   key={link.label}
                   onClick={() => go(link.href)}
-                  className={`px-3 py-2 text-[15px] font-semibold rounded-md transition-colors whitespace-nowrap ${
+                  className={`px-2 py-2 text-[15px] font-semibold rounded-md transition-colors whitespace-nowrap ${
                     isActive(link) ? "text-blue-700" : "text-slate-700 hover:text-blue-700"
                   }`}
                 >
@@ -175,7 +181,7 @@ const Navbar = ({ onBookDemo }) => {
           </div>
 
           {/* 3. RIGHT: CTA & ACTIONS */}
-          <div className="hidden lg:flex items-center shrink-0 gap-4 xl:gap-5">
+          <div className="hidden lg:flex items-center shrink-0 gap-4 xl:gap-6">
             <a 
               href={`tel:${CONTACT_INFO.expertLine.replace(/\s/g, "")}`} 
               className="flex items-center gap-2 text-[15px] font-bold text-slate-700 hover:text-blue-700 transition-colors whitespace-nowrap"
@@ -194,7 +200,12 @@ const Navbar = ({ onBookDemo }) => {
                 Login <ChevronDown size={14} className="text-slate-400" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="bg-white rounded-xl shadow-lg border-slate-100 mt-2">
-                <DropdownMenuItem className="cursor-pointer font-medium focus:bg-blue-50 focus:text-blue-700">Customer Portal Login</DropdownMenuItem>
+                <DropdownMenuItem 
+                  className="cursor-pointer font-medium focus:bg-blue-50 focus:text-blue-700"
+                  onClick={() => go("/login")}
+                >
+                  Customer Portal Login
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
@@ -216,7 +227,7 @@ const Navbar = ({ onBookDemo }) => {
           </button>
         </div>
 
-        {/* Mobile menu dropdown */}
+        {/* Mobile menu dropdown (Still uses displayNavLinks to show all links) */}
         {mobileOpen && (
           <div className="lg:hidden bg-white border-t border-slate-100 shadow-2xl max-h-[80vh] overflow-y-auto">
             <div className="px-4 py-4 flex flex-col gap-2">
@@ -265,7 +276,10 @@ const Navbar = ({ onBookDemo }) => {
               <div className="px-3 pt-4 pb-2 text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2">
                 <LogIn size={14} /> Login Portals
               </div>
-              <button className="w-full text-left px-5 py-2.5 text-[15px] font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors">
+              <button 
+                onClick={() => go("/login")}
+                className="w-full text-left px-5 py-2.5 text-[15px] font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors"
+              >
                 Customer Portal Login
               </button>
 
