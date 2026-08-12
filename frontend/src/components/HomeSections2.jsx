@@ -12,9 +12,50 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { toast } from "sonner";
-import { INDUSTRIES, CLIENTS, TESTIMONIALS, FAQS, CONTACT_INFO } from "../mock";
 import { SectionLabel, SectionTitle } from "./HomeSections";
-import CubeLogo from "./CubeLogo";
+
+// --- HARDCODED MOCK DATA ---
+const CONTACT_INFO = {
+  expertLine: "+91 120 405 7109",
+  usTollFree: "+1 (1111) 1111-11111",
+  india: "+91 120 405 7109",
+  uk: "+44 1234 1111111",
+  email: "sales@cube-software.com",
+  usOffice: "USA",
+  indiaOffice: "A-26, Ground Floor, Sector 63, Noida, Uttar Pradesh 201301, India",
+};
+
+const INDUSTRIES = [
+  { icon: "Headset", title: "BPO – KPO", description: "High-volume dialing, logging and monitoring built for outsourcing floors of every size." },
+  { icon: "Landmark", title: "Financial Services", description: "Compliant recording and secure telephony for banks, NBFCs and trading desks." },
+  { icon: "ConciergeBell", title: "Hospitality", description: "Innovative desk solutions for hotels, event centres, cruise lines and travel brands." },
+  { icon: "HeartPulse", title: "Healthcare", description: "Affordable patient-first communication suites for hospitals, labs and clinics." },
+  { icon: "Building2", title: "Real Estate", description: "Dialer, voice logger and CRM bundles tuned for property sales teams." },
+  { icon: "TowerControl", title: "Telecom", description: "Pioneers in telecom solutions since 1990 with home-grown software trusted worldwide." },
+];
+
+const LOGOS = [
+  '/1.jpg', '/2.png', '/4.png', '/5.jpeg',
+  '/6.png', '/7.png', '/upsc.png', '/cars24.png', '/10.png', '/11.png'
+];
+
+const TESTIMONIALS = [
+  { quote: "Cube Software transformed our business communications, improving efficiency while significantly reducing operational costs.", name: "ABC.", role: "COO, Fintech Startup" },
+  { quote: "Migration from our other dialer was seamless. Our agents are now productive from anywhere in the country.", name: "XYZ.", role: "Head of Contact Center" },
+  { quote: "The dialer deployment and CRM integration have been flawless — and the 24/7 support team is outstanding.", name: "", role: "IT Director, Hospitality Group" },
+];
+
+const FAQS = [
+  { q: "What services does Cube Software provide?", a: "We offer a complete range of communication solutions including Cloud PBX, dialers (inbound/outbound/blended), voice loggers, screen loggers, IVRS, conference bridges, call billing software, voice mail systems, SIP trunking and CRM integrations." },
+  { q: "Which Citys do you support?", a: "We provide numbers and voice solutions across the India Bangaluru, Mumbai, Delhi, Gurugram, Noida, Ahemdabad, Puna in India and many more regions. along with 140 & 160 Lines as well." },
+  { q: "Can I get local and toll-free numbers?", a: "We provide local, national, international DID, toll-free, and vanity numbers to meet your business and market requirements." },
+  { q: "How quickly can numbers be activated?", a: "Most numbers are activated within minutes after verification and payment. Some states may require documentation based on local telecom regulations." },
+  { q: "Do you support call forwarding and IVR?", a: "Yes. Our platform supports IVR menus, smart call routing, call forwarding, time-based routing, ring groups, voicemail, call recording and auto attendants." },
+  { q: "Can your services work with my existing dialers or PBX?", a: "Yes. Our SIP trunking and VoIP solutions are compatible with most major PBX platforms including Asterisk, FreePBX, 3CX, Grandstream and Cisco systems." },
+  { q: "Do you provide CRM integrations?", a: "Yes. We integrate with popular CRMs and tools including custimized CRM, Salesforce, Freshdesk and custom applications through our APIs & CTI Connectors." },
+  { q: "Is your platform suitable for call centers?", a: "Yes. Our platform is built for BPOs, call centers, support teams, sales teams, and remote workforces, delivering high-quality calls, intelligent routing, and enterprise-grade scalability" },
+  { q: "How do I get started?", a: "Getting started is easy. Contact our sales team or request a demo through our website. Our experts will help you choose the right solution based on your business needs, call volume, and future growth." },
+];
 
 const IND_ICONS = { Headset, Landmark, ConciergeBell, HeartPulse, Building2, TowerControl };
 
@@ -44,31 +85,23 @@ export const IndustriesSection = () => (
   </section>
 );
 
-// Array for your 10 logo images (using .png as requested)
-const LOGOS = [
-  '/1.jpg', '/2.png', '/4.png', '/5.jpeg',
-  '/6.png', '/7.png', '/upsc.png', '/cars24.png', '/10.png', '/11.png'
-];
-
 export const ClientsSection = () => (
   <section className="py-14 border-y border-slate-100 bg-slate-50 overflow-hidden relative">
-    {/* Gradient Fades for the edges (matched to slate-50 background) */}
     <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
     <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
-   
+    
     <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-8">
       <div className="text-center text-xs font-bold tracking-[0.25em] uppercase text-slate-400">
         Our Clientele & Partners
       </div>
     </div>
-   
+    
     <div className="flex w-max">
       <motion.div
         animate={{ x: ["0%", "-50%"] }}
         transition={{ ease: "linear", duration: 40, repeat: Infinity }}
         className="flex items-center gap-16 px-8"
       >
-        {/* Spread the LOGOS array twice for a seamless infinite loop */}
         {[...LOGOS, ...LOGOS].map((logoPath, idx) => (
           <div
             key={idx}
@@ -85,7 +118,6 @@ export const ClientsSection = () => (
                 }
               }}
             />
-            {/* Fallback text if the image fails to load */}
             <span className="hidden absolute inset-0 flex items-center justify-center text-sm font-bold text-slate-400 text-center">
               Logo {(idx % 10) + 1}
             </span>
@@ -149,7 +181,6 @@ export const ContactSection = () => {
       return;
     }
     setSubmitting(true);
-    // MOCK: persist locally until backend is wired up
     setTimeout(() => {
       const existing = JSON.parse(localStorage.getItem("cube_inquiries") || "[]");
       existing.push({ ...form, date: new Date().toISOString() });
@@ -234,13 +265,13 @@ export const Footer = () => (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
       <div>
         {/* 1. LEFT: LOGO SECTION */}
-          <span onClick={() => go("/")} className="cursor-pointer shrink-0 flex items-center group">
+          <Link to="/" className="cursor-pointer shrink-0 flex items-center group">
             <img
               src="/logo75.png"
               alt="Cube Software Logo"
               className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
-          </span>
+          </Link>
         <p className="mt-5 text-sm leading-relaxed text-slate-400 text-justify">
           Designing Computer Telephony Integration software for 35+ years — trusted by enterprises
           across the globe for dialers, voice logging, Screen recording, IVR with our cloud telephony.
@@ -250,7 +281,6 @@ export const Footer = () => (
         <div className="font-heading font-bold text-white text-sm tracking-wider uppercase mb-4">Products</div>
         <ul className="space-y-2.5 text-sm">
           {[
-           
             { l: "Quick Call Dialer", s: "quick-call-dialer" },
             { l: "Callisto Voice Logger", s: "voice-logger" },
             { l: "IVRS Services", s: "ivrs" },

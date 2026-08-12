@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 
-// Importing the sections (Paths based on your previous component structure)
-import { FeaturesSection, WhySection, ProductsSection } from "../components/HomeSections";
+// Importing the sections (FeaturesSection safely removed)
+import { WhySection, ProductsSection } from "../components/HomeSections";
 import { ClientsSection, IndustriesSection, TestimonialsSection, FAQSection, ContactSection, Footer } from "../components/HomeSections2";
 
 const Home = () => {
@@ -33,11 +33,9 @@ const Home = () => {
       <Hero onBookDemo={scrollToContact} onGetStarted={scrollToContact} />
       
       <ClientsSection />
-      <FeaturesSection />
+      
       <WhySection />
       <ProductsSection />
-      
-      {/* PBXSection and GlobalNumbersSection have been successfully removed from here */}
       
       <IndustriesSection />
       <TestimonialsSection />

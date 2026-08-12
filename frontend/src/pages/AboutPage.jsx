@@ -7,8 +7,12 @@ import {
 import { Button } from "../components/ui/button";
 import Navbar from "../components/Navbar";
 import { Footer, ClientsSection } from "../components/HomeSections2";
-import { ABOUT_IMAGE } from "../servicesData";
-import { IMAGES } from "../mock";
+
+// --- HARDCODED IMAGES ---
+const ABOUT_IMAGE = "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80";
+const IMAGES = {
+  team: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
+};
 
 const MILESTONES = [
   { year: "1990", text: "Cube Software is founded, pioneering Computer Telephony Integration in India." },

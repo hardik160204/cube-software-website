@@ -2,10 +2,41 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { 
   ArrowRight, MapPin, PhoneCall, Mic, Phone, Mail,
-  MessageCircle, Facebook, Twitter, Linkedin, Instagram , ViberIcon,
+  MessageCircle, Facebook, Twitter, Linkedin, Instagram
 } from "lucide-react";
 import { Button } from "./ui/button";
-import { HERO, IMAGES } from "../mock";
+
+// --- HARDCODED MOCK DATA ---
+const IMAGES = {
+  hero: "/hero-image.jpg",
+  dashboard: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+  globalNumbers: "https://images.unsplash.com/photo-1684610529682-553625a1ffed?auto=format&fit=crop&w=1200&q=80",
+  team: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80",
+};
+
+const HERO = {
+  badge: "Enhancing Communication Capabilities.",
+  titleLines: ["Smarter Calls. Stronger Connections. Enterprise Telephony"],
+  accentIndex: 1,
+  subtitle:
+    "Power your business communication with Cube Quick Call dialers, voice logging and CRM-integrated telephony — engineered by Cube Software for teams of every size.",
+  stats: [
+    { value: "35+", label: "Years of CTI" },
+    { value: "80%", label: "Optimize Cost" },
+    { value: "98.5%", label: "Uptime SLA" },
+  ],
+  localNumbers: [
+    { flag: "🇺🇸", number: "+1 (111) 111-1111" },
+    { flag: "🇬🇧", number: "+44 20 111 1111" },
+    { flag: "🇮🇳", number: "+91 22 1111 1111" },
+  ],
+  tollFree: [
+    { flag: "🇺🇸", number: "+1 (800) 123-4567" },
+    { flag: "🇨🇦", number: "+1 (888) 123-4567" },
+    { flag: "🇦🇺", number: "1800 123 4567" },
+  ],
+  agentCard: { name: "Quick Support", number: "+91 80 68694747" },
+};
 
 // --- FLOATING CARDS ---
 const NumberCard = () => (
@@ -57,24 +88,21 @@ const AgentCard = () => (
 
 // --- OMNICHANNEL ICONS FLOWING OVER BACKGROUND IMAGE ---
 const OmnichannelFlow = () => {
-  // 1. Array of images to cycle through
   const bgImages = [
     "/cube-Main.jpg",
     "/cube-callcentimg1.jpg", 
-    "/telephonecube.jpg", // <-- Replace with your 3rd image path
-    "/guytalkingonphone.jpg"  // <-- Replace with your 4th image path
+    "/telephonecube.jpg", 
+    "/guytalkingonphone.jpg"  
   ];
 
-  // 2. State to keep track of current image index
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
-  // 3. Effect to run the 5-second timer
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImgIndex((prevIndex) => (prevIndex + 1) % bgImages.length);
-    }, 5000); // 5000ms = 5 seconds
+    }, 5000); 
 
-    return () => clearInterval(interval); // Cleanup on unmount
+    return () => clearInterval(interval); 
   }, [bgImages.length]);
 
   const socialNodes = [
@@ -86,13 +114,11 @@ const OmnichannelFlow = () => {
     { Icon: PhoneCall, color: "text-purple-500", bg: "bg-purple-50", start: { top: "35%", left: "90%" }, drift: { x: [0, -70, 50, 0], y: [0, 70, -40, 0] }, size: "w-14 h-14", delay: 1.2 },
     { Icon: Mail, color: "text-amber-500", bg: "bg-amber-50", start: { top: "25%", left: "5%" }, drift: { x: [0, 80, -30, 0], y: [0, -30, 50, 0] }, size: "w-16 h-16", delay: 0.3 },
     { Icon: Phone, color: "text-blue-500", bg: "bg-blue-50", start: { top: "45%", left: "5%" }, drift: { x: [0, 80, -30, 0], y: [0, -30, 50, 0] }, size: "w-16 h-16", delay: 0.3 }
-    /*{ Icon: ViberIcon, color: "text-violet-600", bg: "bg-violet-50", start: { top: "75%", left: "80%" }, drift: { x: [0, -60, 30, 0], y: [0, -40, 50, 0] }, size: "w-16 h-16", delay: 1.7 }*/
   ];
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 bg-slate-900">
       
-      {/* 1. BACKGROUND IMAGE LAYER (Slideshow with Cross-fade) */}
       <div className="absolute inset-0 z-0">
         {bgImages.map((img, index) => (
           <img 
@@ -106,7 +132,6 @@ const OmnichannelFlow = () => {
         ))}
       </div>
 
-      {/* 2. ATMOSPHERIC GLOWS OVER THE IMAGE */}
       <motion.div 
         animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
@@ -118,19 +143,12 @@ const OmnichannelFlow = () => {
         className="absolute bottom-1/4 right-1/4 w-[700px] h-[700px] bg-indigo-400/30 rounded-full blur-[150px] z-10"
       />
 
-      {/* 3. FLOATING SOCIAL/OMNICHANNEL ICONS */}
       <div className="absolute inset-0 z-20">
         {socialNodes.map((node, i) => (
           <motion.div
             key={`node-${i}`}
             initial={{ opacity: 0, scale: 0 }}
-            animate={{ 
-              opacity: 1, 
-              scale: 1, 
-              x: node.drift.x, 
-              y: node.drift.y,
-              rotate: [0, 15, -15, 0] 
-            }}
+            animate={{ opacity: 1, scale: 1, x: node.drift.x, y: node.drift.y, rotate: [0, 15, -15, 0] }}
             transition={{ 
               opacity: { duration: 1, delay: node.delay },
               scale: { duration: 1, delay: node.delay },
@@ -163,10 +181,8 @@ const Hero = ({ onBookDemo, onGetStarted }) => {
   return (
     <section id="home" className="relative overflow-hidden pt-40 pb-24 lg:pt-48">
       
-      {/* 1. OMNICHANNEL ICONS & OFFICE IMAGE BACKGROUND */}
       <OmnichannelFlow />
 
-      {/* 2. MAIN TEXT CONTENT */}
       <div className="relative z-30 max-w-5xl mx-auto px-4 sm:px-6 text-center animate-fade-up">
         <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-200 bg-white/90 backdrop-blur-md text-blue-700 text-[11px] font-bold tracking-[0.15em] uppercase mb-8 shadow-sm">
           <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
@@ -209,7 +225,6 @@ const Hero = ({ onBookDemo, onGetStarted }) => {
         </div>
       </div>
 
-      {/* 3. BOTTOM IMAGE AND FLOATING CARDS */}
       <div className="relative z-30 max-w-6xl mx-auto px-4 sm:px-6 mt-20 animate-fade-up-delayed">
         <div className="relative">
           
@@ -225,7 +240,6 @@ const Hero = ({ onBookDemo, onGetStarted }) => {
             />
           </div>
 
-          {/* Stats bar overlapping the banner at the bottom */}
           <div className="relative sm:absolute sm:-bottom-10 sm:left-1/2 sm:-translate-x-1/2 mt-6 sm:mt-0 bg-white rounded-2xl shadow-xl border border-slate-100 px-8 py-6 flex flex-wrap justify-center gap-x-12 gap-y-4 z-30">
             {HERO.stats.map((s) => (
               <div key={s.label} className="text-center">

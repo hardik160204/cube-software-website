@@ -8,8 +8,18 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
-import { CONTACT_INFO } from "../mock";
 import { NAV_LINKS } from "@/constants/testIds";
+
+// --- HARDCODED CONTACT INFO ---
+const CONTACT_INFO = {
+  expertLine: "+91 120 405 7109",
+  usTollFree: "+1 (1111) 1111-11111",
+  india: "+91 120 405 7109",
+  uk: "+44 1234 1111111",
+  email: "sales@cube-software.com",
+  usOffice: "USA",
+  indiaOffice: "A-26, Ground Floor, Sector 63, Noida, Uttar Pradesh 201301, India",
+};
 
 const Navbar = ({ onBookDemo }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -84,7 +94,7 @@ const Navbar = ({ onBookDemo }) => {
             display: flex;
             align-items: center;
             gap: 2rem;
-            padding-right: 2rem; /* Ensure gap exists between the end of one group and start of the next */
+            padding-right: 2rem;
           }
         `}
       </style>
@@ -92,7 +102,6 @@ const Navbar = ({ onBookDemo }) => {
       {/* Top utility bar - Seamless Continuous Marquee */}
       <div className="bg-[#0A1F44] text-white text-xs sm:text-sm h-10 flex items-center overflow-hidden">
         <div className="animate-marquee">
-          {/* Render 4 groups to ensure it never runs out of text on ultrawide screens */}
           {[1, 2, 3, 4].map((index) => (
             <span key={index} className="marquee-group">
               <span className="font-semibold tracking-wide whitespace-nowrap">Voice Without Limits.</span>
@@ -127,7 +136,7 @@ const Navbar = ({ onBookDemo }) => {
             />
           </span>
 
-          {/* 2. CENTER: NAVIGATION LINKS (Using displayNavLinks) */}
+          {/* 2. CENTER: NAVIGATION LINKS */}
           <div className="hidden lg:flex flex-1 justify-center items-center gap-2 xl:gap-4">
             {displayNavLinks.map((link) =>
               link.children ? (
@@ -167,7 +176,6 @@ const Navbar = ({ onBookDemo }) => {
 
           {/* 3. RIGHT: CTA & ACTIONS */}
           <div className="hidden lg:flex items-center shrink-0 gap-4 xl:gap-5">
-            {/* Phone Number */}
             <a 
               href={`tel:${CONTACT_INFO.expertLine.replace(/\s/g, "")}`} 
               className="flex items-center gap-2 text-[15px] font-bold text-slate-700 hover:text-blue-700 transition-colors whitespace-nowrap"
@@ -178,10 +186,8 @@ const Navbar = ({ onBookDemo }) => {
               <span>{CONTACT_INFO.expertLine}</span>
             </a>
 
-            {/* Vertical Divider */}
             <div className="w-px h-6 bg-slate-200"></div>
 
-            {/* Login Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center gap-1.5 text-[15px] font-semibold text-slate-700 hover:text-blue-700 transition-colors outline-none whitespace-nowrap">
                 <LogIn size={16} className="text-blue-600" />
@@ -192,7 +198,6 @@ const Navbar = ({ onBookDemo }) => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Demo Button */}
             <Button
               onClick={bookDemo}
               className="ml-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 py-5 font-bold transition-transform hover:-translate-y-0.5 whitespace-nowrap shadow-md shadow-blue-600/20"
@@ -247,7 +252,6 @@ const Navbar = ({ onBookDemo }) => {
 
               <div className="h-px bg-slate-100 my-2"></div>
 
-              {/* Mobile Phone */}
               <a 
                 href={`tel:${CONTACT_INFO.expertLine.replace(/\s/g, "")}`} 
                 className="flex items-center gap-3 text-left px-3 py-3 text-[15px] font-bold text-slate-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors"
@@ -258,7 +262,6 @@ const Navbar = ({ onBookDemo }) => {
                 {CONTACT_INFO.expertLine}
               </a>
 
-              {/* Mobile Login Links */}
               <div className="px-3 pt-4 pb-2 text-xs font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2">
                 <LogIn size={14} /> Login Portals
               </div>

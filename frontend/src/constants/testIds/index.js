@@ -18,7 +18,7 @@ export const NAV_LINKS = [
     label: "Services",
     href: "/services",
     children: [
-      { label: "Quick Call Dialer", href: "/services/quick-call-dialer" },
+      { label: "Cloud Contact Center Solution", href: "/services/cloud-contact-center" },
       { label: "India SIP Channels", href: "/services/sip-trunking" },
       { label: "Cloud Contact Centre", href: "/services/cloud-pbx" },
       { label: "Callisto Voice Logger", href: "/services/voice-logger" },
