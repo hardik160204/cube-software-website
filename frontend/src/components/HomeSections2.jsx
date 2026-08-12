@@ -47,7 +47,7 @@ export const IndustriesSection = () => (
 // Array for your 10 logo images (using .png as requested)
 const LOGOS = [
   '/1.jpg', '/2.png', '/4.png', '/5.jpeg',
-  '/6.png', '/7.png', '/8.png', '/9.png', '/10.png', '/11.png'
+  '/6.png', '/7.png', '/upsc.png', '/cars24.png', '/10.png', '/11.png'
 ];
 
 export const ClientsSection = () => (
@@ -55,28 +55,28 @@ export const ClientsSection = () => (
     {/* Gradient Fades for the edges (matched to slate-50 background) */}
     <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
     <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
-    
+   
     <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-8">
       <div className="text-center text-xs font-bold tracking-[0.25em] uppercase text-slate-400">
         Our Clientele & Partners
       </div>
     </div>
-    
+   
     <div className="flex w-max">
-      <motion.div 
-        animate={{ x: ["0%", "-50%"] }} 
-        transition={{ ease: "linear", duration: 40, repeat: Infinity }} 
+      <motion.div
+        animate={{ x: ["0%", "-50%"] }}
+        transition={{ ease: "linear", duration: 40, repeat: Infinity }}
         className="flex items-center gap-16 px-8"
       >
         {/* Spread the LOGOS array twice for a seamless infinite loop */}
         {[...LOGOS, ...LOGOS].map((logoPath, idx) => (
-          <div 
-            key={idx} 
+          <div
+            key={idx}
             className="w-32 h-12 relative flex items-center justify-center shrink-0 hover:scale-105 transition-all duration-300 cursor-pointer"
           >
-            <img 
-              src={logoPath} 
-              alt={`Client Logo ${(idx % 10) + 1}`} 
+            <img
+              src={logoPath}
+              alt={`Client Logo ${(idx % 10) + 1}`}
               className="max-w-full max-h-full object-contain"
               onError={(e) => {
                 e.target.style.display = 'none';
@@ -235,9 +235,9 @@ export const Footer = () => (
       <div>
         {/* 1. LEFT: LOGO SECTION */}
           <span onClick={() => go("/")} className="cursor-pointer shrink-0 flex items-center group">
-            <img 
-              src="/logo75.png" 
-              alt="Cube Software Logo" 
+            <img
+              src="/logo75.png"
+              alt="Cube Software Logo"
               className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
             />
           </span>
@@ -250,7 +250,7 @@ export const Footer = () => (
         <div className="font-heading font-bold text-white text-sm tracking-wider uppercase mb-4">Products</div>
         <ul className="space-y-2.5 text-sm">
           {[
-            
+           
             { l: "Quick Call Dialer", s: "quick-call-dialer" },
             { l: "Callisto Voice Logger", s: "voice-logger" },
             { l: "IVRS Services", s: "ivrs" },
