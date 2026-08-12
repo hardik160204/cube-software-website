@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Loader2, Eye, EyeOff } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, ArrowLeft, Loader2, Sparkles, ShieldCheck, Zap } from "lucide-react";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -9,7 +9,6 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -17,7 +16,7 @@ export default function LoginPage() {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setError(""); 
+    setError("");
   };
 
   const handleLogin = async (e) => {
@@ -26,27 +25,13 @@ export default function LoginPage() {
     setError("");
 
     try {
-      // ==========================================
-      // NODE.JS BACKEND INTEGRATION GOES HERE
-      // ==========================================
-      // const response = await fetch("http://localhost:5000/api/auth/login", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(formData)
-      // });
-      // const data = await response.json();
-      // if (!response.ok) throw new Error(data.message);
-      // localStorage.setItem("token", data.token);
-      // navigate("/dashboard");
-
-      // SIMULATING A NETWORK REQUEST FOR NOW:
+      // SIMULATING A NETWORK REQUEST
       await new Promise((resolve) => setTimeout(resolve, 1500));
       
       if (!formData.email || !formData.password) {
-        throw new Error("Please enter your email and password.");
+        throw new Error("Credentials are required to access the portal.");
       }
-
-      console.log("Logged in:", { ...formData, rememberMe });
+      console.log("Logged in:", formData);
       navigate("/"); 
       
     } catch (err) {
@@ -57,177 +42,206 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] relative flex items-center overflow-hidden font-sans">
+    <div className="min-h-screen w-full flex bg-[#030712] text-slate-200 font-sans overflow-hidden selection:bg-blue-500/30">
       
       {/* ========================================================= */}
-      {/* BACKGROUND IMAGE WITH CURVED CUTOUT */}
+      {/* LEFT PANEL: The "Wow" Factor (Hidden on mobile) */}
       {/* ========================================================= */}
-      <div className="absolute inset-0 z-0 flex justify-end pointer-events-none">
-        {/* Mobile overlay for text readability */}
-        <div className="absolute inset-0 bg-[#050505]/70 lg:hidden z-10" />
+      <div className="hidden lg:flex w-1/2 relative flex-col justify-between p-12 overflow-hidden border-r border-white/5">
         
+        {/* Deep Glowing Background Gradients */}
+        <div className="absolute top-[-20%] left-[-10%] w-[70%] h-[70%] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none mix-blend-screen" />
+        <div className="absolute bottom-[-10%] right-[-20%] w-[60%] h-[60%] bg-indigo-600/20 rounded-full blur-[120px] pointer-events-none mix-blend-screen" />
+        
+        {/* Subtle Grid Pattern Overlay */}
         <div 
-          className="w-full lg:w-[75%] h-full bg-cover bg-center relative z-0"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1556761175-5973dc0f32b7?auto=format&fit=crop&w=1920&q=80')`,
-            // This creates the sweeping curved cut-out effect on desktop
-            clipPath: window.innerWidth >= 1024 ? 'ellipse(90% 120% at 100% 50%)' : 'none'
-          }}
-        >
-          {/* Subtle gradient to blend the image edges */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-transparent to-transparent lg:opacity-50" />
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0V0zm20 20h20v20H20V20zM0 20h20v20H0V20z' fill='%23ffffff' fill-rule='evenodd' fill-opacity='1'/%3E%3C/svg%3E")` }}
+        />
+
+        <div className="relative z-10">
+          <Link to="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm font-semibold group">
+            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> 
+            Back to Website
+          </Link>
+        </div>
+
+        {/* Floating Glassmorphism Card */}
+        <div className="relative z-10 w-full max-w-lg mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-8 shadow-2xl relative overflow-hidden"
+          >
+            {/* Shimmer effect line */}
+            <div className="absolute top-0 left-[-100%] w-[200%] h-px bg-gradient-to-r from-transparent via-white/40 to-transparent animate-[shimmer_3s_infinite]" />
+            
+            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-blue-500/20">
+              <Sparkles size={24} className="text-white" />
+            </div>
+            <h2 className="text-3xl font-heading font-bold text-white mb-4 leading-tight">
+              Scale your communications globally.
+            </h2>
+            <p className="text-slate-400 leading-relaxed text-sm">
+              Cube Software provides enterprise-grade cloud telephony that grows with you. Secure, reliable, and built for modern high-performance teams.
+            </p>
+
+            <div className="mt-8 grid grid-cols-2 gap-4 border-t border-white/10 pt-6">
+              <div className="flex items-center gap-3">
+                <ShieldCheck className="text-emerald-400" size={20} />
+                <span className="text-sm font-medium text-slate-300">Bank-grade Security</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <Zap className="text-amber-400" size={20} />
+                <span className="text-sm font-medium text-slate-300">99.99% Uptime</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        <div className="relative z-10 flex justify-between items-center text-xs text-slate-500 font-medium">
+          <span>© {new Date().getFullYear()} Cube Software Pvt. Ltd.</span>
+          <div className="flex gap-4">
+            <a href="#" className="hover:text-white transition-colors">Privacy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms</a>
+          </div>
         </div>
       </div>
 
       {/* ========================================================= */}
-      {/* MAIN CONTENT CONTAINER */}
+      {/* RIGHT PANEL: The Login Form */}
       {/* ========================================================= */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-8 flex flex-col lg:flex-row items-center justify-between h-full py-12 lg:py-0">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 relative">
         
-        {/* Left Side: Text Content */}
-        <div className="w-full lg:w-5/12 text-white mb-12 lg:mb-0">
-          <Link 
-            to="/" 
-            className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-12 text-sm font-semibold"
-          >
-            <ArrowLeft size={16} /> Back to Website
-          </Link>
-
-          <motion.h1 
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="font-heading font-bold text-4xl sm:text-5xl lg:text-5xl leading-[1.1] tracking-tight text-white max-w-lg"
-          >
-            Manage your communications,<br />
-            monitor performance,<br />
-            and stay in control—<br />
-            securely.
-          </motion.h1>
+        {/* Mobile background elements */}
+        <div className="absolute inset-0 bg-[#030712] lg:hidden z-0">
+          <div className="absolute top-0 left-0 w-full h-full bg-blue-900/10 blur-[100px]" />
         </div>
 
-        {/* Right Side: Login Card */}
-        <div className="w-full lg:w-5/12 flex justify-end">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="w-full max-w-[450px] bg-white rounded-3xl p-8 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative"
-          >
-            <div className="text-center mb-8">
-              <h2 className="font-heading font-black text-2xl sm:text-[28px] text-slate-900 tracking-tight">
-                Hi there, welcome back
-              </h2>
-              <p className="text-sm text-slate-500 mt-2">
-                Sign in to your Cube Software Portal
-              </p>
+        {/* Mobile Back Button */}
+        <div className="absolute top-6 left-6 lg:hidden z-20">
+          <Link to="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white text-sm font-semibold">
+            <ArrowLeft size={16} /> Back
+          </Link>
+        </div>
+
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+          className="w-full max-w-[420px] relative z-10"
+        >
+          
+          {/* Logo & Header */}
+          <div className="mb-10 text-center lg:text-left">
+            <div className="inline-block p-1 rounded-xl bg-white/5 border border-white/10 mb-6 backdrop-blur-md">
+               <img src="/logo75.png" alt="Cube Logo" className="h-10 w-auto object-contain brightness-0 invert" />
             </div>
+            <h1 className="text-3xl sm:text-4xl font-heading font-black text-white tracking-tight mb-2">
+              Welcome back
+            </h1>
+            <p className="text-slate-400 text-sm font-medium">
+              Enter your credentials to access the portal.
+            </p>
+          </div>
 
-            {error && (
-              <div className="bg-red-50 text-red-600 text-sm font-medium p-3 rounded-lg mb-6 text-center border border-red-100">
-                {error}
-              </div>
-            )}
+          {error && (
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-medium p-4 rounded-xl mb-6 flex items-center gap-3"
+            >
+              <div className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+              {error}
+            </motion.div>
+          )}
 
-            <form onSubmit={handleLogin} className="space-y-5">
-              
-              {/* Email Field */}
-              <div className="space-y-2">
-                <label className="block text-[13px] font-bold text-slate-700">
-                  Email*
-                </label>
+          <form onSubmit={handleLogin} className="space-y-5">
+            
+            {/* Email Field */}
+            <div className="space-y-2 group">
+              <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                Email Address
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Mail size={18} className="text-slate-500 group-focus-within:text-blue-400 transition-colors" />
+                </div>
                 <input
                   type="email"
                   name="email"
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0A1F44] focus:border-transparent transition-all text-slate-900 placeholder:text-slate-400"
-                  placeholder="email@company.com"
+                  className="w-full pl-11 pr-4 py-3.5 bg-white/5 border border-white/10 rounded-xl text-[15px] text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 focus:bg-white/10 transition-all placeholder:text-slate-600 shadow-inner"
+                  placeholder="name@company.com"
                 />
               </div>
-
-              {/* Password Field */}
-              <div className="space-y-2">
-                <label className="block text-[13px] font-bold text-slate-700">
-                  Password*
-                </label>
-                <div className="relative">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    required
-                    value={formData.password}
-                    onChange={handleChange}
-                    className="w-full pl-4 pr-12 py-3.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0A1F44] focus:border-transparent transition-all text-slate-900 placeholder:text-slate-400"
-                    placeholder="••••••••••••"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-600 transition-colors"
-                  >
-                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                  </button>
-                </div>
-              </div>
-
-              {/* Remember Me & Forgot Password */}
-              <div className="flex items-center justify-between pt-1 pb-2">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <div className="relative flex items-center justify-center">
-                    <input
-                      type="checkbox"
-                      checked={rememberMe}
-                      onChange={(e) => setRememberMe(e.target.checked)}
-                      className="peer appearance-none w-4 h-4 border border-slate-300 rounded bg-white checked:bg-[#0A1F44] checked:border-[#0A1F44] transition-colors cursor-pointer"
-                    />
-                    <svg
-                      className="absolute w-3 h-3 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                  </div>
-                  <span className="text-[13px] font-semibold text-slate-700 select-none">
-                    Remember me
-                  </span>
-                </label>
-
-                <a href="#" className="text-[13px] font-bold text-slate-900 hover:underline">
-                  Forgot password?
-                </a>
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full bg-[#050505] hover:bg-[#1a1a1a] text-white font-bold py-4 rounded-xl transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-2"
-              >
-                {isLoading ? (
-                  <>
-                    <Loader2 size={18} className="animate-spin" /> Logging in...
-                  </>
-                ) : (
-                  "Log In"
-                )}
-              </button>
-            </form>
-
-            <div className="mt-8 text-center text-[13px] font-medium text-slate-500">
-              Don't have an account? <a href="/#contact" className="text-slate-900 font-bold hover:underline">Sign Up</a>
             </div>
 
-          </motion.div>
-        </div>
+            {/* Password Field */}
+            <div className="space-y-2 group">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  Password
+                </label>
+                <a href="#" className="text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+                  Forgot?
+                </a>
+              </div>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Lock size={18} className="text-slate-500 group-focus-within:text-blue-400 transition-colors" />
+                </div>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full pl-11 pr-12 py-3.5 bg-white/5 border border-white/10 rounded-xl text-[15px] text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 focus:bg-white/10 transition-all placeholder:text-slate-600 shadow-inner"
+                  placeholder="••••••••••••"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-500 hover:text-slate-300 transition-colors"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
+            </div>
 
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-4 rounded-xl transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-6 shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)] transform hover:-translate-y-0.5"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 size={18} className="animate-spin" /> Authenticating
+                </>
+              ) : (
+                "Sign In to Dashboard"
+              )}
+            </button>
+          </form>
+
+          <div className="mt-8 text-center lg:text-left text-sm font-medium text-slate-500 border-t border-white/5 pt-8">
+            Need an account? <a href="/#contact" className="text-white hover:text-blue-400 transition-colors ml-1">Contact Sales</a>
+          </div>
+
+        </motion.div>
       </div>
+
+      {/* Global styles for the shimmer effect */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes shimmer {
+          100% { transform: translateX(100%); }
+        }
+      `}} />
     </div>
   );
 }

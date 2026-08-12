@@ -1,20 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Headset, Landmark, ConciergeBell, HeartPulse, Building2, TowerControl,
-  Star, MapPin, Phone, Mail, Send,
+  Star, MapPin, Phone, Mail, Send, CircleDollarSign, Zap, Route, Settings2,
+  PhoneCall, Mic, Receipt, MonitorPlay, Voicemail, AudioLines, Radio, DatabaseZap, 
+  ArrowRight, ChevronLeft, ChevronRight
 } from "lucide-react";
-import {
-  Accordion, AccordionContent, AccordionItem, AccordionTrigger,
-} from "./ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { toast } from "sonner";
-import { SectionLabel, SectionTitle } from "./HomeSections";
 
-// --- HARDCODED MOCK DATA ---
+// --- HARDCODED DATA ---
 const CONTACT_INFO = {
   expertLine: "+91 120 405 7109",
   usTollFree: "+1 (1111) 1111-11111",
@@ -57,7 +56,228 @@ const FAQS = [
   { q: "How do I get started?", a: "Getting started is easy. Contact our sales team or request a demo through our website. Our experts will help you choose the right solution based on your business needs, call volume, and future growth." },
 ];
 
-const IND_ICONS = { Headset, Landmark, ConciergeBell, HeartPulse, Building2, TowerControl };
+const WHY_ITEMS = [
+  { icon: "CircleDollarSign", title: "Cut Costs by 80%", description: "Upgrade to cloud telephony and leave expensive legacy hardware behind." },
+  { icon: "Zap", title: "Plug-and-Play Setup", description: "Instant setup. Zero headaches" },
+  { icon: "Route", title: "AI-Powered Routing", description: "Distribute calls intelligently with routing engines tuned by three decades of telephony expertise." },
+  { icon: "Settings2", title: "Built to Customise", description: "Shape the platform around your workflows — from IVR trees to wallboards, everything is configurable." },
+];
+
+const MARQUEE_ITEMS = [
+  "Voice Without Limits.", "Connect More. Pay Less.", "35+ Years of Telephony Excellence.",
+  "Enterprise Features. Small Business Pricing.", "Simply Better Telephony.",
+];
+
+const ICONS = {
+  Headset, Landmark, ConciergeBell, HeartPulse, Building2, TowerControl,
+  CircleDollarSign, Zap, Route, Settings2, PhoneCall, Mic, Receipt, MonitorPlay, 
+  Voicemail, AudioLines, Radio, DatabaseZap
+};
+
+// --- DATA FOR THE NEW SERVICES CAROUSEL ---
+const CAROUSEL_DATA = [
+  {
+    id: "cloud-contact-center",
+    title: "Contact Center Solution",
+    desc: "Get results with a powerful inbound, outbound and blended cloud contact center solution with full call disposition.",
+    image: "https://images.unsplash.com/photo-1560264280-88b68371db39?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "voice-logger",
+    title: "Callisto Voice Logger",
+    desc: "The ideal call recording solution — every conversation captured, compressed and searchable.",
+    image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "call-billing",
+    title: "Call Billing Software",
+    desc: "Take command of telecom resources and costs across every office, hotel and facility.",
+    image: "https://images.unsplash.com/photo-1611125832047-1d7ad1e8e48f?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "screen-logger",
+    title: "Screen Logger",
+    desc: "Next-generation multi-PC screen recording over the network — see what your customers experienced.",
+    image: "https://images.unsplash.com/photo-1551739440-5dd934d3a94a?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "ivrs",
+    title: "IVRS Services",
+    desc: "Custom IVR solutions built from scratch with the latest software, database and telecom technologies.",
+    image: "https://images.unsplash.com/photo-1525598912003-663126343e1f?auto=format&fit=crop&w=800&q=80"
+  }
+];
+
+// --- COMPONENTS ---
+export const SectionLabel = ({ children }) => (
+  <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-3">— {children}</div>
+);
+
+export const SectionTitle = ({ children, className = "" }) => (
+  <h2 className={`font-heading font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight text-slate-900 leading-tight ${className}`}>
+    {children}
+  </h2>
+);
+
+const FeatureCard = ({ icon, title, description, accent = "blue", link }) => {
+  const Icon = ICONS[icon];
+  const accents = {
+    blue: "bg-blue-50 text-blue-700 group-hover:bg-blue-700",
+    red: "bg-red-50 text-red-600 group-hover:bg-red-600",
+    amber: "bg-amber-50 text-amber-500 group-hover:bg-amber-500",
+  };
+  return (
+    <div className="group bg-white rounded-2xl border border-slate-100 p-8 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
+      <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-colors duration-300 group-hover:text-white ${accents[accent]}`}>
+        {Icon && <Icon size={22} />}
+      </div>
+      <h3 className="font-heading font-bold text-lg text-slate-900 mb-2">{title}</h3>
+      <p className="text-sm text-slate-600 leading-relaxed">{description}</p>
+      {link && (
+        <Link to={link} className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-blue-700 hover:text-blue-800 group/link">
+          Read More <ArrowRight size={14} className="transition-transform group-hover/link:translate-x-1" />
+        </Link>
+      )}
+    </div>
+  );
+};
+
+export const WhySection = () => (
+  <section id="about" className="py-20 lg:py-28 bg-white">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <SectionLabel>Why Cube Software</SectionLabel>
+      <SectionTitle className="max-w-3xl">Built for the businesses redefining communication</SectionTitle>
+      <p className="mt-4 text-slate-600 max-w-2xl">
+        For over 35+ years we have engineered Computer Telephony Integration software that works
+        seamlessly with the communication stacks of leading international telecom vendors.
+      </p>
+      <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {WHY_ITEMS.map((w, i) => (
+          <FeatureCard key={w.title} {...w} accent={["blue", "red", "amber", "blue"][i]} />
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+// --- THE NEW CAROUSEL SECTION ---
+// We keep the export name as "ProductsSection" so your Home.jsx doesn't break!
+export const ProductsSection = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [cardsToShow, setCardsToShow] = useState(3);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) setCardsToShow(1);
+      else if (window.innerWidth < 1024) setCardsToShow(2);
+      else setCardsToShow(3);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const maxIndex = Math.max(0, CAROUSEL_DATA.length - cardsToShow);
+
+  const prevSlide = () => setCurrentIndex((prev) => Math.max(prev - 1, 0));
+  const nextSlide = () => setCurrentIndex((prev) => Math.min(prev + 1, maxIndex));
+
+  return (
+    <section id="services" className="py-20 lg:py-28 bg-slate-50 overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+        
+        <div className="text-center mb-16">
+          <h2 className="font-heading font-black text-4xl sm:text-5xl text-slate-900 tracking-tight">
+            Our Services
+          </h2>
+        </div>
+
+        <div className="relative">
+          <button
+            onClick={prevSlide}
+            disabled={currentIndex === 0}
+            className={`absolute -left-2 sm:-left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
+              currentIndex === 0 
+                ? "bg-white text-slate-300 shadow-sm cursor-not-allowed opacity-50" 
+                : "bg-white text-[#1f638b] hover:bg-[#1f638b] hover:text-white shadow-xl cursor-pointer"
+            }`}
+            aria-label="Previous"
+          >
+            <ChevronLeft size={24} strokeWidth={2.5} />
+          </button>
+
+          <button
+            onClick={nextSlide}
+            disabled={currentIndex === maxIndex}
+            className={`absolute -right-2 sm:-right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
+              currentIndex === maxIndex 
+                ? "bg-white text-slate-300 shadow-sm cursor-not-allowed opacity-50" 
+                : "bg-white text-[#1f638b] hover:bg-[#1f638b] hover:text-white shadow-xl cursor-pointer"
+            }`}
+            aria-label="Next"
+          >
+            <ChevronRight size={24} strokeWidth={2.5} />
+          </button>
+
+          <div className="overflow-hidden px-4 py-8 mx-6 sm:mx-10">
+            <div 
+              className="flex transition-transform duration-500 ease-out"
+              style={{ transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)` }}
+            >
+              {CAROUSEL_DATA.map((item) => (
+                <div 
+                  key={item.id}
+                  className="shrink-0 px-4 transition-all duration-500"
+                  style={{ width: `${100 / cardsToShow}%` }}
+                >
+                  <div className="bg-white rounded-[2rem] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] hover:-translate-y-2 transition-all duration-300 flex flex-col h-full overflow-hidden group">
+                    
+                    <div className="w-full h-56 overflow-hidden relative">
+                      <img 
+                        src={item.image} 
+                        alt={item.title} 
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                      />
+                    </div>
+                    
+                    <div className="p-8 flex flex-col flex-grow items-center text-center">
+                      <h3 className="font-heading font-bold text-xl text-slate-900 mb-4 group-hover:text-[#1f638b] transition-colors">
+                        {item.title}
+                      </h3>
+                      <p className="text-[14px] text-slate-500 leading-relaxed mb-8 flex-grow">
+                        {item.desc}
+                      </p>
+                      <Link to={`/services/${item.id}`} className="w-full mt-auto">
+                        <button className="w-full bg-[#1f638b] hover:bg-[#13425e] text-white py-3.5 rounded-xl font-bold shadow-md transition-colors text-[15px]">
+                          Learn More
+                        </button>
+                      </Link>
+                    </div>
+
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export const MarqueeBanner = () => (
+  <section className="py-10 bg-[#0A1F44] overflow-hidden">
+    <div className="marquee-track flex items-center gap-16 whitespace-nowrap">
+      {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
+        <span key={i} className="flex items-center gap-16">
+          <span className="font-heading font-black text-2xl sm:text-3xl text-white/90">{item}</span>
+          <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0" />
+        </span>
+      ))}
+    </div>
+  </section>
+);
 
 export const IndustriesSection = () => (
   <section id="industries" className="py-20 lg:py-28 bg-white">
@@ -66,7 +286,7 @@ export const IndustriesSection = () => (
       <SectionTitle className="max-w-3xl">Our products are designed to perform at every arena</SectionTitle>
       <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {INDUSTRIES.map((ind, i) => {
-          const Icon = IND_ICONS[ind.icon];
+          const Icon = ICONS[ind.icon];
           const colors = ["text-blue-700 bg-blue-50", "text-red-600 bg-red-50", "text-amber-500 bg-amber-50"];
           return (
             <div key={ind.title} className="group flex gap-5 p-6 rounded-2xl border border-slate-100 bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
@@ -89,38 +309,14 @@ export const ClientsSection = () => (
   <section className="py-14 border-y border-slate-100 bg-slate-50 overflow-hidden relative">
     <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
     <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
-    
     <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-8">
-      <div className="text-center text-xs font-bold tracking-[0.25em] uppercase text-slate-400">
-        Our Clientele & Partners
-      </div>
+      <div className="text-center text-xs font-bold tracking-[0.25em] uppercase text-slate-400">Our Clientele & Partners</div>
     </div>
-    
     <div className="flex w-max">
-      <motion.div
-        animate={{ x: ["0%", "-50%"] }}
-        transition={{ ease: "linear", duration: 40, repeat: Infinity }}
-        className="flex items-center gap-16 px-8"
-      >
+      <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ ease: "linear", duration: 40, repeat: Infinity }} className="flex items-center gap-16 px-8">
         {[...LOGOS, ...LOGOS].map((logoPath, idx) => (
-          <div
-            key={idx}
-            className="w-32 h-12 relative flex items-center justify-center shrink-0 hover:scale-105 transition-all duration-300 cursor-pointer"
-          >
-            <img
-              src={logoPath}
-              alt={`Client Logo ${(idx % 10) + 1}`}
-              className="max-w-full max-h-full object-contain"
-              onError={(e) => {
-                e.target.style.display = 'none';
-                if (e.target.nextElementSibling) {
-                  e.target.nextElementSibling.classList.remove('hidden');
-                }
-              }}
-            />
-            <span className="hidden absolute inset-0 flex items-center justify-center text-sm font-bold text-slate-400 text-center">
-              Logo {(idx % 10) + 1}
-            </span>
+          <div key={idx} className="w-32 h-12 relative flex items-center justify-center shrink-0 hover:scale-105 transition-all duration-300 cursor-pointer">
+            <img src={logoPath} alt={`Client Logo ${(idx % 10) + 1}`} className="max-w-full max-h-full object-contain" />
           </div>
         ))}
       </motion.div>
@@ -159,9 +355,7 @@ export const FAQSection = () => (
       <Accordion type="single" collapsible className="mt-10">
         {FAQS.map((f, i) => (
           <AccordionItem key={i} value={`faq-${i}`} className="bg-white rounded-xl border border-slate-100 mb-3 px-6 shadow-sm data-[state=open]:shadow-md transition-shadow">
-            <AccordionTrigger className="text-left font-heading font-bold text-slate-900 hover:text-blue-700 hover:no-underline py-5">
-              {f.q}
-            </AccordionTrigger>
+            <AccordionTrigger className="text-left font-heading font-bold text-slate-900 hover:text-blue-700 hover:no-underline py-5">{f.q}</AccordionTrigger>
             <AccordionContent className="text-slate-600 leading-relaxed pb-5">{f.a}</AccordionContent>
           </AccordionItem>
         ))}
@@ -182,9 +376,6 @@ export const ContactSection = () => {
     }
     setSubmitting(true);
     setTimeout(() => {
-      const existing = JSON.parse(localStorage.getItem("cube_inquiries") || "[]");
-      existing.push({ ...form, date: new Date().toISOString() });
-      localStorage.setItem("cube_inquiries", JSON.stringify(existing));
       toast.success("Thank you! Our team will reach out within 24 hours.");
       setForm({ name: "", email: "", phone: "", company: "", message: "" });
       setSubmitting(false);
@@ -199,9 +390,7 @@ export const ContactSection = () => {
         <div>
           <SectionLabel>Contact Us</SectionLabel>
           <SectionTitle>Let’s build your communication stack</SectionTitle>
-          <p className="mt-4 text-slate-600 max-w-lg">
-            Book a demo or ask us anything — our telephony experts respond within one business day.
-          </p>
+          <p className="mt-4 text-slate-600 max-w-lg">Book a demo or ask us anything — our telephony experts respond within one business day.</p>
           <div className="mt-10 space-y-6">
             <div className="flex gap-4">
               <div className="w-11 h-11 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center shrink-0"><MapPin size={20} /></div>
@@ -233,7 +422,6 @@ export const ContactSection = () => {
             </div>
           </div>
         </div>
-
         <form onSubmit={handleSubmit} className="bg-slate-50 rounded-2xl border border-slate-100 p-8 shadow-sm self-start">
           <div className="grid sm:grid-cols-2 gap-4">
             <Input placeholder="Full name *" value={form.name} onChange={set("name")} className="bg-white h-11" />
@@ -241,17 +429,8 @@ export const ContactSection = () => {
             <Input placeholder="Phone number *" value={form.phone} onChange={set("phone")} className="bg-white h-11" />
             <Input placeholder="Company" value={form.company} onChange={set("company")} className="bg-white h-11" />
           </div>
-          <Textarea
-            placeholder="Tell us about your requirements *"
-            value={form.message}
-            onChange={set("message")}
-            className="bg-white mt-4 min-h-32"
-          />
-          <Button
-            type="submit"
-            disabled={submitting}
-            className="mt-5 w-full bg-blue-700 hover:bg-blue-800 text-white h-12 text-base rounded-md transition-transform hover:-translate-y-0.5"
-          >
+          <Textarea placeholder="Tell us about your requirements *" value={form.message} onChange={set("message")} className="bg-white mt-4 min-h-32" />
+          <Button type="submit" disabled={submitting} className="mt-5 w-full bg-blue-700 hover:bg-blue-800 text-white h-12 text-base rounded-md transition-transform hover:-translate-y-0.5">
             {submitting ? "Sending..." : (<span className="flex items-center gap-2">Send Message <Send size={16} /></span>)}
           </Button>
         </form>
@@ -264,14 +443,9 @@ export const Footer = () => (
   <footer className="bg-[#0A1F44] text-slate-300">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
       <div>
-        {/* 1. LEFT: LOGO SECTION */}
-          <Link to="/" className="cursor-pointer shrink-0 flex items-center group">
-            <img
-              src="/logo75.png"
-              alt="Cube Software Logo"
-              className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-            />
-          </Link>
+        <Link to="/" className="cursor-pointer shrink-0 flex items-center group">
+          <img src="/logo75.png" alt="Cube Software Logo" className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
+        </Link>
         <p className="mt-5 text-sm leading-relaxed text-slate-400 text-justify">
           Designing Computer Telephony Integration software for 35+ years — trusted by enterprises
           across the globe for dialers, voice logging, Screen recording, IVR with our cloud telephony.
@@ -295,7 +469,6 @@ export const Footer = () => (
         <div className="font-heading font-bold text-white text-sm tracking-wider uppercase mb-4">Company</div>
         <ul className="space-y-2.5 text-sm">
           <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
-          <li><Link to="/pricing" className="hover:text-white transition-colors">Pricing</Link></li>
           {[
             { l: "Industries", h: "/#industries" },
             { l: "Client Voices", h: "/#home" },
@@ -321,7 +494,6 @@ export const Footer = () => (
         <span>© {new Date().getFullYear()} Cube Software Pvt. Ltd. All rights reserved.</span>
         <span>Smart. Scalable. Secure Cloud Telephony.</span>
       </div>
-      
     </div>
   </footer>
 );

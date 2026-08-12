@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   Headset, Landmark, ConciergeBell, HeartPulse, Building2, TowerControl,
   Star, MapPin, Phone, Mail, Send, CircleDollarSign, Zap, Route, Settings2,
-  PhoneCall, Mic, Receipt, MonitorPlay, Voicemail, AudioLines, Radio, DatabaseZap, ArrowRight
+  ChevronLeft, ChevronRight
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
 import { Button } from "./ui/button";
@@ -12,7 +12,7 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { toast } from "sonner";
 
-// --- HARDCODED DATA ---
+// --- HARDCODED CONTACT INFO ---
 const CONTACT_INFO = {
   expertLine: "+91 120 405 7109",
   usTollFree: "+1 (1111) 1111-11111",
@@ -24,12 +24,12 @@ const CONTACT_INFO = {
 };
 
 const INDUSTRIES = [
-  { icon: "Headset", title: "BPO – KPO", description: "High-volume dialing, logging and monitoring built for outsourcing floors of every size." },
-  { icon: "Landmark", title: "Financial Services", description: "Compliant recording and secure telephony for banks, NBFCs and trading desks." },
-  { icon: "ConciergeBell", title: "Hospitality", description: "Innovative desk solutions for hotels, event centres, cruise lines and travel brands." },
-  { icon: "HeartPulse", title: "Healthcare", description: "Affordable patient-first communication suites for hospitals, labs and clinics." },
-  { icon: "Building2", title: "Real Estate", description: "Dialer, voice logger and CRM bundles tuned for property sales teams." },
-  { icon: "TowerControl", title: "Telecom", description: "Pioneers in telecom solutions since 1990 with home-grown software trusted worldwide." },
+  { icon: Headset, title: "BPO – KPO", description: "High-volume dialing, logging and monitoring built for outsourcing floors of every size." },
+  { icon: Landmark, title: "Financial Services", description: "Compliant recording and secure telephony for banks, NBFCs and trading desks." },
+  { icon: ConciergeBell, title: "Hospitality", description: "Innovative desk solutions for hotels, event centres, cruise lines and travel brands." },
+  { icon: HeartPulse, title: "Healthcare", description: "Affordable patient-first communication suites for hospitals, labs and clinics." },
+  { icon: Building2, title: "Real Estate", description: "Dialer, voice logger and CRM bundles tuned for property sales teams." },
+  { icon: TowerControl, title: "Telecom", description: "Pioneers in telecom solutions since 1990 with home-grown software trusted worldwide." },
 ];
 
 const LOGOS = [
@@ -45,32 +45,21 @@ const TESTIMONIALS = [
 
 const FAQS = [
   { q: "What services does Cube Software provide?", a: "We offer a complete range of communication solutions including Cloud PBX, dialers (inbound/outbound/blended), voice loggers, screen loggers, IVRS, conference bridges, call billing software, voice mail systems, SIP trunking and CRM integrations." },
-  { q: "Which Citys do you support?", a: "We provide numbers and voice solutions across the India Bangaluru, Mumbai, Delhi, Gurugram, Noida, Ahemdabad, Puna in India and many more regions. along with 140 & 160 Lines as well." },
+  { q: "Which Citys do you support?", a: "We provide numbers and voice solutions across India: Bengaluru, Mumbai, Delhi, Gurugram, Noida, Ahmedabad, Pune, and many more regions, along with 140 & 160 lines." },
   { q: "Can I get local and toll-free numbers?", a: "We provide local, national, international DID, toll-free, and vanity numbers to meet your business and market requirements." },
   { q: "How quickly can numbers be activated?", a: "Most numbers are activated within minutes after verification and payment. Some states may require documentation based on local telecom regulations." },
   { q: "Do you support call forwarding and IVR?", a: "Yes. Our platform supports IVR menus, smart call routing, call forwarding, time-based routing, ring groups, voicemail, call recording and auto attendants." },
   { q: "Can your services work with my existing dialers or PBX?", a: "Yes. Our SIP trunking and VoIP solutions are compatible with most major PBX platforms including Asterisk, FreePBX, 3CX, Grandstream and Cisco systems." },
-  { q: "Do you provide CRM integrations?", a: "Yes. We integrate with popular CRMs and tools including custimized CRM, Salesforce, Freshdesk and custom applications through our APIs & CTI Connectors." },
-  { q: "Is your platform suitable for call centers?", a: "Yes. Our platform is built for BPOs, call centers, support teams, sales teams, and remote workforces, delivering high-quality calls, intelligent routing, and enterprise-grade scalability" },
+  { q: "Do you provide CRM integrations?", a: "Yes. We integrate with popular CRMs and tools including customized CRM, Salesforce, Freshdesk and custom applications through our APIs & CTI Connectors." },
+  { q: "Is your platform suitable for call centers?", a: "Yes. Our platform is built for BPOs, call centers, support teams, sales teams, and remote workforces, delivering high-quality calls, intelligent routing, and enterprise-grade scalability." },
   { q: "How do I get started?", a: "Getting started is easy. Contact our sales team or request a demo through our website. Our experts will help you choose the right solution based on your business needs, call volume, and future growth." },
 ];
 
-const PRODUCTS = [
-  { icon: "PhoneCall", title: "Quick Call Dialer", slug: "quick-call-dialer", description: "Inbound, outbound and blended dialers with ACD, IVR and predictive dialing — on-premise or hosted." },
-  { icon: "Mic", title: "Callisto Voice Logger", slug: "voice-logger", description: "Full-featured call recording across Analog, PRI and SIP with minimal storage and multiple formats." },
-  { icon: "Receipt", title: "Call Billing Software", slug: "call-billing", description: "Manage telecom resources and costs across offices, hotels, hospitals and housing societies." },
-  { icon: "MonitorPlay", title: "Screen Logger", slug: "screen-logger", description: "Next-generation multi-PC screen recording over the network for quality and compliance teams." },
-  { icon: "Voicemail", title: "Cube Voice Mail", slug: "voice-mail", description: "Exchange voice messages, deliver voice information and process transactions automatically." },
-  { icon: "AudioLines", title: "IVRS Services", slug: "ivrs", description: "Custom IVR built from scratch with modern software, databases and telecom signalling." },
-  { icon: "Radio", title: "Conference Bridge", slug: "conference-bridge", description: "Full audio conferencing that integrates seamlessly with your existing telephony stack." },
-  { icon: "DatabaseZap", title: "Voice Logger InSync", slug: "voice-logger-insync", description: "Centralise critical recording data from multiple locations into one synchronised archive." },
-];
-
 const WHY_ITEMS = [
-  { icon: "CircleDollarSign", title: "Cut Costs by 80%", description: "Upgrade to cloud telephony and leave expensive legacy hardware behind." },
-  { icon: "Zap", title: "Plug-and-Play Setup", description: "Instant setup. Zero headaches" },
-  { icon: "Route", title: "AI-Powered Routing", description: "Distribute calls intelligently with routing engines tuned by three decades of telephony expertise." },
-  { icon: "Settings2", title: "Built to Customise", description: "Shape the platform around your workflows — from IVR trees to wallboards, everything is configurable." },
+  { icon: CircleDollarSign, title: "Cut Costs by 80%", description: "Upgrade to cloud telephony and leave expensive legacy hardware behind." },
+  { icon: Zap, title: "Plug-and-Play Setup", description: "Instant setup. Zero headaches." },
+  { icon: Route, title: "AI-Powered Routing", description: "Distribute calls intelligently with routing engines tuned by three decades of telephony expertise." },
+  { icon: Settings2, title: "Built to Customise", description: "Shape the platform around your workflows — from IVR trees to wallboards, everything is configurable." },
 ];
 
 const MARQUEE_ITEMS = [
@@ -78,13 +67,58 @@ const MARQUEE_ITEMS = [
   "Enterprise Features. Small Business Pricing.", "Simply Better Telephony.",
 ];
 
-const ICONS = {
-  Headset, Landmark, ConciergeBell, HeartPulse, Building2, TowerControl,
-  CircleDollarSign, Zap, Route, Settings2, PhoneCall, Mic, Receipt, MonitorPlay, 
-  Voicemail, AudioLines, Radio, DatabaseZap
-};
+// --- CAROUSEL DATA (Replaces old Products grid) ---
+const CAROUSEL_DATA = [
+  {
+    id: "cloud-contact-center",
+    title: "Contact Center Solution",
+    desc: "Get results with a powerful inbound, outbound and blended cloud contact center solution with full call disposition.",
+    image: "https://images.unsplash.com/photo-1560264280-88b68371db39?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "voice-logger",
+    title: "Callisto Voice Logger",
+    desc: "The ideal call recording solution — every conversation captured, compressed and searchable.",
+    image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "call-billing",
+    title: "Call Billing Software",
+    desc: "Take command of telecom resources and costs across every office, hotel and facility.",
+    image: "https://images.unsplash.com/photo-1611125832047-1d7ad1e8e48f?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "screen-logger",
+    title: "Screen Logger",
+    desc: "Next-generation multi-PC screen recording over the network — see what your customers experienced.",
+    image: "https://images.unsplash.com/photo-1551739440-5dd934d3a94a?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "ivrs",
+    title: "IVRS Services",
+    desc: "Custom IVR solutions built from scratch with the latest software, database and telecom technologies.",
+    image: "https://images.unsplash.com/photo-1525598912003-663126343e1f?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "voice-mail",
+    title: "Cube Voice Mail",
+    desc: "Exchange voice messages, deliver voice information and process transactions automatically.",
+    image: "https://images.unsplash.com/photo-1592890288564-76628a30a657?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "conference-bridge",
+    title: "Conference Bridge",
+    desc: "Full audio conferencing that integrates seamlessly with your existing telephony stack.",
+    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    id: "voice-logger-insync",
+    title: "Voice Logger InSync",
+    desc: "Centralise critical recording data from multiple locations into one synchronised archive.",
+    image: "https://images.unsplash.com/photo-1506399558188-acca6f8cbf41?auto=format&fit=crop&w=800&q=80"
+  }
+];
 
-// --- COMPONENTS ---
 export const SectionLabel = ({ children }) => (
   <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-3">— {children}</div>
 );
@@ -94,29 +128,6 @@ export const SectionTitle = ({ children, className = "" }) => (
     {children}
   </h2>
 );
-
-const FeatureCard = ({ icon, title, description, accent = "blue", link }) => {
-  const Icon = ICONS[icon];
-  const accents = {
-    blue: "bg-blue-50 text-blue-700 group-hover:bg-blue-700",
-    red: "bg-red-50 text-red-600 group-hover:bg-red-600",
-    amber: "bg-amber-50 text-amber-500 group-hover:bg-amber-500",
-  };
-  return (
-    <div className="group bg-white rounded-2xl border border-slate-100 p-8 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
-      <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-colors duration-300 group-hover:text-white ${accents[accent]}`}>
-        {Icon && <Icon size={22} />}
-      </div>
-      <h3 className="font-heading font-bold text-lg text-slate-900 mb-2">{title}</h3>
-      <p className="text-sm text-slate-600 leading-relaxed">{description}</p>
-      {link && (
-        <Link to={link} className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-blue-700 hover:text-blue-800 group/link">
-          Read More <ArrowRight size={14} className="transition-transform group-hover/link:translate-x-1" />
-        </Link>
-      )}
-    </div>
-  );
-};
 
 export const WhySection = () => (
   <section id="about" className="py-20 lg:py-28 bg-white">
@@ -128,27 +139,150 @@ export const WhySection = () => (
         seamlessly with the communication stacks of leading international telecom vendors.
       </p>
       <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {WHY_ITEMS.map((w, i) => (
-          <FeatureCard key={w.title} {...w} accent={["blue", "red", "amber", "blue"][i]} />
-        ))}
+        {WHY_ITEMS.map((w, i) => {
+          const Icon = w.icon;
+          const accents = [
+            "bg-blue-50 text-blue-700 group-hover:bg-blue-700",
+            "bg-red-50 text-red-600 group-hover:bg-red-600",
+            "bg-amber-50 text-amber-500 group-hover:bg-amber-500",
+            "bg-blue-50 text-blue-700 group-hover:bg-blue-700"
+          ];
+          return (
+            <div key={w.title} className="group bg-white rounded-2xl border border-slate-100 p-8 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-colors duration-300 group-hover:text-white ${accents[i]}`}>
+                <Icon size={22} />
+              </div>
+              <h3 className="font-heading font-bold text-lg text-slate-900 mb-2">{w.title}</h3>
+              <p className="text-sm text-slate-600 leading-relaxed">{w.description}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   </section>
 );
 
-export const ProductsSection = () => (
-  <section id="products" className="py-20 lg:py-28 bg-slate-50">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6">
-      <SectionLabel>Our Products</SectionLabel>
-      <SectionTitle className="max-w-3xl">Designed for flawlessness. Built to perform</SectionTitle>
-      <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {PRODUCTS.filter(p => !p.title.includes("CRM")).map((p, i) => (
-          <FeatureCard key={p.title} {...p} accent={["blue", "red", "amber"][i % 3]} link={p.slug ? `/services/${p.slug}` : undefined} />
-        ))}
+// --- REPLACED PRODUCTS SECTION WITH HORIZONTAL CAROUSEL ---
+export const ProductsSection = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [cardsToShow, setCardsToShow] = useState(3);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) setCardsToShow(1);
+      else if (window.innerWidth < 1024) setCardsToShow(2);
+      else setCardsToShow(3);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const maxIndex = Math.max(0, CAROUSEL_DATA.length - cardsToShow);
+
+  const prevSlide = () => setCurrentIndex((prev) => Math.max(prev - 1, 0));
+  const nextSlide = () => setCurrentIndex((prev) => Math.min(prev + 1, maxIndex));
+
+  return (
+    <section id="products" className="py-20 lg:py-28 bg-slate-50 overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+        
+        <div className="text-center mb-12">
+          <SectionLabel>Our Services</SectionLabel>
+          <SectionTitle>Our Services</SectionTitle>
+        </div>
+
+        <div className="relative">
+          
+          <button
+            onClick={prevSlide}
+            disabled={currentIndex === 0}
+            className={`absolute -left-2 sm:-left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
+              currentIndex === 0 
+                ? "bg-white text-slate-300 shadow-sm cursor-not-allowed opacity-50" 
+                : "bg-white text-[#1f638b] hover:bg-[#1f638b] hover:text-white shadow-xl cursor-pointer"
+            }`}
+            aria-label="Previous"
+          >
+            <ChevronLeft size={24} strokeWidth={2.5} />
+          </button>
+
+          <button
+            onClick={nextSlide}
+            disabled={currentIndex === maxIndex}
+            className={`absolute -right-2 sm:-right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
+              currentIndex === maxIndex 
+                ? "bg-white text-slate-300 shadow-sm cursor-not-allowed opacity-50" 
+                : "bg-white text-[#1f638b] hover:bg-[#1f638b] hover:text-white shadow-xl cursor-pointer"
+            }`}
+            aria-label="Next"
+          >
+            <ChevronRight size={24} strokeWidth={2.5} />
+          </button>
+
+          <div className="overflow-hidden px-2 py-6 mx-6 sm:mx-10">
+            <div 
+              className="flex transition-transform duration-500 ease-out"
+              style={{ transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)` }}
+            >
+              {CAROUSEL_DATA.map((item) => (
+                <div 
+                  key={item.id}
+                  className="shrink-0 px-3 transition-all duration-500"
+                  style={{ width: `${100 / cardsToShow}%` }}
+                >
+                  <div className="bg-white rounded-[2rem] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.12)] hover:-translate-y-2 transition-all duration-300 flex flex-col h-full overflow-hidden group">
+                    
+                    <div className="w-full h-52 overflow-hidden relative">
+                      <img 
+                        src={item.image} 
+                        alt={item.title} 
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                      />
+                    </div>
+                    
+                    <div className="p-6 flex flex-col flex-grow items-center text-center">
+                      <h3 className="font-heading font-bold text-xl text-slate-900 mb-3 group-hover:text-[#1f638b] transition-colors">
+                        {item.title}
+                      </h3>
+                      <p className="text-[14px] text-slate-500 leading-relaxed mb-6 flex-grow line-clamp-3">
+                        {item.desc}
+                      </p>
+                      
+                      <Link to={`/services/${item.id}`} className="w-full mt-auto">
+                        <button className="w-full bg-[#1f638b] hover:bg-[#13425e] text-white py-3 rounded-xl font-bold shadow-md transition-colors text-[14px]">
+                          Learn More
+                        </button>
+                      </Link>
+                    </div>
+
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Dots Indicator */}
+          <div className="flex justify-center items-center gap-2 mt-4">
+            {Array.from({ length: maxIndex + 1 }).map((_, dotIdx) => (
+              <button
+                key={dotIdx}
+                onClick={() => setCurrentIndex(dotIdx)}
+                className={`h-2.5 rounded-full transition-all duration-500 ${
+                  currentIndex === dotIdx 
+                    ? "w-8 bg-[#1f638b]" 
+                    : "w-2.5 bg-slate-300 hover:bg-slate-400"
+                }`}
+                aria-label={`Go to slide ${dotIdx + 1}`}
+              />
+            ))}
+          </div>
+
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export const MarqueeBanner = () => (
   <section className="py-10 bg-[#0A1F44] overflow-hidden">
@@ -170,12 +304,12 @@ export const IndustriesSection = () => (
       <SectionTitle className="max-w-3xl">Our products are designed to perform at every arena</SectionTitle>
       <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {INDUSTRIES.map((ind, i) => {
-          const Icon = ICONS[ind.icon];
+          const Icon = ind.icon;
           const colors = ["text-blue-700 bg-blue-50", "text-red-600 bg-red-50", "text-amber-500 bg-amber-50"];
           return (
             <div key={ind.title} className="group flex gap-5 p-6 rounded-2xl border border-slate-100 bg-white shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
               <div className={`w-12 h-12 shrink-0 rounded-xl flex items-center justify-center ${colors[i % 3]}`}>
-                {Icon && <Icon size={22} />}
+                <Icon size={22} />
               </div>
               <div>
                 <h3 className="font-heading font-bold text-lg text-slate-900">{ind.title}</h3>
@@ -215,7 +349,7 @@ export const TestimonialsSection = () => (
       <SectionTitle>Success Stories from Our Clients</SectionTitle>
       <div className="mt-12 grid md:grid-cols-3 gap-6">
         {TESTIMONIALS.map((t) => (
-          <div key={t.name} className="bg-slate-50 rounded-2xl border border-slate-100 p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+          <div key={t.quote} className="bg-slate-50 rounded-2xl border border-slate-100 p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
             <div className="flex gap-1 mb-5">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star key={i} size={16} className="fill-amber-400 text-amber-400" />
@@ -339,7 +473,7 @@ export const Footer = () => (
         <div className="font-heading font-bold text-white text-sm tracking-wider uppercase mb-4">Products</div>
         <ul className="space-y-2.5 text-sm">
           {[
-            { l: "Quick Call Dialer", s: "quick-call-dialer" },
+            { l: "Contact Center Solution", s: "cloud-contact-center" },
             { l: "Callisto Voice Logger", s: "voice-logger" },
             { l: "IVRS Services", s: "ivrs" },
             { l: "Conference Bridge", s: "conference-bridge" },

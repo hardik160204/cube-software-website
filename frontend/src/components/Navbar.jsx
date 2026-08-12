@@ -36,7 +36,7 @@ const MENU_ITEMS = [
 ];
 
 const CONTACT_INFO = {
-  expertLine: "+91 120 405 7109",
+  expertLine: "+91 80 6869 4747",
 };
 
 const Navbar = ({ onBookDemo }) => {
