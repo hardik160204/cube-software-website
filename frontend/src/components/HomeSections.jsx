@@ -34,7 +34,7 @@ const INDUSTRIES = [
 
 const LOGOS = [
   '/1.jpg', '/2.png', '/4.png', '/5.jpeg',
-  '/6.png', '/7.png', '/upsc.png', '/cars24.png', '/10.png', '/11.png'
+  '/6.png', '/7.png', '/upsc.png', '/cars24.png', '/10.png', '/11.png', '/Avaya.jpeg'
 ];
 
 const TESTIMONIALS = [
@@ -188,8 +188,7 @@ export const ProductsSection = () => {
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
         
         <div className="text-center mb-12">
-          <SectionLabel>Our Services</SectionLabel>
-          <SectionTitle>Our Services</SectionTitle>
+          <SectionTitle>Our Products</SectionTitle>
         </div>
 
         <div className="relative">

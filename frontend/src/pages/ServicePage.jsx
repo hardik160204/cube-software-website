@@ -830,7 +830,7 @@ const ServicePage = () => {
             className="text-center mb-14"
           >
             <h2 className="font-heading font-black text-4xl sm:text-5xl tracking-tight text-slate-900">
-              Our Services
+              Our Products
             </h2>
           </motion.div>
 

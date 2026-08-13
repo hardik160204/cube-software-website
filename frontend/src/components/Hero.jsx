@@ -192,13 +192,13 @@ const Hero = ({ onBookDemo, onGetStarted }) => {
         <h1 className="font-heading font-black text-5xl sm:text-6xl lg:text-7xl leading-[1.02] tracking-tight text-slate-900 bg-white/70 backdrop-blur-md rounded-3xl py-4 inline-block px-8 border border-white/60 shadow-xl shadow-slate-200/40">
           Quick Call.{" "}
           <span className="relative inline-block text-red-700">
-            Secure
+            Cloud
             <svg className="absolute -bottom-2 left-0 w-full" height="20" viewBox="0 0 200 10" preserveAspectRatio="none">
               <path d="M2 8 Q 100 -2 198 7" stroke="#1D4ED8" strokeWidth="4" fill="none" strokeLinecap="round" />
             </svg>
           </span>
           <br />
-          Cloud Telephony.
+          Telephony.
         </h1>
 
         <p className="mt-6 text-lg text-slate-800 max-w-2xl mx-auto leading-relaxed font-semibold bg-white/80 backdrop-blur-md p-4 rounded-2xl border border-white/60 shadow-sm">
