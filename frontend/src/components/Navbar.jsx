@@ -36,13 +36,13 @@ const MENU_ITEMS = [
 ];
 
 const CONTACT_INFO = {
-  expertLine: "+91 80 6869 4747",
+  expertLine: "+91 806 869 4440",
 };
 
 const Navbar = ({ onBookDemo }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [hoveredMenu, setHoveredMenu] = useState(null); // State for our new hover dropdowns
+  const [hoveredMenu, setHoveredMenu] = useState(null);
   
   const navigate = useNavigate();
   const location = useLocation();
@@ -55,7 +55,7 @@ const Navbar = ({ onBookDemo }) => {
 
   const go = (href) => {
     setMobileOpen(false);
-    setHoveredMenu(null); // Close dropdowns on navigation
+    setHoveredMenu(null);
     if (href.startsWith("/")) {
       navigate(href);
       return;
@@ -85,7 +85,6 @@ const Navbar = ({ onBookDemo }) => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       
-      {/* PERFECTED MARQUEE CSS */}
       <style>
         {`
           @keyframes marquee {
@@ -110,7 +109,7 @@ const Navbar = ({ onBookDemo }) => {
       </style>
 
       {/* Top utility bar */}
-      <div className="bg-[#0A1F44] text-white text-xs sm:text-sm h-10 flex items-center overflow-hidden">
+      <div className="bg-[#84081b] text-white text-xs sm:text-sm h-10 flex items-center overflow-hidden">
         <div className="animate-marquee">
           {[1, 2, 3, 4].map((index) => (
             <span key={index} className="marquee-group">
@@ -130,8 +129,10 @@ const Navbar = ({ onBookDemo }) => {
       {/* Main nav */}
       <nav
         className={`transition-all duration-300 ${
-          scrolled ? "bg-white/95 backdrop-blur-md shadow-md" : "bg-white"
-        } border-b border-slate-100`}
+          scrolled 
+            ? "bg-white/95 backdrop-blur-md shadow-md border-b border-slate-100" 
+            : "bg-transparent border-b-transparent"
+        }`}
       >
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between h-20">
           
@@ -140,15 +141,16 @@ const Navbar = ({ onBookDemo }) => {
             <img 
               src="/logo75.png" 
               alt="Cube Software Logo" 
-              className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              className={`h-10 sm:h-12 w-auto object-contain transition-all duration-300 group-hover:scale-105 ${
+                !scrolled ? "brightness-0 invert" : ""
+              }`}
             />
           </span>
 
-          {/* 2. CENTER LINKS (Fitted perfectly with smart text sizing and gaps) */}
+          {/* 2. CENTER LINKS */}
           <div className="hidden lg:flex flex-1 justify-center items-center gap-1 xl:gap-4">
             {MENU_ITEMS.map((link) =>
               link.children ? (
-                // --- CUSTOM HOVER DROPDOWN FOR SERVICES & PRODUCTS ---
                 <div
                   key={link.label}
                   className="relative h-20 flex items-center"
@@ -158,7 +160,9 @@ const Navbar = ({ onBookDemo }) => {
                   <button
                     onClick={() => go(link.href)}
                     className={`px-2 xl:px-3 py-2 text-[13px] xl:text-[14px] font-bold rounded-md flex items-center gap-1 transition-colors whitespace-nowrap ${
-                      isActive(link) || hoveredMenu === link.label ? "text-blue-700" : "text-slate-700 hover:text-blue-700"
+                      scrolled 
+                        ? (isActive(link) || hoveredMenu === link.label ? "text-blue-700" : "text-slate-700 hover:text-blue-700")
+                        : (isActive(link) || hoveredMenu === link.label ? "text-white" : "text-white/90 hover:text-white")
                     }`}
                   >
                     {link.label} 
@@ -191,12 +195,13 @@ const Navbar = ({ onBookDemo }) => {
                   </AnimatePresence>
                 </div>
               ) : (
-                // --- STANDARD LINKS ---
                 <button
                   key={link.label}
                   onClick={() => go(link.href)}
                   className={`px-2 xl:px-3 py-2 text-[13px] xl:text-[14px] font-bold rounded-md transition-colors whitespace-nowrap ${
-                    isActive(link) ? "text-blue-700" : "text-slate-700 hover:text-blue-700"
+                    scrolled 
+                      ? (isActive(link) ? "text-blue-700" : "text-slate-700 hover:text-blue-700")
+                      : (isActive(link) ? "text-white" : "text-white/90 hover:text-white")
                   }`}
                 >
                   {link.label}
@@ -209,27 +214,37 @@ const Navbar = ({ onBookDemo }) => {
           <div className="hidden lg:flex items-center shrink-0 gap-3 xl:gap-5 ml-2">
             <a 
               href={`tel:${CONTACT_INFO.expertLine.replace(/\s/g, "")}`} 
-              className="flex items-center gap-2 text-[13px] xl:text-[14px] font-bold text-slate-700 hover:text-blue-700 transition-colors whitespace-nowrap"
+              className={`flex items-center gap-2 text-[13px] xl:text-[14px] font-bold transition-colors whitespace-nowrap ${
+                scrolled ? "text-slate-700 hover:text-blue-700" : "text-white/90 hover:text-white"
+              }`}
             >
-              <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center">
-                <Phone size={14} className="text-blue-600" />
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
+                scrolled ? "bg-blue-50 text-blue-600" : "bg-white/20 text-white"
+              }`}>
+                <Phone size={14} />
               </div>
               <span className="hidden xl:inline">{CONTACT_INFO.expertLine}</span>
             </a>
 
-            <div className="w-px h-5 bg-slate-200"></div>
+            <div className={`w-px h-5 transition-colors ${scrolled ? "bg-slate-200" : "bg-white/30"}`}></div>
 
             <button 
               onClick={() => go("/login")}
-              className="flex items-center gap-1.5 text-[13px] xl:text-[14px] font-bold text-slate-700 hover:text-blue-700 transition-colors outline-none whitespace-nowrap"
+              className={`flex items-center gap-1.5 text-[13px] xl:text-[14px] font-bold transition-colors outline-none whitespace-nowrap ${
+                scrolled ? "text-slate-700 hover:text-blue-700" : "text-white/90 hover:text-white"
+              }`}
             >
-              <LogIn size={16} className="text-blue-600" />
+              <LogIn size={16} className={scrolled ? "text-blue-600" : "text-white"} />
               Login
             </button>
 
             <Button
               onClick={bookDemo}
-              className="ml-1 xl:ml-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-5 xl:px-6 py-4 xl:py-5 text-[13px] xl:text-[14px] font-bold transition-transform hover:-translate-y-0.5 whitespace-nowrap shadow-md shadow-blue-600/20"
+              className={`ml-1 xl:ml-2 rounded-lg px-5 xl:px-6 py-4 xl:py-5 text-[13px] xl:text-[14px] font-bold transition-transform hover:-translate-y-0.5 whitespace-nowrap ${
+                scrolled 
+                  ? "bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-600/20" 
+                  : "bg-white text-blue-700 hover:bg-blue-50 shadow-lg"
+              }`}
             >
               Book Demo
             </Button>
@@ -237,7 +252,7 @@ const Navbar = ({ onBookDemo }) => {
 
           {/* Mobile Menu Toggle */}
           <button
-            className="lg:hidden p-2 text-slate-700 shrink-0"
+            className={`lg:hidden p-2 shrink-0 transition-colors ${scrolled ? "text-slate-700" : "text-white"}`}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -245,7 +260,7 @@ const Navbar = ({ onBookDemo }) => {
           </button>
         </div>
 
-        {/* --- MOBILE DROPDOWN --- */}
+        {/* --- MOBILE DROPDOWN (Always solid white for readability) --- */}
         {mobileOpen && (
           <div className="lg:hidden bg-white border-t border-slate-100 shadow-2xl max-h-[80vh] overflow-y-auto">
             <div className="px-4 py-4 flex flex-col gap-2">

@@ -5,7 +5,12 @@ import Hero from "../components/Hero";
 
 // Importing the sections (FeaturesSection safely removed)
 import { WhySection, ProductsSection } from "../components/HomeSections";
-import { ClientsSection, IndustriesSection, TestimonialsSection, FAQSection, ContactSection, Footer } from "../components/HomeSections2";
+
+// 1. Removed ContactSection from the HomeSections2 import
+import { ClientsSection, IndustriesSection, TestimonialsSection, FAQSection, Footer } from "../components/HomeSections2";
+
+// 2. Added the import for our NEW standalone ContactSection
+import ContactSection from "../components/ContactSection";
 
 const Home = () => {
   const location = useLocation();
@@ -40,7 +45,10 @@ const Home = () => {
       <IndustriesSection />
       <TestimonialsSection />
       <FAQSection />
-      <ContactSection />
+      
+      {/* This will now render the NEW map layout */}
+      <ContactSection /> 
+      
       <Footer />
     </div>
   );

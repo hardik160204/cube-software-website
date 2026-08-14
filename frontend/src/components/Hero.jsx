@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { 
   ArrowRight, MapPin, PhoneCall, Mic, Phone, Mail,
@@ -86,50 +86,30 @@ const AgentCard = () => (
   </div>
 );
 
-// --- OMNICHANNEL ICONS FLOWING OVER BACKGROUND IMAGE ---
+// --- VIDEO BACKGROUND & FLOATING ICONS FLOW ---
 const OmnichannelFlow = () => {
-  const bgImages = [
-    "/cube-Main.jpg",
-    "/cube-callcentimg1.jpg", 
-    "/telephonecube.jpg", 
-    "/guytalkingonphone.jpg"  
-  ];
+  /* 
+    4 Background images are commented out as requested.
+    The video /cubemain.mp4 is now embedded as the active background.
+  */
 
-  const [currentImgIndex, setCurrentImgIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImgIndex((prevIndex) => (prevIndex + 1) % bgImages.length);
-    }, 5000); 
-
-    return () => clearInterval(interval); 
-  }, [bgImages.length]);
-
-  const socialNodes = [
-    { Icon: MessageCircle, color: "text-emerald-500", bg: "bg-emerald-50", start: { top: "15%", left: "15%" }, drift: { x: [0, 60, -30, 0], y: [0, -50, 40, 0] }, size: "w-16 h-16", delay: 0 },
-    { Icon: Facebook, color: "text-blue-600", bg: "bg-blue-50", start: { top: "30%", left: "15%" }, drift: { x: [0, -40, 50, 0], y: [0, 60, -20, 0] }, size: "w-14 h-14", delay: 0.5 },
-    { Icon: Instagram, color: "text-pink-500", bg: "bg-pink-50", start: { top: "15%", left: "80%" }, drift: { x: [0, -60, 40, 0], y: [0, 50, -40, 0] }, size: "w-16 h-16", delay: 1 },
-    { Icon: Twitter, color: "text-sky-500", bg: "bg-sky-50", start: { top: "30%", left: "84%" }, drift: { x: [0, -50, 30, 0], y: [0, 60, 40, 0] }, size: "w-14 h-14", delay: 1.5 },
-    { Icon: Linkedin, color: "text-blue-700", bg: "bg-blue-50", start: { top: "80%", left: "20%" }, drift: { x: [0, 60, -40, 0], y: [0, -40, 60, 0] }, size: "w-16 h-16", delay: 0.8 },
-    { Icon: PhoneCall, color: "text-purple-500", bg: "bg-purple-50", start: { top: "35%", left: "90%" }, drift: { x: [0, -70, 50, 0], y: [0, 70, -40, 0] }, size: "w-14 h-14", delay: 1.2 },
-    { Icon: Mail, color: "text-amber-500", bg: "bg-amber-50", start: { top: "25%", left: "5%" }, drift: { x: [0, 80, -30, 0], y: [0, -30, 50, 0] }, size: "w-16 h-16", delay: 0.3 },
-    { Icon: Phone, color: "text-blue-500", bg: "bg-blue-50", start: { top: "45%", left: "5%" }, drift: { x: [0, 80, -30, 0], y: [0, -30, 50, 0] }, size: "w-16 h-16", delay: 0.3 }
-  ];
+  /* 
+    Social nodes (floating icons) are commented out per your request.
+  */
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 bg-slate-900">
       
+      {/* Video Background */}
       <div className="absolute inset-0 z-0">
-        {bgImages.map((img, index) => (
-          <img 
-            key={img}
-            src={img} 
-            alt={`Background ${index + 1}`} 
-            className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000 ease-in-out ${
-              index === currentImgIndex ? "opacity-70" : "opacity-0"
-            }`}
-          />
-        ))}
+        <video 
+          src="/cubemain.mp4" 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="absolute inset-0 w-full h-half object-cover object-center opacity-60"
+        />
       </div>
 
       <motion.div 
@@ -142,36 +122,6 @@ const OmnichannelFlow = () => {
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         className="absolute bottom-1/4 right-1/4 w-[700px] h-[700px] bg-indigo-400/30 rounded-full blur-[150px] z-10"
       />
-
-      <div className="absolute inset-0 z-20">
-        {socialNodes.map((node, i) => (
-          <motion.div
-            key={`node-${i}`}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1, x: node.drift.x, y: node.drift.y, rotate: [0, 15, -15, 0] }}
-            transition={{ 
-              opacity: { duration: 1, delay: node.delay },
-              scale: { duration: 1, delay: node.delay },
-              x: { duration: 25 + i * 2, repeat: Infinity, ease: "easeInOut" },
-              y: { duration: 28 + i * 2, repeat: Infinity, ease: "easeInOut" },
-              rotate: { duration: 20 + i * 2, repeat: Infinity, ease: "easeInOut" }
-            }}
-            className="absolute"
-            style={{ top: node.start.top, left: node.start.left }}
-          >
-            <div className="relative group">
-              <motion.div 
-                animate={{ scale: [1, 1.4, 1], opacity: [0.4, 0, 0.4] }}
-                transition={{ duration: 3, repeat: Infinity, delay: node.delay }}
-                className={`absolute inset-0 ${node.color.replace('text-', 'bg-')} rounded-2xl blur-md`}
-              />
-              <div className={`${node.size} ${node.bg} rounded-2xl shadow-xl shadow-slate-300/60 border border-white flex items-center justify-center relative backdrop-blur-xl bg-opacity-90`}>
-                <node.Icon className={`w-1/2 h-1/2 ${node.color}`} strokeWidth={1.5} />
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
     </div>
   );
 };
@@ -231,6 +181,7 @@ const Hero = ({ onBookDemo, onGetStarted }) => {
           <NumberCard />
           <AgentCard />
 
+          {/* Restored Image Container Below */}
           <div className="rounded-[2.5rem] overflow-hidden shadow-2xl ring-1 ring-slate-200 relative z-10 bg-white">
             <img
               src={IMAGES.hero}

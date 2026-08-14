@@ -1,4 +1,5 @@
 import "./App.css";
+import ContactSection from './components/ContactSection';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "sonner";
 import Home from "./pages/Home";

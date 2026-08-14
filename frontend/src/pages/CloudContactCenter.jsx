@@ -117,7 +117,7 @@ export default function CloudContactCenter() {
   ];
 
   return (
-    <div className="bg-white text-slate-900">
+    <div className="bg-Red text-slate-900">
       <Navbar/>
 
       {/* Hero Section */}
@@ -127,17 +127,23 @@ export default function CloudContactCenter() {
           style={{ backgroundImage: `url(${PAGE_DATA.heroImage})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44]/95 via-[#0A1F44]/85 to-[#0A1F44]/60" />
+        
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-44 pb-24">
           <nav className="flex items-center gap-1.5 text-xs text-blue-200 mb-6">
             <Link className="hover:text-white transition-colors" to="/">Home</Link>
             <ChevronRight size={13} />
             <span className="text-white font-semibold">{PAGE_DATA.title}</span>
           </nav>
-          <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight max-w-3xl leading-[1.05] animate-fade-up">
+          
+          <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight max-w-3xl leading-[1.05] animate-fade-up text-left">
             {PAGE_DATA.title}
           </h1>
-          <p className="mt-5 text-lg text-blue-100 max-w-2xl leading-relaxed animate-fade-up">{PAGE_DATA.tagline}</p>
-          <div className="mt-8 flex flex-wrap gap-4 animate-fade-up">
+          
+          <p className="mt-5 text-lg text-blue-100 max-w-2xl leading-relaxed animate-fade-up text-left">
+            {PAGE_DATA.tagline}
+          </p>
+          
+          <div className="mt-8 flex justify-start gap-4 animate-fade-up w-full">
             <Link to="/#contact">
               <Button className="bg-blue-600 hover:bg-blue-500 text-white px-8 h-12 rounded-md shadow-lg transition-transform hover:-translate-y-0.5" size="lg">
                 Book Demo
@@ -150,19 +156,21 @@ export default function CloudContactCenter() {
               </Button>
             </Link>
           </div>
-          <div className="mt-12 flex flex-wrap gap-0 divide-x divide-white/15">
+   {/* STATS BLOCK - ORIGINAL LEFT ALIGNMENT */}
+          <div className="mt-12 flex flex-wrap gap-0 divide-x divide-white/15 animate-fade-up">
             {PAGE_DATA.stats.map((s, i) => (
               <div key={s.label} className={i === 0 ? "pr-8" : "px-8"}>
-                <div className="font-heading font-black text-2xl sm:text-3xl text-white">{s.value}</div>
-                <div className="text-[11px] font-semibold tracking-wider uppercase text-blue-200 mt-1">{s.label}</div>
+                <div className="font-heading font-black text-2xl sm:text-3xl text-white text-left">{s.value}</div>
+                <div className="text-[11px] font-semibold tracking-wider uppercase text-blue-200 mt-1 text-left">{s.label}</div>
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
       {/* Overview Section */}
-      <section className="py-24 bg-white overflow-hidden">
+      <section className="py-24 bg-Red overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-16 lg:gap-20 xl:gap-28 items-center">
           <div className="relative z-10 order-1 lg:order-2 lg:pl-8 xl:pl-12">
             <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-4">— Overview</div>
@@ -278,7 +286,7 @@ export default function CloudContactCenter() {
                     <motion.div
                       animate={{ y: [-8, 8, -8] }}
                       transition={{ duration: 3 + (i * 0.3), repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }}
-                      className="w-[72px] h-[72px] rounded-full bg-white shadow-xl border-[2px] border-blue-500 flex items-center justify-center relative group"
+                      className="w-[72px] h-[72px] rounded-full bg-Red shadow-xl border-[2px] border-blue-500 flex items-center justify-center relative group"
                     >
                       <node.Icon className="w-8 h-8 text-[#0A1F44]" strokeWidth={1.5} />
                     </motion.div>
@@ -313,7 +321,7 @@ export default function CloudContactCenter() {
               disabled={currentSlide === 0}
               className={`absolute -left-2 sm:-left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
                 currentSlide === 0 
-                  ? "bg-white text-slate-300 shadow-sm cursor-not-allowed opacity-50" 
+                  ? "bg-Red text-slate-300 shadow-sm cursor-not-allowed opacity-50" 
                   : "bg-blue-50 text-[#1f638b] hover:bg-[#1f638b] hover:text-white shadow-lg cursor-pointer"
               }`}
               aria-label="Previous Slide"
@@ -326,7 +334,7 @@ export default function CloudContactCenter() {
               disabled={currentSlide === maxSlide}
               className={`absolute -right-2 sm:-right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
                 currentSlide === maxSlide 
-                  ? "bg-white text-slate-300 shadow-sm cursor-not-allowed opacity-50" 
+                  ? "bg-Red text-slate-300 shadow-sm cursor-not-allowed opacity-50" 
                   : "bg-blue-50 text-[#1f638b] hover:bg-[#1f638b] hover:text-white shadow-lg cursor-pointer"
               }`}
               aria-label="Next Slide"
@@ -348,7 +356,7 @@ export default function CloudContactCenter() {
                       className="shrink-0 px-3 transition-all duration-500"
                       style={{ width: `${100 / cardsToShow}%` }}
                     >
-                      <div className="bg-white rounded-[32px] p-5 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] hover:-translate-y-3 transition-all duration-500 flex flex-col h-full group">
+                      <div className="bg-Red rounded-[32px] p-5 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] hover:-translate-y-3 transition-all duration-500 flex flex-col h-full group">
                         
                         <div className="w-full h-48 overflow-hidden rounded-[20px] mb-5">
                           <img 
@@ -414,7 +422,7 @@ export default function CloudContactCenter() {
               };
               
               return (
-                <div key={f.title} className="group bg-white rounded-2xl border border-slate-100 p-8 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
+                <div key={f.title} className="group bg-Red rounded-2xl border border-slate-100 p-8 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-colors duration-300 group-hover:text-white ${accents[accent]}`}>
                     {Icon && <Icon size={22} />}
                   </div>
@@ -428,7 +436,7 @@ export default function CloudContactCenter() {
       </section>
 
       {/* Cube Empowering Businesses Section */}
-      <section className="py-24 bg-white overflow-hidden border-t border-slate-200">
+      <section className="py-24 bg-Red overflow-hidden border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
           <div className="order-1 lg:order-1 lg:pr-8">
             <h2 className="font-heading font-black text-3xl sm:text-4xl text-slate-900 leading-tight mb-6">
@@ -466,7 +474,7 @@ export default function CloudContactCenter() {
             <motion.div
               animate={{ y: [-6, 6, -6] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-8 -right-4 lg:-right-8 bg-white py-3 px-5 rounded-2xl shadow-xl flex items-center gap-3 z-20 border border-slate-100"
+              className="absolute top-8 -right-4 lg:-right-8 bg-Red py-3 px-5 rounded-2xl shadow-xl flex items-center gap-3 z-20 border border-slate-100"
             >
               <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 shrink-0">
                 <MessageSquare size={20} />
@@ -479,7 +487,7 @@ export default function CloudContactCenter() {
             <motion.div
               animate={{ y: [6, -6, 6] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-10 -left-4 lg:-left-8 bg-white py-3 px-5 rounded-2xl shadow-xl flex items-center gap-3 z-20 border border-slate-100"
+              className="absolute bottom-10 -left-4 lg:-left-8 bg-Red py-3 px-5 rounded-2xl shadow-xl flex items-center gap-3 z-20 border border-slate-100"
             >
               <div className="w-10 h-10 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-600 shrink-0">
                 <PhoneCall size={20} />
@@ -528,7 +536,7 @@ export default function CloudContactCenter() {
             </h2>
             <div className="mt-8 grid sm:grid-cols-2 gap-4">
               {PAGE_DATA.useCases.map((u, i) => (
-                <div key={u} className="rounded-xl border border-slate-200 bg-white p-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+                <div key={u} className="rounded-xl border border-slate-200 bg-Red p-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
                   <div className="font-heading font-black text-2xl text-blue-200">{String(i + 1).padStart(2, "0")}</div>
                   <div className="mt-2 font-semibold text-slate-800 text-sm">{u}</div>
                 </div>

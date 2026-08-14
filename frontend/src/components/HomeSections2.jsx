@@ -5,7 +5,8 @@ import {
   Headset, Landmark, ConciergeBell, HeartPulse, Building2, TowerControl,
   Star, MapPin, Phone, Mail, Send, CircleDollarSign, Zap, Route, Settings2,
   PhoneCall, Mic, Receipt, MonitorPlay, Voicemail, AudioLines, Radio, DatabaseZap, 
-  ArrowRight, ChevronLeft, ChevronRight
+  ArrowRight, ChevronLeft, ChevronRight,
+  Facebook, Linkedin, Instagram // <-- ADDED NEW ICONS HERE
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
 import { Button } from "./ui/button";
@@ -161,7 +162,6 @@ export const WhySection = () => (
 );
 
 // --- THE NEW CAROUSEL SECTION ---
-// We keep the export name as "ProductsSection" so your Home.jsx doesn't break!
 export const ProductsSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsToShow, setCardsToShow] = useState(3);
@@ -450,7 +450,21 @@ export const Footer = () => (
           Designing Computer Telephony Integration software for 35+ years — trusted by enterprises
           across the globe for dialers, voice logging, Screen recording, IVR with our cloud telephony.
         </p>
+        
+        {/* --- ADDED SOCIAL MEDIA ICONS HERE --- */}
+        <div className="flex items-center gap-4 mt-6">
+          <a href="#" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all duration-300">
+            <Facebook size={18} />
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-blue-500 hover:text-white transition-all duration-300">
+            <Linkedin size={18} />
+          </a>
+          <a href="https://instagram.com/rancosolutions" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-pink-600 hover:text-white transition-all duration-300">
+            <Instagram size={18} />
+          </a>
+        </div>
       </div>
+      
       <div>
         <div className="font-heading font-bold text-white text-sm tracking-wider uppercase mb-4">Products</div>
         <ul className="space-y-2.5 text-sm">
