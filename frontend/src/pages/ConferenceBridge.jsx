@@ -180,7 +180,7 @@ export default function ConferenceBridge() {
 
       <section className="bg-slate-50 py-10 border-b border-slate-200 border-dashed">
         <div className="max-w-7xl mx-auto px-4 text-center text-slate-400">
-          <p className="font-mono text-sm">[ Reserved Space for Specific Conference Bridge Diagram / Feature Grid ]</p>
+          <p className="font-mono text-sm"></p>
         </div>
       </section>
 
@@ -313,7 +313,7 @@ export default function ConferenceBridge() {
 
       <section className="bg-white py-10 border-y border-slate-200 border-dashed">
         <div className="max-w-7xl mx-auto px-4 text-center text-slate-400">
-          <p className="font-mono text-sm">[ Reserved Space for Call-to-Action graphics or Integrations list ]</p>
+          <p className="font-mono text-sm"></p>
         </div>
       </section>
 

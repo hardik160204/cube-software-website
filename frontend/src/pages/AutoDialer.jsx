@@ -201,7 +201,7 @@ export default function AutoDialer() {
 
       <section className="bg-slate-50 py-10 border-b border-slate-200 border-dashed">
         <div className="max-w-7xl mx-auto px-4 text-center text-slate-400">
-          <p className="font-mono text-sm">[ Reserved Space for Specific Auto Dialer Diagram / Predictive Logic Flow ]</p>
+          <p className="font-mono text-sm"></p>
         </div>
       </section>
 
