@@ -31,7 +31,7 @@ export default function ContactSection() {
                   <MapPin size={20} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-slate-900">India Office</h4>
+                  <h4 className="font-bold text-slate-900">Corporate Office</h4>
                   <p className="text-slate-600 text-sm mt-1 leading-relaxed">
                     A-26, Ground Floor, Sector 63, Noida,<br />
                     Uttar Pradesh 201301, India
@@ -54,18 +54,7 @@ export default function ContactSection() {
                 </div>
               </div>
 
-              {/* US Office */}
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center text-red-500 shrink-0 mt-1">
-                  <MapPin size={20} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-slate-900">US Office</h4>
-                  <p className="text-slate-600 text-sm mt-1 leading-relaxed">
-                    USA
-                  </p>
-                </div>
-              </div>
+          
 
               {/* Phone */}
               <div className="flex items-start gap-4">
@@ -75,8 +64,8 @@ export default function ContactSection() {
                 <div>
                   <h4 className="font-bold text-slate-900">Phone</h4>
                   <p className="text-slate-600 text-sm mt-1 leading-relaxed">
-                    India: +91 120 405 7109<br />
-                    US: +1 (111) 111-1111
+                    India: +91 806 869 4440<br />
+                
                   </p>
                 </div>
               </div>

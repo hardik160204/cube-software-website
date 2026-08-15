@@ -4,12 +4,11 @@ import { Phone, ChevronDown, Menu, X, LogIn } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
 
-// --- NAVIGATION DATA RESTRUCTURED EXACTLY TO YOUR NEEDS ---
+// --- NAVIGATION DATA ---
 const MENU_ITEMS = [
   { label: "Home", href: "#home" },
   {
     label: "Services",
-    href: "/services",
     children: [
       { label: "Contact Center Solution", href: "/services/cloud-contact-center" },
       { label: "Auto Dialer", href: "/services/auto-dialer" },
@@ -18,7 +17,6 @@ const MENU_ITEMS = [
   },
   {
     label: "Products",
-    href: "#products",
     children: [
       { label: "Callisto Voice Logger", href: "/services/voice-logger" },
       { label: "Call Billing Software", href: "/services/call-billing" },
@@ -40,7 +38,8 @@ const CONTACT_INFO = {
 };
 
 const Navbar = ({ onBookDemo }) => {
-  const [scrolled, setScrolled] = useState(false);
+  // 'transparent' | 'glass' | 'solid'
+  const [navState, setNavState] = useState("transparent");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [hoveredMenu, setHoveredMenu] = useState(null);
   
@@ -48,14 +47,34 @@ const Navbar = ({ onBookDemo }) => {
   const location = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
+    const onScroll = () => {
+      const scrollY = window.scrollY;
+      const isHome = location.pathname === "/";
+      
+      // Calculate dynamic thresholds based on viewport height
+      // 1.6 * vh covers the Hero slider AND the World Map section
+      const vh = window.innerHeight;
+      const solidThreshold = isHome ? vh * 1.6 : 50; 
+      
+      if (scrollY === 0) {
+        setNavState("transparent");
+      } else if (scrollY > 0 && scrollY < solidThreshold) {
+        setNavState("glass");
+      } else {
+        setNavState("solid");
+      }
+    };
+    
     window.addEventListener("scroll", onScroll);
+    onScroll(); // Trigger immediately on mount to check position
+    
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [location.pathname]);
 
   const go = (href) => {
     setMobileOpen(false);
     setHoveredMenu(null);
+    if (!href) return; // Safety check
     if (href.startsWith("/")) {
       navigate(href);
       return;
@@ -80,6 +99,17 @@ const Navbar = ({ onBookDemo }) => {
     if (link.label === "Services") return location.pathname.startsWith("/services");
     if (link.href === "#home") return location.pathname === "/";
     return false;
+  };
+
+  // Determine styling based on the active state
+  const getNavClasses = () => {
+    if (navState === "solid") {
+      return "bg-white/95 backdrop-blur-md shadow-md border-b border-slate-100";
+    }
+    if (navState === "glass") {
+      return "bg-white/70 backdrop-blur-md border-b border-white/40 shadow-sm";
+    }
+    return "bg-transparent border-b-transparent";
   };
 
   return (
@@ -127,23 +157,15 @@ const Navbar = ({ onBookDemo }) => {
       </div>
 
       {/* Main nav */}
-      <nav
-        className={`transition-all duration-300 ${
-          scrolled 
-            ? "bg-white/95 backdrop-blur-md shadow-md border-b border-slate-100" 
-            : "bg-transparent border-b-transparent"
-        }`}
-      >
+      <nav className={`transition-all duration-500 ease-in-out ${getNavClasses()}`}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between h-20">
           
-          {/* 1. LOGO */}
+          {/* 1. LOGO DYNAMIC SWAP */}
           <span onClick={() => go("/")} className="cursor-pointer shrink-0 flex items-center group mr-2 xl:mr-4">
             <img 
-              src="/logo75.png" 
+              src={navState === "transparent" ? "/logo-77.png" : "/logo75.png"} 
               alt="Cube Software Logo" 
-              className={`h-10 sm:h-12 w-auto object-contain transition-all duration-300 group-hover:scale-105 ${
-                !scrolled ? "brightness-0 invert" : ""
-              }`}
+              className="h-10 sm:h-12 w-auto object-contain transition-all duration-300 group-hover:scale-105"
             />
           </span>
 
@@ -158,10 +180,14 @@ const Navbar = ({ onBookDemo }) => {
                   onMouseLeave={() => setHoveredMenu(null)}
                 >
                   <button
-                    onClick={() => go(link.href)}
-                    className={`px-2 xl:px-3 py-2 text-[13px] xl:text-[14px] font-bold rounded-md flex items-center gap-1 transition-colors whitespace-nowrap ${
-                      scrolled 
-                        ? (isActive(link) || hoveredMenu === link.label ? "text-blue-700" : "text-slate-700 hover:text-blue-700")
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setHoveredMenu(hoveredMenu === link.label ? null : link.label);
+                    }}
+                    className={`px-2 xl:px-3 py-2 text-[13px] xl:text-[14px] font-bold rounded-md flex items-center gap-1 transition-colors whitespace-nowrap cursor-pointer ${
+                      navState !== "transparent"
+                        ? (isActive(link) || hoveredMenu === link.label ? "text-blue-700" : "text-slate-800 hover:text-blue-700")
                         : (isActive(link) || hoveredMenu === link.label ? "text-white" : "text-white/90 hover:text-white")
                     }`}
                   >
@@ -197,10 +223,11 @@ const Navbar = ({ onBookDemo }) => {
               ) : (
                 <button
                   key={link.label}
+                  type="button"
                   onClick={() => go(link.href)}
                   className={`px-2 xl:px-3 py-2 text-[13px] xl:text-[14px] font-bold rounded-md transition-colors whitespace-nowrap ${
-                    scrolled 
-                      ? (isActive(link) ? "text-blue-700" : "text-slate-700 hover:text-blue-700")
+                    navState !== "transparent"
+                      ? (isActive(link) ? "text-blue-700" : "text-slate-800 hover:text-blue-700")
                       : (isActive(link) ? "text-white" : "text-white/90 hover:text-white")
                   }`}
                 >
@@ -215,33 +242,34 @@ const Navbar = ({ onBookDemo }) => {
             <a 
               href={`tel:${CONTACT_INFO.expertLine.replace(/\s/g, "")}`} 
               className={`flex items-center gap-2 text-[13px] xl:text-[14px] font-bold transition-colors whitespace-nowrap ${
-                scrolled ? "text-slate-700 hover:text-blue-700" : "text-white/90 hover:text-white"
+                navState !== "transparent" ? "text-slate-800 hover:text-blue-700" : "text-white/90 hover:text-white"
               }`}
             >
               <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
-                scrolled ? "bg-blue-50 text-blue-600" : "bg-white/20 text-white"
+                navState !== "transparent" ? "bg-blue-50 text-blue-600" : "bg-white/20 text-white"
               }`}>
                 <Phone size={14} />
               </div>
               <span className="hidden xl:inline">{CONTACT_INFO.expertLine}</span>
             </a>
 
-            <div className={`w-px h-5 transition-colors ${scrolled ? "bg-slate-200" : "bg-white/30"}`}></div>
+            <div className={`w-px h-5 transition-colors ${navState !== "transparent" ? "bg-slate-300" : "bg-white/30"}`}></div>
 
             <button 
+              type="button"
               onClick={() => go("/login")}
               className={`flex items-center gap-1.5 text-[13px] xl:text-[14px] font-bold transition-colors outline-none whitespace-nowrap ${
-                scrolled ? "text-slate-700 hover:text-blue-700" : "text-white/90 hover:text-white"
+                navState !== "transparent" ? "text-slate-800 hover:text-blue-700" : "text-white/90 hover:text-white"
               }`}
             >
-              <LogIn size={16} className={scrolled ? "text-blue-600" : "text-white"} />
+              <LogIn size={16} className={navState !== "transparent" ? "text-blue-600" : "text-white"} />
               Login
             </button>
 
             <Button
               onClick={bookDemo}
               className={`ml-1 xl:ml-2 rounded-lg px-5 xl:px-6 py-4 xl:py-5 text-[13px] xl:text-[14px] font-bold transition-transform hover:-translate-y-0.5 whitespace-nowrap ${
-                scrolled 
+                navState !== "transparent" 
                   ? "bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-600/20" 
                   : "bg-white text-blue-700 hover:bg-blue-50 shadow-lg"
               }`}
@@ -252,7 +280,8 @@ const Navbar = ({ onBookDemo }) => {
 
           {/* Mobile Menu Toggle */}
           <button
-            className={`lg:hidden p-2 shrink-0 transition-colors ${scrolled ? "text-slate-700" : "text-white"}`}
+            type="button"
+            className={`lg:hidden p-2 shrink-0 transition-colors ${navState !== "transparent" ? "text-slate-800" : "text-white"}`}
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -260,7 +289,7 @@ const Navbar = ({ onBookDemo }) => {
           </button>
         </div>
 
-        {/* --- MOBILE DROPDOWN (Always solid white for readability) --- */}
+        {/* --- MOBILE DROPDOWN --- */}
         {mobileOpen && (
           <div className="lg:hidden bg-white border-t border-slate-100 shadow-2xl max-h-[80vh] overflow-y-auto">
             <div className="px-4 py-4 flex flex-col gap-2">
@@ -275,6 +304,7 @@ const Navbar = ({ onBookDemo }) => {
                       {link.children.map((c) => (
                         <button
                           key={c.label}
+                          type="button"
                           onClick={() => go(c.href)}
                           className="w-full text-left px-5 py-2.5 text-[15px] font-medium text-slate-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors"
                         >
@@ -286,8 +316,9 @@ const Navbar = ({ onBookDemo }) => {
                 ) : (
                   <button
                     key={link.label}
+                    type="button"
                     onClick={() => go(link.href)}
-                    className="text-left px-3 py-3 text-[15px] font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors"
+                    className="w-full text-left px-3 py-3 text-[15px] font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors"
                   >
                     {link.label}
                   </button>
@@ -307,6 +338,7 @@ const Navbar = ({ onBookDemo }) => {
               </a>
 
               <button 
+                type="button"
                 onClick={() => go("/login")}
                 className="flex items-center gap-3 text-left px-3 py-3 text-[15px] font-bold text-slate-800 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors"
               >
@@ -316,7 +348,7 @@ const Navbar = ({ onBookDemo }) => {
                 Customer Portal Login
               </button>
 
-              <Button onClick={bookDemo} className="mt-4 mb-4 bg-blue-600 hover:bg-blue-700 text-white py-6 rounded-xl font-bold shadow-lg shadow-blue-600/20">
+              <Button onClick={bookDemo} className="mt-4 mb-4 w-full bg-blue-600 hover:bg-blue-700 text-white py-6 rounded-xl font-bold shadow-lg shadow-blue-600/20">
                 Book Demo
               </Button>
             </div>

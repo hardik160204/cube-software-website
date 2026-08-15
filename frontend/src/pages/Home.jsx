@@ -1,23 +1,21 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
+import CubeHeroSlider from "../components/CubeHeroSlider";
 
-// Importing the sections (FeaturesSection safely removed)
-import { WhySection, ProductsSection } from "../components/HomeSections";
-
-// 1. Removed ContactSection from the HomeSections2 import
+// 1. Removed ProductsSection from this import
+import { WhySection } from "../components/HomeSections"; 
 import { ClientsSection, IndustriesSection, TestimonialsSection, FAQSection, Footer } from "../components/HomeSections2";
-
-// 2. Added the import for our NEW standalone ContactSection
 import ContactSection from "../components/ContactSection";
+
+// 2. Imported our new reusable 3x2 grid component!
+import OurProducts from "../components/OurProducts"; 
 
 const Home = () => {
   const location = useLocation();
 
   useEffect(() => {
     if (location.hash) {
-      // wait for render, then scroll to the requested section
       setTimeout(() => {
         const el = document.querySelector(location.hash);
         if (el) el.scrollIntoView({ behavior: "smooth" });
@@ -35,18 +33,20 @@ const Home = () => {
   return (
     <div className="bg-white text-slate-900">
       <Navbar onBookDemo={scrollToContact} />
-      <Hero onBookDemo={scrollToContact} onGetStarted={scrollToContact} />
+
+      <CubeHeroSlider onBookDemo={scrollToContact} />
       
       <ClientsSection />
       
       <WhySection />
-      <ProductsSection />
+
+      {/* 3. Dropped in the new static grid component */}
+      <OurProducts /> 
       
       <IndustriesSection />
       <TestimonialsSection />
       <FAQSection />
       
-      {/* This will now render the NEW map layout */}
       <ContactSection /> 
       
       <Footer />

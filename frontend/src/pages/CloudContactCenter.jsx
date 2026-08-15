@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight, CheckCircle2, ChevronRight, ChevronLeft, Cloud, Smartphone, GitBranch, AudioLines,
   BarChart3, ShieldCheck, Globe, Gauge, Plug, Landmark, Activity, PhoneOutgoing,
@@ -9,33 +9,37 @@ import {
   Receipt, Percent, Building, AlertTriangle, FileSpreadsheet, MonitorPlay, Link2,
   CalendarClock, Voicemail, Mail, Forward, Clock, Languages, MessageSquare,
   Radio, UserCog, Disc, DatabaseZap, Layers, Sparkles,
-  AtSign, Laptop, Briefcase, Phone, AppWindow, Headphones, BrainCircuit
+  AtSign, Laptop, Briefcase, Phone, AppWindow, Headphones, BrainCircuit,
+  Headset, Bot, MousePointerClick, History, LineChart, UserCheck, PhoneOff, Inbox
 } from "lucide-react";
 import { Button } from "../components/ui/button";
 import Navbar from "../components/Navbar";
 import { Footer } from "../components/HomeSections2";
+import OurProducts from "../components/OurProducts";
 
-// --- HARDCODED PAGE DATA ---
+// =========================================================================
+// CLOUD CONTACT CENTER SPECIFIC DATA
+// =========================================================================
 const PAGE_DATA = {
-  title: "Cloud Contact Center",
-  tagline: "Get results with a powerful inbound, outbound and blended dialer with full call disposition.",
-  heroImage: "https://images.unsplash.com/photo-1560264280-88b68371db39?auto=format&fit=crop&w=1920&q=80",
+  title: "Contact Center Solution",
+  tagline: "Get results with a powerful inbound, outbound and blended cloud contact center solution with full call disposition.",
+  heroVideo: "/cloud-contact-center-bg.mp4", // <-- UPDATE THIS TO YOUR VIDEO FILE
   stats: [
     { value: "3x", label: "Agent Productivity" },
     { value: "ACD/IVR/PD", label: "Complete Suite" },
     { value: "Hosted", label: "or On-Premise" },
   ],
   overview: [
-    "Cloud Contact Center is our flagship contact-center engine — a complete suite covering inbound ACD, outbound predictive/progressive/preview dialing and blended operations. Agents see customer context before they speak; supervisors see everything in real time.",
+    "Cloud Contact Center Solution is Cube Software's flagship contact-center engine — a complete suite covering inbound ACD, outbound predictive/progressive/preview dialing and blended operations. Agents see customer context before they speak; supervisors see everything in real time.",
     "Available for both international and domestic operations, on-premise or fully hosted, the platform ships with comprehensive modules including ACD, IVR, predictive dialing, call disposition, campaign management and quality monitoring — everything a modern contact center floor needs.",
   ],
   features: [
-    { icon: "PhoneOutgoing", title: "Predictive Dialing", description: "AI-paced dialing keeps agents talking, not waiting — with answering-machine detection." },
-    { icon: "PhoneIncoming", title: "Intelligent ACD", description: "Skill-based, priority and least-idle routing for inbound queues." },
-    { icon: "ListChecks", title: "Call Disposition", description: "Custom disposition trees, callbacks and lead recycling per campaign." },
-    { icon: "LayoutDashboard", title: "Supervisor Wallboards", description: "Live monitoring, whisper, barge-in and force-logout controls." },
-    { icon: "Database", title: "Campaign & Lead Manager", description: "Upload, filter, dedupe and pace lead lists with DNC scrubbing." },
-    { icon: "Plug", title: "CRM Screen-Pop", description: "Native connectors for Salesforce and custom CRMs." },
+    { icon: PhoneOutgoing, title: "Predictive Dialing", description: "AI-paced dialing keeps agents talking, not waiting — with answering-machine detection." },
+    { icon: PhoneIncoming, title: "Intelligent ACD", description: "Skill-based, priority and least-idle routing for inbound queues." },
+    { icon: ListChecks, title: "Call Disposition", description: "Custom disposition trees, callbacks and lead recycling per campaign." },
+    { icon: LayoutDashboard, title: "Supervisor Wallboards", description: "Live monitoring, whisper, barge-in and force-logout controls." },
+    { icon: Database, title: "Campaign & Lead Manager", description: "Upload, filter, dedupe and pace lead lists with DNC scrubbing." },
+    { icon: Plug, title: "CRM Screen-Pop", description: "Native connectors for Salesforce and custom CRMs." },
   ],
   benefits: [
     "Triple outbound connect rates with predictive pacing",
@@ -57,18 +61,130 @@ const FEATURE_IMAGES = [
   "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80", 
 ];
 
-// --- SECTION MIGRATED FROM HOMEPAGE ---
 const ENTERPRISE_FEATURES = [
-  { icon: "ShieldCheck", title: "Enterprise Security", description: "Encrypted protocols, fraud monitoring and hardened infrastructure that protect every conversation your teams have." },
-  { icon: "Plug", title: "CRM & API Integration", description: "Plug into Salesforce, Freshdesk and your own apps through clean, well-documented APIs." },
-  { icon: "Headphones", title: "24/7 Support", description: "Never skip a beat. Secure 24/7 dedicated support for your critical business communications." },
-  { icon: "BrainCircuit", title: "AI Call Management", description: "AI that listens, routes, and scores. Elevate your team with smart routing, sentiment analysis, and automated QA." },
+  { icon: ShieldCheck, title: "Enterprise Security", description: "Encrypted protocols, fraud monitoring and hardened infrastructure that protect every conversation your teams have." },
+  { icon: Plug, title: "CRM & API Integration", description: "Plug into Salesforce, Freshdesk and your own apps through clean, well-documented APIs." },
+  { icon: Headphones, title: "24/7 Support", description: "Never skip a beat. Secure 24/7 dedicated support for your critical business communications." },
+  { icon: BrainCircuit, title: "AI Call Management", description: "AI that listens, routes, and scores. Elevate your team with smart routing, sentiment analysis, and automated QA." },
 ];
 
 const ICONS = {
   Cloud, Globe, ShieldCheck, Plug, Headphones, BrainCircuit,
   PhoneOutgoing, PhoneIncoming, ListChecks, LayoutDashboard, Database
 };
+
+// --- FIX: MOVED THESE ABOVE THE MODULES_DATA ARRAY ---
+// Fallback dummy icons to prevent breaking if Lucide lacks exact names
+const FileText = ({ className }) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>;
+const Settings = ({ className }) => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
+
+const MODULES_DATA = [
+  {
+    id: "inbound",
+    iconColor: "text-orange-500",
+    icon: Headset,
+    title: "Inbound Communication",
+    items: [
+      { text: "Multi-level IVR for structured call handling", icon: GitBranch },
+      { text: "Toll-free numbers and virtual numbers for customer access", icon: Phone },
+      { text: "Missed call services with automated response workflows", icon: PhoneOff },
+      { text: "Skill-based routing, queue management, and call recordings", icon: LineChart },
+      { text: "Sticky agent routing for repeat callers", icon: UserCheck },
+      { text: "Softphone for browser-based call handling", icon: Mic }
+    ]
+  },
+  {
+    id: "outbound",
+    iconColor: "text-blue-600",
+    icon: Megaphone,
+    title: "Outbound Communication & Campaigns",
+    items: [
+      { text: "Auto dialer with predictive, progressive, and preview dialing", icon: PhoneOutgoing },
+      { text: "Click-to-call from CRM and business applications", icon: MousePointerClick },
+      { text: "Voice broadcast for bulk outbound communication", icon: Radio },
+      { text: "Campaign management with retry and follow-up logic", icon: BarChart3 },
+      { text: "Lead distribution and outbound workflow control", icon: Users },
+      { text: "True caller integration for verified outbound identity", icon: ShieldCheck }
+    ]
+  },
+  {
+    id: "messaging",
+    iconColor: "text-emerald-500",
+    icon: MessageSquare,
+    title: "Messaging & Omnichannel Interaction Handling",
+    items: [
+      { text: "SMS and RCS-based customer communication", icon: MessageSquare },
+      { text: "WhatsApp Business API for conversational messaging", icon: MessageSquare },
+      { text: "Unified inbox for managing chat and messaging channels", icon: Inbox },
+      { text: "Conversation history and context tracking across channels", icon: History },
+      { text: "Template-based messaging and quick replies", icon: FileText },
+      { text: "Cross-channel interaction visibility for agents", icon: Globe }
+    ]
+  },
+  {
+    id: "ai",
+    iconColor: "text-amber-500",
+    icon: Bot,
+    title: "Artificial Intelligence & Automation",
+    items: [
+      { text: "AI voice bot for automated inbound interactions", icon: Mic },
+      { text: "AI-powered call transcription and summarization", icon: FileAudio },
+      { text: "Post-call analysis with conversation insights and trends", icon: LineChart },
+      { text: "Workflow automation for routing, follow-ups, and task triggers", icon: Settings },
+      { text: "Rule-based interaction handling and escalation logic", icon: GitBranch },
+      { text: "Performance insights for agents and contact center operations", icon: BarChart3 }
+    ]
+  }
+];
+
+const ContactCenterModules = () => {
+  return (
+    <section className="py-24 bg-[#FAFAFA] border-t border-slate-200">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-8 items-start">
+          
+          <div className="lg:w-[35%] lg:sticky lg:top-32 shrink-0 z-10">
+            <h2 className="font-heading font-black text-4xl sm:text-5xl text-slate-900 leading-[1.15] tracking-tight">
+              Contact Center Modules for End-to-End Business Communication
+            </h2>
+          </div>
+
+          <div className="lg:w-[65%] flex items-stretch overflow-x-auto gap-6 pb-12 pt-4 px-4 -mx-4 lg:px-4 lg:-mx-4 snap-x snap-mandatory [scrollbar-width:thin] [scrollbar-color:#cbd5e1_transparent] [&::-webkit-scrollbar]:h-2.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-300 [&::-webkit-scrollbar-thumb]:rounded-full">
+            {MODULES_DATA.map((module) => (
+              <div 
+                key={module.id} 
+                className="min-w-[320px] max-w-[320px] md:min-w-[400px] md:max-w-[400px] shrink-0 snap-center bg-white rounded-3xl p-8 shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-slate-100 flex flex-col hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] transition-shadow duration-300"
+              >
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 bg-slate-50 ${module.iconColor}`}>
+                  <module.icon strokeWidth={2} size={28} />
+                </div>
+                
+                <h3 className="font-heading font-bold text-[22px] text-slate-900 mb-8 leading-snug">
+                  {module.title}
+                </h3>
+                
+                <ul className="flex flex-col gap-5 flex-grow">
+                  {module.items.map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className={`mt-0.5 shrink-0 ${module.iconColor}`}>
+                        <item.icon size={18} strokeWidth={2.5} />
+                      </div>
+                      <span className="text-[15px] text-slate-600 font-medium leading-relaxed">
+                        {item.text}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+            <div className="min-w-[20px] shrink-0"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 
 export default function CloudContactCenter() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -92,10 +208,7 @@ export default function CloudContactCenter() {
   const totalFeatures = PAGE_DATA.features.length;
   const maxSlide = Math.max(0, totalFeatures - cardsToShow);
 
-  if (currentSlide > maxSlide) {
-    setCurrentSlide(maxSlide);
-  }
-
+  if (currentSlide > maxSlide) setCurrentSlide(maxSlide);
   const prevSlide = () => setCurrentSlide((p) => Math.max(p - 1, 0));
   const nextSlide = () => setCurrentSlide((p) => Math.min(p + 1, maxSlide));
 
@@ -117,33 +230,47 @@ export default function CloudContactCenter() {
   ];
 
   return (
-    <div className="bg-Red text-slate-900">
-      <Navbar/>
+    <div className="bg-white text-slate-900 flex flex-col min-h-screen">
+      <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${PAGE_DATA.heroImage})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44]/95 via-[#0A1F44]/85 to-[#0A1F44]/60" />
+      {/* --- FULL-HEIGHT HERO SECTION --- */}
+      <section className="relative w-full min-h-[100dvh] flex flex-col overflow-hidden bg-[#0A1F44]">
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-44 pb-24">
+        {/* Video Background */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover object-center z-0 opacity-80"
+        >
+          <source src={PAGE_DATA.heroVideo} type="video/mp4" />
+        </video>
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44]/80 via-[#0A1F44]/40 to-transparent z-10 pointer-events-none" />
+        
+        {/* Spacer for Navbar */}
+        <div className="w-full h-24 lg:h-32 shrink-0 pointer-events-none z-10"></div>
+        
+        {/* Main Hero Content (Centered) */}
+        <div className="relative z-20 flex-grow flex flex-col justify-center w-full max-w-7xl mx-auto px-4 sm:px-6 pb-12 sm:pb-16">
           <nav className="flex items-center gap-1.5 text-xs text-blue-200 mb-6">
             <Link className="hover:text-white transition-colors" to="/">Home</Link>
+            <ChevronRight size={13} />
+            <span className="text-blue-300">Products</span>
             <ChevronRight size={13} />
             <span className="text-white font-semibold">{PAGE_DATA.title}</span>
           </nav>
           
-          <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight max-w-3xl leading-[1.05] animate-fade-up text-left">
+          <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight max-w-4xl leading-[1.05] animate-fade-up">
             {PAGE_DATA.title}
           </h1>
-          
-          <p className="mt-5 text-lg text-blue-100 max-w-2xl leading-relaxed animate-fade-up text-left">
+          <p className="mt-5 text-lg text-blue-100 max-w-2xl leading-relaxed text-justify animate-fade-up">
             {PAGE_DATA.tagline}
           </p>
           
-          <div className="mt-8 flex justify-start gap-4 animate-fade-up w-full">
+          <div className="mt-8 flex flex-wrap gap-4 animate-fade-up">
             <Link to="/#contact">
               <Button className="bg-blue-600 hover:bg-blue-500 text-white px-8 h-12 rounded-md shadow-lg transition-transform hover:-translate-y-0.5" size="lg">
                 Book Demo
@@ -156,26 +283,33 @@ export default function CloudContactCenter() {
               </Button>
             </Link>
           </div>
-   {/* STATS BLOCK - ORIGINAL LEFT ALIGNMENT */}
-          <div className="mt-12 flex flex-wrap gap-0 divide-x divide-white/15 animate-fade-up">
+        </div>
+
+        {/* --- BOTTOM STATS BAR --- */}
+        <div className="relative z-30 w-full shrink-0 border-t border-white/10 bg-[#0A1F44]/40 backdrop-blur-md py-6 mt-auto">
+          <div className="max-w-[1400px] mx-auto grid grid-cols-3 divide-x divide-white/10">
             {PAGE_DATA.stats.map((s, i) => (
-              <div key={s.label} className={i === 0 ? "pr-8" : "px-8"}>
-                <div className="font-heading font-black text-2xl sm:text-3xl text-white text-left">{s.value}</div>
-                <div className="text-[11px] font-semibold tracking-wider uppercase text-blue-200 mt-1 text-left">{s.label}</div>
+              <div key={s.label} className="text-center px-2 sm:px-4">
+                <div className="font-heading font-black text-3xl sm:text-4xl lg:text-5xl text-white mb-1 md:mb-2 drop-shadow-md">
+                  {s.value}
+                </div>
+                <div className="font-bold tracking-[0.1em] sm:tracking-[0.15em] uppercase text-blue-200/80 text-[10px] sm:text-xs md:text-sm">
+                  {s.label}
+                </div>
               </div>
             ))}
           </div>
-
         </div>
+
       </section>
 
       {/* Overview Section */}
-      <section className="py-24 bg-Red overflow-hidden">
+      <section className="py-24 bg-white overflow-hidden border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-16 lg:gap-20 xl:gap-28 items-center">
           <div className="relative z-10 order-1 lg:order-2 lg:pl-8 xl:pl-12">
             <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-4">— Overview</div>
-            <h2 className="font-heading font-bold text-3xl sm:text-4xl text-slate-900 leading-snug mb-5">
-              The Engine Powering <span className="text-blue-600">{PAGE_DATA.title}</span>
+            <h2 className="font-heading font-bold text-3xl sm:text-3xl text-slate-900 leading-snug mb-5">
+              The Intelligence Behind Modern <span className="text-blue-600">{PAGE_DATA.title}</span>
             </h2>
             <div className="space-y-4">
               {PAGE_DATA.overview.map((p, i) => (
@@ -286,7 +420,7 @@ export default function CloudContactCenter() {
                     <motion.div
                       animate={{ y: [-8, 8, -8] }}
                       transition={{ duration: 3 + (i * 0.3), repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }}
-                      className="w-[72px] h-[72px] rounded-full bg-Red shadow-xl border-[2px] border-blue-500 flex items-center justify-center relative group"
+                      className="w-[72px] h-[72px] rounded-full bg-white shadow-xl border-[2px] border-blue-500 flex items-center justify-center relative group"
                     >
                       <node.Icon className="w-8 h-8 text-[#0A1F44]" strokeWidth={1.5} />
                     </motion.div>
@@ -298,10 +432,12 @@ export default function CloudContactCenter() {
         </div>
       </section>
 
+      {/* Contact Center Modules Section */}
+      <ContactCenterModules />
+
       {/* Features Carousel */}
       <section className="pt-24 pb-12 bg-[#FAFAFA] overflow-hidden relative">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-          
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -315,29 +451,21 @@ export default function CloudContactCenter() {
           </motion.div>
 
           <div className="relative w-full">
-            
             <button
               onClick={prevSlide}
               disabled={currentSlide === 0}
               className={`absolute -left-2 sm:-left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
-                currentSlide === 0 
-                  ? "bg-Red text-slate-300 shadow-sm cursor-not-allowed opacity-50" 
-                  : "bg-blue-50 text-[#1f638b] hover:bg-[#1f638b] hover:text-white shadow-lg cursor-pointer"
+                currentSlide === 0 ? "bg-white text-slate-300 shadow-sm cursor-not-allowed opacity-50" : "bg-blue-50 text-[#1f638b] hover:bg-[#1f638b] hover:text-white shadow-lg cursor-pointer"
               }`}
-              aria-label="Previous Slide"
             >
               <ChevronLeft size={26} strokeWidth={2.5} />
             </button>
-
             <button
               onClick={nextSlide}
               disabled={currentSlide === maxSlide}
               className={`absolute -right-2 sm:-right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
-                currentSlide === maxSlide 
-                  ? "bg-Red text-slate-300 shadow-sm cursor-not-allowed opacity-50" 
-                  : "bg-blue-50 text-[#1f638b] hover:bg-[#1f638b] hover:text-white shadow-lg cursor-pointer"
+                currentSlide === maxSlide ? "bg-white text-slate-300 shadow-sm cursor-not-allowed opacity-50" : "bg-blue-50 text-[#1f638b] hover:bg-[#1f638b] hover:text-white shadow-lg cursor-pointer"
               }`}
-              aria-label="Next Slide"
             >
               <ChevronRight size={26} strokeWidth={2.5} />
             </button>
@@ -349,85 +477,50 @@ export default function CloudContactCenter() {
               >
                 {PAGE_DATA.features.map((f, i) => {
                   const imageUrl = FEATURE_IMAGES[i % FEATURE_IMAGES.length];
-
                   return (
-                    <div 
-                      key={f.title}
-                      className="shrink-0 px-3 transition-all duration-500"
-                      style={{ width: `${100 / cardsToShow}%` }}
-                    >
-                      <div className="bg-Red rounded-[32px] p-5 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] hover:-translate-y-3 transition-all duration-500 flex flex-col h-full group">
-                        
+                    <div key={f.title} className="shrink-0 px-3 transition-all duration-500" style={{ width: `${100 / cardsToShow}%` }}>
+                      <div className="bg-white rounded-[32px] p-5 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] hover:-translate-y-3 transition-all duration-500 flex flex-col h-full group">
                         <div className="w-full h-48 overflow-hidden rounded-[20px] mb-5">
-                          <img 
-                            src={imageUrl} 
-                            alt={f.title} 
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                          />
+                          <img src={imageUrl} alt={f.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                         </div>
-                        
                         <div className="flex flex-col flex-grow items-center text-center px-2">
-                          <h3 className="font-heading font-bold text-xl text-slate-900 mb-3 group-hover:text-[#1f638b] transition-colors">
-                            {f.title}
-                          </h3>
-                          <p className="text-[14px] text-slate-500 leading-relaxed mb-4 line-clamp-3">
-                            {f.description}
-                          </p>
+                          <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 mb-3">
+                            <f.icon size={18} />
+                          </div>
+                          <h3 className="font-heading font-bold text-xl text-slate-900 mb-2 group-hover:text-[#1f638b] transition-colors">{f.title}</h3>
+                          <p className="text-[14px] text-slate-500 leading-relaxed mb-4">{f.description}</p>
                         </div>
-
                       </div>
                     </div>
                   );
                 })}
               </div>
             </div>
-            
-            <div className="flex justify-center items-center gap-2 mt-4">
-              {Array.from({ length: maxSlide + 1 }).map((_, dotIdx) => (
-                <button
-                  key={dotIdx}
-                  onClick={() => setCurrentSlide(dotIdx)}
-                  className={`h-2.5 rounded-full transition-all duration-500 ${
-                    currentSlide === dotIdx 
-                      ? "w-8 bg-[#1f638b]" 
-                      : "w-2.5 bg-slate-300 hover:bg-slate-400"
-                  }`}
-                  aria-label={`Go to slide ${dotIdx + 1}`}
-                />
-              ))}
-            </div>
-
           </div>
         </div>
       </section>
 
-      {/* Migrated "Empowering business-critical..." Section inserted here */}
       <section className="pb-24 pt-12 bg-[#FAFAFA]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-3">— Key Features</div>
           <h2 className="font-heading font-black text-3xl sm:text-4xl tracking-tight text-slate-900 leading-tight max-w-3xl">
-            Empowering business-critical communications with reliability, security, and scalability.
+            Empowering business-critical communications with reliability and security.
           </h2>
-          <p className="mt-4 text-slate-600 max-w-2xl">
-            One unified platform for Voice, Screen-Recording, Chat, and CRM, built for enterprise-grade performance and scalability.
-          </p>
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {ENTERPRISE_FEATURES.map((f, i) => {
-              const Icon = ICONS[f.icon];
               const accent = ["blue", "red", "amber", "blue"][i % 4];
               const accents = {
                 blue: "bg-blue-50 text-blue-700 group-hover:bg-blue-700",
                 red: "bg-red-50 text-red-600 group-hover:bg-red-600",
                 amber: "bg-amber-50 text-amber-500 group-hover:bg-amber-500",
               };
-              
               return (
-                <div key={f.title} className="group bg-Red rounded-2xl border border-slate-100 p-8 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
+                <div key={f.title} className="group bg-white rounded-2xl border border-slate-100 p-8 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-colors duration-300 group-hover:text-white ${accents[accent]}`}>
-                    {Icon && <Icon size={22} />}
+                    <f.icon size={22} />
                   </div>
                   <h3 className="font-heading font-bold text-lg text-slate-900 mb-2">{f.title}</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">{f.description}</p>
+                  <p className="text-sm text-slate-600 leading-relaxed text-justify">{f.description}</p>
                 </div>
               );
             })}
@@ -435,82 +528,6 @@ export default function CloudContactCenter() {
         </div>
       </section>
 
-      {/* Cube Empowering Businesses Section */}
-      <section className="py-24 bg-Red overflow-hidden border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-          <div className="order-1 lg:order-1 lg:pr-8">
-            <h2 className="font-heading font-black text-3xl sm:text-4xl text-slate-900 leading-tight mb-6">
-              Cube Software: Empowering Businesses with <span className="text-blue-600">{PAGE_DATA.title}</span>
-            </h2>
-            <div className="space-y-6">
-              <p className="text-lg text-slate-600 leading-relaxed text-justify">
-                Introducing Cube Software's revolutionary unified omnichannel solution for {PAGE_DATA.title} — the ultimate breakthrough in business communication. Say goodbye to operational hassles and embrace a seamless experience that allows you to focus entirely on your customers.
-              </p>
-              <p className="text-lg text-slate-600 leading-relaxed text-justify">
-                This cutting-edge technology empowers your team to provide exceptional customer service, vastly improve agent productivity, and effortlessly explore new growth opportunities across your entire contact center operation.
-              </p>
-            </div>
-            <div className="mt-8">
-              <Link to="/#contact">
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 h-12 rounded-md shadow-md transition-colors">
-                  Discover {PAGE_DATA.title}
-                </Button>
-              </Link>
-            </div>
-          </div>
-
-          <div className="relative w-full aspect-video flex items-center justify-center order-2 lg:order-2 mt-10 lg:mt-0">
-            <div className="absolute inset-0 bg-blue-600 rounded-tr-[120px] rounded-bl-[120px] rounded-tl-3xl rounded-br-3xl transform rotate-3 opacity-90 shadow-2xl"></div>
-            <div className="absolute inset-0 bg-blue-400 rounded-tr-[120px] rounded-bl-[120px] rounded-tl-3xl rounded-br-3xl transform -rotate-3 opacity-30"></div>
-
-            <div className="relative w-full h-full overflow-hidden rounded-tr-[120px] rounded-bl-[120px] rounded-tl-3xl rounded-br-3xl border-[6px] border-white shadow-inner">
-              <img
-                src="/cube-image-g.png"
-                alt="Cube Customer Support Agent"
-                className="w-full h-full object-cover object-center"
-              />
-            </div>
-
-            <motion.div
-              animate={{ y: [-6, 6, -6] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-8 -right-4 lg:-right-8 bg-Red py-3 px-5 rounded-2xl shadow-xl flex items-center gap-3 z-20 border border-slate-100"
-            >
-              <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 shrink-0">
-                <MessageSquare size={20} />
-              </div>
-              <div className="text-[13px] font-bold text-slate-800 leading-tight">
-                Hi! How can I assist<br/><span className="font-semibold text-slate-500">you today?</span>
-              </div>
-            </motion.div>
-
-            <motion.div
-              animate={{ y: [6, -6, 6] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-10 -left-4 lg:-left-8 bg-Red py-3 px-5 rounded-2xl shadow-xl flex items-center gap-3 z-20 border border-slate-100"
-            >
-              <div className="w-10 h-10 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-600 shrink-0">
-                <PhoneCall size={20} />
-              </div>
-              <div className="text-[13px] font-bold text-slate-800 leading-tight">
-                We are happy<br/><span className="font-semibold text-slate-500">to help you.</span>
-              </div>
-            </motion.div>
-
-            <motion.div
-              animate={{ y: [-4, 4, -4] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-6 left-8 bg-amber-400 py-3 px-5 rounded-xl shadow-lg z-20 border-2 border-white"
-            >
-              <div className="text-sm font-black text-slate-900 text-center leading-tight">
-                Premium Cloud<br/>Solutions
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits + Use cases */}
       <section className="py-20 bg-slate-50 border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-14">
           <div>
@@ -520,7 +537,7 @@ export default function CloudContactCenter() {
             </h2>
             <ul className="mt-8 space-y-4">
               {PAGE_DATA.benefits.map((b) => (
-                <li key={b} className="flex items-start gap-3 text-slate-700">
+                <li key={b} className="flex items-start gap-3 text-slate-700 text-justify">
                   <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center shrink-0 mt-0.5">
                     <CheckCircle2 size={14} />
                   </span>
@@ -536,9 +553,9 @@ export default function CloudContactCenter() {
             </h2>
             <div className="mt-8 grid sm:grid-cols-2 gap-4">
               {PAGE_DATA.useCases.map((u, i) => (
-                <div key={u} className="rounded-xl border border-slate-200 bg-Red p-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+                <div key={u} className="rounded-xl border border-slate-200 bg-white p-5 hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
                   <div className="font-heading font-black text-2xl text-blue-200">{String(i + 1).padStart(2, "0")}</div>
-                  <div className="mt-2 font-semibold text-slate-800 text-sm">{u}</div>
+                  <div className="mt-2 font-semibold text-slate-800 text-sm text-justify">{u}</div>
                 </div>
               ))}
             </div>
@@ -546,14 +563,19 @@ export default function CloudContactCenter() {
         </div>
       </section>
 
-      {/* CTA banner */}
+      <section className="bg-white py-10 border-y border-slate-200 border-dashed">
+        <div className="max-w-7xl mx-auto px-4 text-center text-slate-400">
+          <p className="font-mono text-sm">[ Reserved Space for Call-to-Action graphics or Integrations list ]</p>
+        </div>
+      </section>
+
       <section className="py-16 bg-[#0A1F44]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
           <div>
             <h2 className="font-heading font-black text-3xl sm:text-4xl text-white tracking-tight">
               Ready to deploy {PAGE_DATA.title}?
             </h2>
-            <p className="mt-3 text-blue-200 max-w-xl">
+            <p className="mt-3 text-blue-200 max-w-xl text-justify">
               Talk to our telephony experts and get a tailored demo for your business within 24 hours.
             </p>
           </div>
@@ -564,6 +586,8 @@ export default function CloudContactCenter() {
           </Link>
         </div>
       </section>
+
+      <OurProducts />
 
       <Footer/>
     </div>

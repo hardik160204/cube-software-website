@@ -6,7 +6,7 @@ import {
   Star, MapPin, Phone, Mail, Send, CircleDollarSign, Zap, Route, Settings2,
   PhoneCall, Mic, Receipt, MonitorPlay, Voicemail, AudioLines, Radio, DatabaseZap, 
   ArrowRight, ChevronLeft, ChevronRight,
-  Facebook, Linkedin, Instagram // <-- ADDED NEW ICONS HERE
+  Facebook, Linkedin, Instagram
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
 import { Button } from "./ui/button";
@@ -17,11 +17,8 @@ import { toast } from "sonner";
 // --- HARDCODED DATA ---
 const CONTACT_INFO = {
   expertLine: "+91 120 405 7109",
-  usTollFree: "+1 (1111) 1111-11111",
-  india: "+91 120 405 7109",
-  uk: "+44 1234 1111111",
+  india: "+91 806 869 4440",
   email: "sales@cube-software.com",
-  usOffice: "USA",
   indiaOffice: "A-26, Ground Floor, Sector 63, Noida, Uttar Pradesh 201301, India",
 };
 
@@ -34,9 +31,15 @@ const INDUSTRIES = [
   { icon: "TowerControl", title: "Telecom", description: "Pioneers in telecom solutions since 1990 with home-grown software trusted worldwide." },
 ];
 
-const LOGOS = [
-  '/1.jpg', '/2.png', '/4.png', '/5.jpeg',
-  '/6.png', '/7.png', '/upsc.png', '/cars24.png', '/10.png', '/11.png','/Avaya.jpeg', '/yatra.png', '/digiCon.png', '/Fusion.png', '/Mitel.png', '/ABSIndia.png'
+// Split the logos into Clients and Partners for the two-line marquee
+const CLIENT_LOGOS = [
+  '/1.jpg', '/2.png', '/4.png', '/5.jpeg', 
+  '/6.png', '/7.png', '/upsc.png', '/cars24.png', '/yatra.png'
+];
+
+const PARTNER_LOGOS = [
+  '/10.png', '/11.png', '/Avaya.jpeg', '/digiCon.png', 
+  '/Fusion.png', '/Mitel.png', '/ABSIndia.png'
 ];
 
 const TESTIMONIALS = [
@@ -306,20 +309,45 @@ export const IndustriesSection = () => (
 );
 
 export const ClientsSection = () => (
-  <section className="py-14 border-y border-slate-100 bg-slate-50 overflow-hidden relative">
-    <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
-    <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-8">
-      <div className="text-center text-xs font-bold tracking-[0.25em] uppercase text-slate-400">Our Clientele & Partners</div>
+  <section className="py-16 lg:py-24 border-y border-slate-100 bg-[#FAFAFA] overflow-hidden relative">
+    {/* Side fade gradients for smooth scrolling effect */}
+    <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#FAFAFA] to-transparent z-10 pointer-events-none" />
+    <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#FAFAFA] to-transparent z-10 pointer-events-none" />
+    
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-12 text-center">
+      <h2 className="font-heading font-bold text-3xl sm:text-4xl text-slate-900">Trusted By</h2>
     </div>
-    <div className="flex w-max">
-      <motion.div animate={{ x: ["0%", "-50%"] }} transition={{ ease: "linear", duration: 40, repeat: Infinity }} className="flex items-center gap-16 px-8">
-        {[...LOGOS, ...LOGOS].map((logoPath, idx) => (
-          <div key={idx} className="w-32 h-12 relative flex items-center justify-center shrink-0 hover:scale-105 transition-all duration-300 cursor-pointer">
-            <img src={logoPath} alt={`Client Logo ${(idx % 10) + 1}`} className="max-w-full max-h-full object-contain" />
-          </div>
-        ))}
-      </motion.div>
+
+    <div className="flex flex-col gap-12 sm:gap-16">
+      {/* Row 1: Clientele moving Left */}
+      <div className="flex w-max">
+        <motion.div 
+          animate={{ x: ["0%", "-50%"] }} 
+          transition={{ ease: "linear", duration: 35, repeat: Infinity }} 
+          className="flex items-center gap-16 sm:gap-24 px-8"
+        >
+          {[...CLIENT_LOGOS, ...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logoPath, idx) => (
+            <div key={idx} className="w-32 h-14 sm:w-40 sm:h-16 relative flex items-center justify-center shrink-0 hover:scale-105 transition-transform duration-300 cursor-pointer">
+              <img src={logoPath} alt="Client Logo" className="max-w-full max-h-full object-contain" />
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Row 2: Partners moving Right */}
+      <div className="flex w-max">
+        <motion.div 
+          animate={{ x: ["-50%", "0%"] }} 
+          transition={{ ease: "linear", duration: 40, repeat: Infinity }} 
+          className="flex items-center gap-16 sm:gap-24 px-8"
+        >
+          {[...PARTNER_LOGOS, ...PARTNER_LOGOS, ...PARTNER_LOGOS].map((logoPath, idx) => (
+            <div key={idx} className="w-32 h-14 sm:w-40 sm:h-16 relative flex items-center justify-center shrink-0 hover:scale-105 transition-transform duration-300 cursor-pointer">
+              <img src={logoPath} alt="Partner Logo" className="max-w-full max-h-full object-contain" />
+            </div>
+          ))}
+        </motion.div>
+      </div>
     </div>
   </section>
 );
@@ -444,7 +472,7 @@ export const Footer = () => (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
       <div>
         <Link to="/" className="cursor-pointer shrink-0 flex items-center group">
-          <img src="/logo75.png" alt="Cube Software Logo" className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
+          <img src="/logo-77.png" alt="Cube Software Logo" className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
         </Link>
         <p className="mt-5 text-sm leading-relaxed text-slate-400 text-justify">
           Designing Computer Telephony Integration software for 35+ years — trusted by enterprises
@@ -453,13 +481,13 @@ export const Footer = () => (
         
         {/* --- ADDED SOCIAL MEDIA ICONS HERE --- */}
         <div className="flex items-center gap-4 mt-6">
-          <a href="#" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all duration-300">
+          <a href="https://www.facebook.com/CSPLNOIDA/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all duration-300">
             <Facebook size={18} />
           </a>
-          <a href="#" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-blue-500 hover:text-white transition-all duration-300">
+          <a href="https://www.linkedin.com/company/cube-software-private-limited-cspl-/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-blue-500 hover:text-white transition-all duration-300">
             <Linkedin size={18} />
           </a>
-          <a href="https://instagram.com/rancosolutions" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-pink-600 hover:text-white transition-all duration-300">
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-pink-600 hover:text-white transition-all duration-300">
             <Instagram size={18} />
           </a>
         </div>
@@ -469,8 +497,8 @@ export const Footer = () => (
         <div className="font-heading font-bold text-white text-sm tracking-wider uppercase mb-4">Products</div>
         <ul className="space-y-2.5 text-sm">
           {[
-            { l: "Quick Call Dialer", s: "quick-call-dialer" },
-            { l: "Callisto Voice Logger", s: "voice-logger" },
+            { l: "Quick Call Dialer", s: "auto-dialer" },
+            { l: "Callisto Voice Logger", s: "callisto-voice-logger" },
             { l: "IVRS Services", s: "ivrs" },
             { l: "Conference Bridge", s: "conference-bridge" },
             { l: "Call Billing Software", s: "call-billing" },
@@ -497,7 +525,6 @@ export const Footer = () => (
         <div className="font-heading font-bold text-white text-sm tracking-wider uppercase mb-4">Reach Us</div>
         <ul className="space-y-3 text-sm text-slate-400">
           <li className="flex gap-2"><MapPin size={15} className="mt-0.5 shrink-0 text-blue-400" /> {CONTACT_INFO.indiaOffice}</li>
-          <li className="flex gap-2"><MapPin size={15} className="mt-0.5 shrink-0 text-blue-400" /> {CONTACT_INFO.usOffice}</li>
           <li className="flex gap-2"><Phone size={15} className="mt-0.5 shrink-0 text-blue-400" /> {CONTACT_INFO.india}</li>
           <li className="flex gap-2"><Mail size={15} className="mt-0.5 shrink-0 text-blue-400" /> {CONTACT_INFO.email}</li>
         </ul>

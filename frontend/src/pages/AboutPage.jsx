@@ -31,10 +31,10 @@ const VALUES = [
 ];
 
 const STATS = [
-  { icon: CalendarDays, value: "35+", label: "Years in Business" },
-  { icon: Users, value: "5,000+", label: "Deployments" },
-  { icon: Globe2, value: "10+", label: "Countries Reached" },
-  { icon: Package, value: "20+", label: "Product Lines" },
+  { value: "35+", label: "Years in Business" },
+  { value: "5,000+", label: "Deployments" },
+  { value: "10+", label: "Countries Reached" },
+  { value: "20+", label: "Product Lines" },
 ];
 
 const AboutPage = () => {
@@ -43,27 +43,43 @@ const AboutPage = () => {
   }, []);
 
   return (
-    <div className="bg-white text-slate-900">
+    <div className="bg-white text-slate-900 flex flex-col min-h-screen">
       <Navbar />
 
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${ABOUT_IMAGE})` }} />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44]/95 via-[#0A1F44]/85 to-[#0A1F44]/60" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-44 pb-24">
+      <section className="relative w-full h-[100dvh] min-h-[700px] flex flex-col overflow-hidden bg-[#0A1F44]">
+        
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 w-full h-full bg-cover bg-center z-0 opacity-40" 
+          style={{ backgroundImage: `url(${ABOUT_IMAGE})` }} 
+        />
+        
+        {/* Dark gradient overlay blending seamlessly */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A1F44]/90 via-[#0A1F44]/60 to-[#0A1F44] z-0 pointer-events-none" />
+        
+        {/* INVISIBLE TOP SPACER (Pushes content safely below the fixed Navbar) */}
+        <div className="w-full h-24 lg:h-32 shrink-0 pointer-events-none z-10"></div>
+
+        {/* HERO MAIN CONTENT */}
+        <div className="relative z-20 flex-grow flex flex-col justify-center w-full max-w-7xl mx-auto px-4 sm:px-6 pb-8 sm:pb-12">
+          
           <nav className="flex items-center gap-1.5 text-xs text-blue-200 mb-6">
             <Link to="/" className="hover:text-white transition-colors">Home</Link>
             <ChevronRight size={13} />
             <span className="text-white font-semibold">About Us</span>
           </nav>
+          
           <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight max-w-3xl leading-[1.05] animate-fade-up">
             35+ Years of Telephony, Engineered with Passion
           </h1>
+          
           <p className="mt-5 text-lg text-blue-100 max-w-2xl leading-relaxed animate-fade-up">
             At Cube Software we have been designing Computer Telephony Integration software for over
             three decades — deploying products that work seamlessly with the communication solutions
             of the world's leading telecom vendors.
           </p>
+          
           <div className="mt-8 animate-fade-up">
             <Link to="/#contact">
               <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white px-8 h-12 rounded-md shadow-lg transition-transform hover:-translate-y-0.5">
@@ -71,24 +87,25 @@ const AboutPage = () => {
               </Button>
             </Link>
           </div>
+          
         </div>
-      </section>
 
-      {/* Stats */}
-      <section className="bg-white border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14 grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {STATS.map((s) => (
-            <div key={s.label} className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center shrink-0">
-                <s.icon size={22} />
+        {/* BOTTOM STATS BAR (Anchored safely at the bottom of the hero) */}
+        <div className="relative z-30 w-full shrink-0 border-t border-white/10 bg-[#0A1F44]/40 backdrop-blur-sm py-4 sm:py-6 mt-auto">
+          <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
+            {STATS.map((s, i) => (
+              <div key={s.label} className={`text-center px-2 sm:px-4 ${i < 2 ? "pb-4 md:pb-0" : ""}`}>
+                <div className="font-heading font-black text-3xl sm:text-4xl text-white mb-1 drop-shadow-md">
+                  {s.value}
+                </div>
+                <div className="font-semibold tracking-wider uppercase text-blue-200/80 text-xs sm:text-sm">
+                  {s.label}
+                </div>
               </div>
-              <div>
-                <div className="font-heading font-black text-3xl text-slate-900">{s.value}</div>
-                <div className="text-xs font-semibold tracking-wider uppercase text-slate-500">{s.label}</div>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+
       </section>
 
       {/* Story */}
