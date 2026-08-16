@@ -108,7 +108,7 @@ export default function CallBillingSoftware() {
         </video>
 
         {/* Lighter Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44]/90 via-[#0A1F44]/10 to-[#0A1F44]/2 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44]/90 via-[#0A1F44]/40 to-[#0A1F44]/10 z-10 pointer-events-none" />
         
         {/* Invisible Spacer to clear the fixed Navbar */}
         <div className="w-full h-24 lg:h-32 shrink-0 pointer-events-none z-10"></div>
@@ -150,7 +150,7 @@ export default function CallBillingSoftware() {
           <div className="max-w-[1400px] mx-auto grid grid-cols-3 divide-x divide-white/10">
             {PAGE_DATA.stats.map((s, i) => (
               <div key={s.label} className="text-center px-2 sm:px-4">
-                <div className="font-heading font-black text-3xl sm:text-4xl lg:text-5xl text-white mb-1 md:mb-2 drop-shadow-md">
+                <div className="font-heading font-black text-2xl sm:text-3xl lg:text-4xl text-white mb-1 md:mb-2 drop-shadow-md truncate">
                   {s.value}
                 </div>
                 <div className="font-bold tracking-[0.1em] sm:tracking-[0.15em] uppercase text-blue-200/80 text-[10px] sm:text-xs md:text-sm">
@@ -163,16 +163,16 @@ export default function CallBillingSoftware() {
 
       </section>
 
-      {/* --- REBUILT TWO-COLUMN OVERVIEW SECTION --- */}
+      {/* --- FIXED TWO-COLUMN OVERVIEW SECTION (FULL IMAGE VISIBILITY) --- */}
       <section className="py-24 bg-white overflow-hidden border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-16 lg:gap-20 xl:gap-28 items-center">
           
-          {/* LEFT COLUMN: Image */}
-          <div className="relative order-2 lg:order-1 w-full rounded-3xl overflow-hidden shadow-2xl bg-slate-50 border border-slate-100 p-4 sm:p-8 flex items-center justify-center min-h-[350px] sm:min-h-[450px]">
+          {/* LEFT COLUMN: Image container completely cleaned so nothing cuts off */}
+          <div className="relative order-2 lg:order-1 w-full flex items-center justify-center">
             <img 
               src={PAGE_DATA.overviewImage} 
               alt={`${PAGE_DATA.title} Overview`}
-              className="w-full h-auto object-contain transition-transform duration-700 hover:scale-105 rounded-xl"
+              className="w-full h-auto object-contain transition-transform duration-700 hover:scale-105 drop-shadow-xl"
             />
           </div>
 
@@ -201,7 +201,7 @@ export default function CallBillingSoftware() {
 
       <section className="bg-slate-50 py-10 border-b border-slate-200 border-dashed">
         <div className="max-w-7xl mx-auto px-4 text-center text-slate-400">
-          <p className="font-mono text-sm"></p>
+          <p className="font-mono text-sm">[ Reserved Space for Call Billing Rating Architecture / Tariff Flow ]</p>
         </div>
       </section>
 
@@ -334,7 +334,7 @@ export default function CallBillingSoftware() {
 
       <section className="bg-white py-10 border-y border-slate-200 border-dashed">
         <div className="max-w-7xl mx-auto px-4 text-center text-slate-400">
-          <p className="font-mono text-sm"></p>
+          <p className="font-mono text-sm">[ Reserved Space for Call-to-Action graphics or Integrations list ]</p>
         </div>
       </section>
 

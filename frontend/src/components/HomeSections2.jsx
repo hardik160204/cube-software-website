@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
-  Headset, Landmark, ConciergeBell, HeartPulse, Building2, TowerControl,
-  Star, MapPin, Phone, Mail, Send, CircleDollarSign, Zap, Route, Settings2,
+  Headset, Landmark, ConciergeBell, HeartPulse, TowerControl,
+  MapPin, Phone, Mail, Send, CircleDollarSign, Zap, Route, Settings2,
   PhoneCall, Mic, Receipt, MonitorPlay, Voicemail, AudioLines, Radio, DatabaseZap, 
   ArrowRight, ChevronLeft, ChevronRight,
   Facebook, Linkedin, Instagram
@@ -42,12 +42,6 @@ const PARTNER_LOGOS = [
   '/Fusion.png', '/Mitel.png', '/ABSIndia.png'
 ];
 
-const TESTIMONIALS = [
-  { quote: "Cube Software transformed our business communications, improving efficiency while significantly reducing operational costs.", name: "ABC.", role: "COO, Fintech Startup" },
-  { quote: "Migration from our other dialer was seamless. Our agents are now productive from anywhere in the country.", name: "XYZ.", role: "Head of Contact Center" },
-  { quote: "The dialer deployment and CRM integration have been flawless — and the 24/7 support team is outstanding.", name: "", role: "IT Director, Hospitality Group" },
-];
-
 const FAQS = [
   { q: "What services does Cube Software provide?", a: "We offer a complete range of communication solutions including Cloud PBX, dialers (inbound/outbound/blended), voice loggers, screen loggers, IVRS, conference bridges, call billing software, voice mail systems, SIP trunking and CRM integrations." },
   { q: "Which Citys do you support?", a: "We provide numbers and voice solutions across the India Bangaluru, Mumbai, Delhi, Gurugram, Noida, Ahemdabad, Puna in India and many more regions. along with 140 & 160 Lines as well." },
@@ -71,6 +65,10 @@ const MARQUEE_ITEMS = [
   "Voice Without Limits.", "Connect More. Pay Less.", "35+ Years of Telephony Excellence.",
   "Enterprise Features. Small Business Pricing.", "Simply Better Telephony.",
 ];
+
+// Fallback dummy icon for Building2 since it was removed to prevent errors
+const Building2 = ({ size, className }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M16 6h.01"></path><path d="M12 6h.01"></path><path d="M12 10h.01"></path><path d="M12 14h.01"></path><path d="M16 10h.01"></path><path d="M16 14h.01"></path><path d="M8 10h.01"></path><path d="M8 14h.01"></path></svg>;
+
 
 const ICONS = {
   Headset, Landmark, ConciergeBell, HeartPulse, Building2, TowerControl,
@@ -352,28 +350,7 @@ export const ClientsSection = () => (
   </section>
 );
 
-export const TestimonialsSection = () => (
-  <section className="py-20 lg:py-28 bg-white">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6">
-      <SectionLabel>Client Voices</SectionLabel>
-      <SectionTitle>Success Stories from Our Clients</SectionTitle>
-      <div className="mt-12 grid md:grid-cols-3 gap-6">
-        {TESTIMONIALS.map((t) => (
-          <div key={t.name} className="bg-slate-50 rounded-2xl border border-slate-100 p-8 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-            <div className="flex gap-1 mb-5">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} size={16} className="fill-amber-400 text-amber-400" />
-              ))}
-            </div>
-            <p className="text-slate-700 italic leading-relaxed">“{t.quote}”</p>
-            <div className="mt-6 font-heading font-bold text-slate-900">{t.name}</div>
-            <div className="text-sm text-slate-500">{t.role}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
+
 
 export const FAQSection = () => (
   <section id="faq" className="py-20 lg:py-28 bg-slate-50">
@@ -428,17 +405,10 @@ export const ContactSection = () => {
               </div>
             </div>
             <div className="flex gap-4">
-              <div className="w-11 h-11 rounded-xl bg-red-50 text-red-600 flex items-center justify-center shrink-0"><MapPin size={20} /></div>
-              <div>
-                <div className="font-heading font-bold text-slate-900 text-sm">US Office</div>
-                <div className="text-sm text-slate-600">{CONTACT_INFO.usOffice}</div>
-              </div>
-            </div>
-            <div className="flex gap-4">
               <div className="w-11 h-11 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center shrink-0"><Phone size={20} /></div>
               <div>
                 <div className="font-heading font-bold text-slate-900 text-sm">Phone</div>
-                <div className="text-sm text-slate-600">India: {CONTACT_INFO.india} · US: {CONTACT_INFO.usTollFree}</div>
+                <div className="text-sm text-slate-600">India: {CONTACT_INFO.india}</div>
               </div>
             </div>
             <div className="flex gap-4">
@@ -479,7 +449,7 @@ export const Footer = () => (
           across the globe for dialers, voice logging, Screen recording, IVR with our cloud telephony.
         </p>
         
-        {/* --- ADDED SOCIAL MEDIA ICONS HERE --- */}
+        {/* --- SOCIAL MEDIA ICONS --- */}
         <div className="flex items-center gap-4 mt-6">
           <a href="https://www.facebook.com/CSPLNOIDA/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all duration-300">
             <Facebook size={18} />
@@ -511,9 +481,9 @@ export const Footer = () => (
         <div className="font-heading font-bold text-white text-sm tracking-wider uppercase mb-4">Company</div>
         <ul className="space-y-2.5 text-sm">
           <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
+          <li><Link to="/client-voices" className="hover:text-white transition-colors">Client Voices</Link></li>
           {[
             { l: "Industries", h: "/#industries" },
-            { l: "Client Voices", h: "/#home" },
             { l: "FAQ", h: "/#faq" },
             { l: "Contact", h: "/#contact" },
           ].map((x) => (
