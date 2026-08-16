@@ -18,7 +18,7 @@ const PAGE_DATA = {
   title: "IVRS Services",
   tagline: "Custom IVR solutions built from scratch with the latest software, database and telecom technologies.",
   heroVideo: "/ivrs-bg.mp4", // <-- UPDATE THIS TO YOUR VIDEO FILE NAME
-  overviewImage: "/ivrs-overview.png", // <-- UPDATE THIS TO YOUR LEFT-SIDE OVERVIEW IMAGE
+  overviewImage: "/IVRS.png", // <-- UPDATE THIS TO YOUR LEFT-SIDE OVERVIEW IMAGE
   stats: [
     { value: "70%", label: "Calls Self-Served" },
     { value: "Custom", label: "Built for You" },
