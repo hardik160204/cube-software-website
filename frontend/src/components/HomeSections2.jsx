@@ -34,11 +34,11 @@ const INDUSTRIES = [
 // Split the logos into Clients and Partners for the two-line marquee
 const CLIENT_LOGOS = [
   '/1.jpg', '/2.png', '/4.png', '/5.jpeg', 
-  '/6.png', '/7.png', '/upsc.png', '/cars24.png', '/yatra.png'
+  '/6.png', '/7.png', '/upsc.png', '/cars24.png', '/Yatra.png'
 ];
 
 const PARTNER_LOGOS = [
-  '/10.png', '/11.png', '/Avaya.jpeg', '/digiCon.png', 
+  '/10.png', '/11.png', '/Avaya.jpeg', '/DigiCon.png', 
   '/Fusion.png', '/Mitel.png', '/ABSIndia.png'
 ];
 
