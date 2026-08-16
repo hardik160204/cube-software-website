@@ -182,7 +182,7 @@ export default function CubeHeroSlider({ onBookDemo }) {
                     What to <span className="text-red-600">Expect</span>
                   </div>
                   <div className="flex items-center justify-center gap-2 text-white/50 mb-4">
-                    <span className="w-1.5 h-1.5 rounded-full bg-red-400"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-600"></span>
                     <span className="w-1 h-1 rounded-full bg-white/30"></span>
                     <span className="w-1 h-1 rounded-full bg-white/30"></span>
                   </div>

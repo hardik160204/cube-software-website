@@ -17,7 +17,8 @@ import OurProducts from "../components/OurProducts";
 const PAGE_DATA = {
   title: "Voice Logger InSync",
   tagline: "Centralise critical recording data from every location into one synchronised archive.",
-  heroImage: "/voice-logger-insync.png", 
+  heroVideo: "/voice-logger-insync-bg.mp4", // <-- UPDATE THIS TO YOUR VIDEO FILE NAME
+  overviewImage: "/voice-logger-insync-overview.png", // <-- UPDATE THIS TO YOUR OVERVIEW IMAGE
   stats: [
     { value: "Multi-Site", label: "Consolidation" },
     { value: "Auto", label: "Sync Engine" },
@@ -89,17 +90,31 @@ export default function VoiceLoggerInSync() {
   const nextSlide = () => setCurrentSlide((p) => Math.min(p + 1, maxSlide));
 
   return (
-    <div className="bg-white text-slate-900">
+    <div className="bg-white text-slate-900 flex flex-col min-h-screen">
       <Navbar />
 
-      <section className="relative overflow-hidden bg-[#0A1F44]">
-        <div 
-          className="absolute inset-0 w-full h-full bg-cover bg-center z-0 opacity-40"
-          style={{ backgroundImage: `url('${PAGE_DATA.heroImage}')` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44]/90 via-[#0A1F44]/70 to-[#0A1F44]/30 z-10" />
+      {/* --- FULL-HEIGHT HERO SECTION --- */}
+      <section className="relative w-full min-h-[100dvh] flex flex-col overflow-hidden bg-[#0A1F44]">
         
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 pt-44 pb-24">
+        {/* Video Background */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover z-0 opacity-80"
+        >
+          <source src={PAGE_DATA.heroVideo} type="video/mp4" />
+        </video>
+
+        {/* Lighter Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44]/90 via-[#0A1F44]/40 to-[#0A1F44]/10 z-10 pointer-events-none" />
+        
+        {/* Invisible Spacer to clear the fixed Navbar */}
+        <div className="w-full h-24 lg:h-32 shrink-0 pointer-events-none z-10"></div>
+        
+        {/* Main Hero Content (Centered) */}
+        <div className="relative z-20 flex-grow flex flex-col justify-center w-full max-w-7xl mx-auto px-4 sm:px-6 pb-12 sm:pb-16">
           <nav className="flex items-center gap-1.5 text-xs text-blue-200 mb-6">
             <Link className="hover:text-white transition-colors" to="/">Home</Link>
             <ChevronRight size={13} />
@@ -128,23 +143,43 @@ export default function VoiceLoggerInSync() {
               </Button>
             </Link>
           </div>
-          
-          <div className="mt-12 flex flex-wrap justify-start gap-0 divide-x divide-white/15 animate-fade-up w-full">
+        </div>
+
+        {/* --- BOTTOM STATS BAR --- */}
+        <div className="relative z-30 w-full shrink-0 border-t border-white/10 bg-[#0A1F44]/40 backdrop-blur-md py-6 mt-auto">
+          <div className="max-w-[1400px] mx-auto grid grid-cols-3 divide-x divide-white/10">
             {PAGE_DATA.stats.map((s, i) => (
-              <div key={s.label} className={`text-left ${i === 0 ? "pr-8" : "px-8"}`}>
-                <div className="font-heading font-black text-2xl sm:text-3xl text-white">{s.value}</div>
-                <div className="text-[11px] font-semibold tracking-wider uppercase text-blue-200 mt-1">{s.label}</div>
+              <div key={s.label} className="text-center px-2 sm:px-4">
+                <div className="font-heading font-black text-2xl sm:text-3xl lg:text-4xl text-white mb-1 md:mb-2 drop-shadow-md truncate">
+                  {s.value}
+                </div>
+                <div className="font-bold tracking-[0.1em] sm:tracking-[0.15em] uppercase text-blue-200/80 text-[10px] sm:text-xs md:text-sm">
+                  {s.label}
+                </div>
               </div>
             ))}
           </div>
         </div>
+
       </section>
 
+      {/* --- FIXED TWO-COLUMN OVERVIEW SECTION (FULL IMAGE VISIBILITY) --- */}
       <section className="py-24 bg-white overflow-hidden border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-16 lg:gap-20 xl:gap-28 items-center">
+          
+          {/* LEFT COLUMN: Clean Image Container */}
+          <div className="relative order-2 lg:order-1 w-full flex items-center justify-center">
+            <img 
+              src={PAGE_DATA.overviewImage} 
+              alt={`${PAGE_DATA.title} Overview`}
+              className="w-full h-auto object-contain transition-transform duration-700 hover:scale-105 drop-shadow-xl"
+            />
+          </div>
+
+          {/* RIGHT COLUMN: Text */}
+          <div className="relative z-10 order-1 lg:order-2">
             <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-4">— Overview</div>
-            <h2 className="font-heading font-bold text-3xl sm:text-4xl text-slate-900 leading-snug mb-8">
+            <h2 className="font-heading font-bold text-3xl sm:text-4xl text-slate-900 leading-snug mb-6">
               The Intelligence Behind Modern <span className="text-blue-600">Data Synchronization</span>
             </h2>
             <div className="space-y-6 text-lg text-slate-600 leading-relaxed text-justify">
@@ -152,13 +187,21 @@ export default function VoiceLoggerInSync() {
                 <p key={i}>{p}</p>
               ))}
             </div>
+            <div className="mt-10">
+              <Link to="/#contact">
+                <Button className="bg-[#0A1F44] hover:bg-blue-700 text-white px-8 h-14 text-base rounded-md shadow-lg transition-transform hover:-translate-y-1" size="lg">
+                  Book A Demo
+                </Button>
+              </Link>
+            </div>
           </div>
+
         </div>
       </section>
 
       <section className="bg-slate-50 py-10 border-b border-slate-200 border-dashed">
         <div className="max-w-7xl mx-auto px-4 text-center text-slate-400">
-          <p className="font-mono text-sm"></p>
+          <p className="font-mono text-sm">[ Reserved Space for Central Sync Architecture / Network Flow ]</p>
         </div>
       </section>
 
@@ -291,7 +334,7 @@ export default function VoiceLoggerInSync() {
 
       <section className="bg-white py-10 border-y border-slate-200 border-dashed">
         <div className="max-w-7xl mx-auto px-4 text-center text-slate-400">
-          <p className="font-mono text-sm"></p>
+          <p className="font-mono text-sm">[ Reserved Space for Call-to-Action graphics or Integrations list ]</p>
         </div>
       </section>
 
