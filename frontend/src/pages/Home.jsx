@@ -15,7 +15,7 @@ import OurProducts from "../components/OurProducts";
 const TESTIMONIALS = [
   {
     company: "Yatra Online",
-    logo: "/yatra.png",
+    logo: "/Yatra.png",
     badge: "Travel & Hospitality",
     author: "Rajesh Kumar",
     role: "Head of Customer Operations",
