@@ -248,7 +248,7 @@ export default function CloudContactCenter() {
         </video>
 
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44]/80 via-[#0A1F44]/40 to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44]/90 via-[#0A1F44]/2 to-transparent z-10 pointer-events-none" />
         
         {/* Spacer for Navbar */}
         <div className="w-full h-24 lg:h-32 shrink-0 pointer-events-none z-10"></div>

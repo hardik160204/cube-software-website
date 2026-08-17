@@ -108,7 +108,7 @@ export default function VoiceLoggerInSync() {
         </video>
 
         {/* Lighter Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44]/90 via-[#0A1F44]/40 to-[#0A1F44]/10 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44]/90 via-[#0A1F44]/10 to-[#0A1F44]/2 z-10 pointer-events-none" />
         
         {/* Invisible Spacer to clear the fixed Navbar */}
         <div className="w-full h-24 lg:h-32 shrink-0 pointer-events-none z-10"></div>
