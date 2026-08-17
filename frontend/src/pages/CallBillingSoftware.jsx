@@ -6,6 +6,7 @@ import {
   Receipt, Percent, Building, AlertTriangle, FileSpreadsheet, MonitorPlay, 
   ShieldCheck, Plug, Headphones, BrainCircuit
 } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { Button } from "../components/ui/button";
 import Navbar from "../components/Navbar";
 import { Footer } from "../components/HomeSections2";
@@ -45,6 +46,14 @@ const PAGE_DATA = {
     "Significant reduction in monthly telecom expenditure",
   ],
   useCases: ["Corporate offices & branches", "Hotels & hospitality suites", "Shared office spaces & incubators", "Hospitals & campuses"],
+  faqs: [
+    { q: "What is Call Billing Software and how does it work?", a: "Call Billing Software captures Call Detail Records (CDRs) from your PBX or telecom gateway via IP, Serial, or File interface, instantly calculating call costs based on customizable tariff tables and tax rates." },
+    { q: "Can it integrate with our existing PBX or IP-PBX system?", a: "Yes, our billing platform interfaces seamlessly with all leading PBX and IP-PBX systems, including Cisco, Asterisk, Avaya, Mitel, Panasonic, and legacy PABX switches." },
+    { q: "How does the system help prevent telecom fraud and misuse?", a: "The software features built-in anomaly and abuse detection that instantly alerts administrators about unauthorized international/premium numbers, after-hours usage spikes, and unusual calling patterns." },
+    { q: "Can we track and allocate budgets per department or extension?", a: "Absolutely. You can set individual spending caps and monthly budgets for specific departments, cost centers, or employee extensions, complete with automated threshold alerts." },
+    { q: "Does it support PMS integration for hotel and hospitality guest billing?", a: "Yes, it offers bi-directional Property Management System (PMS) integration to automatically post telephone charges directly to guest room folios in real time." },
+    { q: "What reporting formats are available for accounting and audits?", a: "The platform generates comprehensive CDR reports and itemized invoices exportable in PDF, Excel, CSV, and HTML formats, with options for automated scheduled email delivery to finance teams." },
+  ],
 };
 
 const FEATURE_IMAGES = [
@@ -167,7 +176,7 @@ export default function CallBillingSoftware() {
       <section className="py-24 bg-white overflow-hidden border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-16 lg:gap-20 xl:gap-28 items-center">
           
-          {/* LEFT COLUMN: Image container completely cleaned so nothing cuts off */}
+          {/* LEFT COLUMN: Image container */}
           <div className="relative order-2 lg:order-1 w-full flex items-center justify-center">
             <img 
               src={PAGE_DATA.overviewImage} 
@@ -329,6 +338,28 @@ export default function CallBillingSoftware() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* --- FAQ SECTION --- */}
+      <section className="py-24 bg-white border-t border-slate-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-4">— FAQ</div>
+            <h2 className="font-heading font-black text-3xl sm:text-4xl text-slate-900">Common Questions</h2>
+          </div>
+          <Accordion type="single" collapsible className="w-full">
+            {PAGE_DATA.faqs.map((f, i) => (
+              <AccordionItem key={i} value={`faq-${i}`} className="bg-slate-50 rounded-xl border border-slate-100 mb-3 px-6 shadow-sm data-[state=open]:shadow-md transition-shadow">
+                <AccordionTrigger className="text-left font-heading font-bold text-slate-900 hover:text-blue-700 hover:no-underline py-5">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-slate-600 leading-relaxed pb-5">
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 

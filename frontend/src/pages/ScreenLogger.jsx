@@ -6,6 +6,7 @@ import {
   MonitorPlay, Link2, CalendarClock, Gauge, Search, Lock,
   ShieldCheck, Plug, Headphones, BrainCircuit
 } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { Button } from "../components/ui/button";
 import Navbar from "../components/Navbar";
 import { Footer } from "../components/HomeSections2";
@@ -45,6 +46,14 @@ const PAGE_DATA = {
     "Central web console for QA teams",
   ],
   useCases: ["Contact center QA", "Banking process audits", "BPO client compliance", "Training & onboarding"],
+  faqs: [
+    { q: "What is Cube Screen Logger?", a: "Cube Screen Logger is a network-based software solution that captures the desktop activity of agents simultaneously, providing a visual record of their interactions." },
+    { q: "Does it sync with call audio?", a: "Yes, when paired with the Callisto Voice Logger, the screen recordings perfectly synchronize with the call audio, allowing you to see exactly what the agent was doing during the conversation." },
+    { q: "Will recording screens slow down our network or agent PCs?", a: "No, the software uses a highly efficient, smart compression codec that minimizes both bandwidth usage and local CPU footprint." },
+    { q: "How is the screen recording triggered?", a: "Recordings can be triggered automatically by specific call events (like call connect), application launches, or based on predefined schedules." },
+    { q: "Can we restrict who has access to view these recordings?", a: "Absolutely. The platform includes strict, role-based access controls and comprehensive audit logging to ensure only authorized personnel can replay sensitive screen captures." },
+    { q: "How do we search for a specific recording?", a: "Sessions are fully indexed. You can easily search for specific interactions using parameters like agent name, date, time, call ID, or campaign." },
+  ],
 };
 
 const FEATURE_IMAGES = [
@@ -329,6 +338,28 @@ export default function ScreenLogger() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* --- FAQ SECTION --- */}
+      <section className="py-24 bg-white border-t border-slate-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-4">— FAQ</div>
+            <h2 className="font-heading font-black text-3xl sm:text-4xl text-slate-900">Common Questions</h2>
+          </div>
+          <Accordion type="single" collapsible className="w-full">
+            {PAGE_DATA.faqs.map((f, i) => (
+              <AccordionItem key={i} value={`faq-${i}`} className="bg-slate-50 rounded-xl border border-slate-100 mb-3 px-6 shadow-sm data-[state=open]:shadow-md transition-shadow">
+                <AccordionTrigger className="text-left font-heading font-bold text-slate-900 hover:text-blue-700 hover:no-underline py-5">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-slate-600 leading-relaxed pb-5">
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 

@@ -6,6 +6,7 @@ import {
   AudioLines, Database, MessageSquare, PhoneOutgoing, Languages, BarChart3, 
   Plug, ShieldCheck, Headphones, BrainCircuit
 } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { Button } from "../components/ui/button";
 import Navbar from "../components/Navbar";
 import { Footer } from "../components/HomeSections2";
@@ -45,6 +46,14 @@ const PAGE_DATA = {
     "Domestic and international deployment options",
   ],
   useCases: ["Bank balance & OTP lines", "Order & delivery status", "Appointment reminders", "Government helplines"],
+  faqs: [
+    { q: "What is an IVRS (Interactive Voice Response System)?", a: "IVRS is an automated telephony system that interacts with callers, gathers information, and routes calls to the appropriate recipient or self-service application using voice prompts and touch-tone keypad selections." },
+    { q: "Can the IVR system connect to our live databases (CRM/ERP)?", a: "Yes, our IVRS natively reads and writes to SQL, ERP, and CRM systems mid-call, allowing callers to hear live account balances, order statuses, or appointment slots instead of static, canned messages." },
+    { q: "Do you support multi-language IVR menus?", a: "Absolutely. We support multi-language voice prompts, allowing you to serve a diverse customer base by providing professional recordings in the languages your callers prefer." },
+    { q: "What is the difference between DTMF and Speech Input?", a: "DTMF (Dual-Tone Multi-Frequency) requires callers to press keypad buttons (e.g., 'Press 1 for Sales'), whereas Speech Input uses advanced voice recognition to allow callers to simply speak their choices." },
+    { q: "Can the IVR system handle outbound calls as well?", a: "Yes. Our solution supports outbound IVR blasts, enabling you to automate reminders, alerts, OTP deliveries, and customer surveys at scale without requiring manual agent intervention." },
+    { q: "Is it possible to integrate the IVR with our existing PBX or contact center?", a: "Yes, our custom IVR solutions are designed to seamlessly integrate with most modern dialers, CRMs, billing systems, and existing PBX infrastructure, whether deployed on-premise or in the cloud." },
+  ],
 };
 
 const FEATURE_IMAGES = [
@@ -167,7 +176,7 @@ export default function IvrsServices() {
       <section className="py-24 bg-white overflow-hidden border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-16 lg:gap-20 xl:gap-28 items-center">
           
-          {/* LEFT COLUMN: Image */}
+          {/* LEFT COLUMN: Image - Now auto-height to show the whole image */}
           <div className="relative order-2 lg:order-1 w-full rounded-3xl overflow-hidden shadow-2xl bg-white flex items-center justify-center">
             <img 
               src={PAGE_DATA.overviewImage} 
@@ -329,6 +338,28 @@ export default function IvrsServices() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* --- FAQ SECTION --- */}
+      <section className="py-24 bg-white border-t border-slate-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-4">— FAQ</div>
+            <h2 className="font-heading font-black text-3xl sm:text-4xl text-slate-900">Common Questions</h2>
+          </div>
+          <Accordion type="single" collapsible className="w-full">
+            {PAGE_DATA.faqs.map((f, i) => (
+              <AccordionItem key={i} value={`faq-${i}`} className="bg-slate-50 rounded-xl border border-slate-100 mb-3 px-6 shadow-sm data-[state=open]:shadow-md transition-shadow">
+                <AccordionTrigger className="text-left font-heading font-bold text-slate-900 hover:text-blue-700 hover:no-underline py-5">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-slate-600 leading-relaxed pb-5">
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 

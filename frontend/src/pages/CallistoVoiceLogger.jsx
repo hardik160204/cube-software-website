@@ -6,6 +6,7 @@ import {
   Mic, FileAudio, Search, HardDrive, Lock, Bell, 
   ShieldCheck, Plug, Headphones, BrainCircuit
 } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { Button } from "../components/ui/button";
 import Navbar from "../components/Navbar";
 import { Footer } from "../components/HomeSections2";
@@ -18,6 +19,7 @@ const PAGE_DATA = {
   title: "Callisto Voice Logger",
   tagline: "The ideal call recording solution — every conversation captured, compressed and searchable.",
   heroVideo: "/blue-voice.mp4", // <-- UPDATE THIS TO YOUR EXACT VIDEO FILE NAME IN THE PUBLIC FOLDER
+  overviewImage: "/callisto-overview.png", // <-- ADDED FOR 2-COLUMN LAYOUT CONSISTENCY
   stats: [
     { value: "All", label: "Analog/PRI/SIP" },
     { value: "90%", label: "Storage Savings" },
@@ -44,6 +46,14 @@ const PAGE_DATA = {
     "Integrates with dialer, CRM and quality tools",
   ],
   useCases: ["Banking & trading desks", "Emergency & helpline services", "Contact center QA", "Legal & compliance teams"],
+  faqs: [
+    { q: "What types of lines can Callisto Voice Logger record?", a: "Callisto can seamlessly record Analog lines, PRI trunks, E1/T1, and SIP trunks simultaneously on a single server without needing separate hardware." },
+    { q: "Are the recordings secure and tamper-proof?", a: "Yes, all recordings are encrypted and checksummed to create a tamper-evident archive, making them fully compliant for legal, financial, and regulatory audits." },
+    { q: "How much storage space do I need?", a: "Callisto uses advanced compression algorithms that reduce storage requirements by up to 90%, allowing you to store years of high-quality audio on standard, modest hard drives." },
+    { q: "Can I search for a specific recording easily?", a: "Absolutely. Recordings are indexed by caller ID, extension, date, time, and custom tags, allowing you to retrieve any conversation in seconds." },
+    { q: "Does it support live monitoring for QA teams?", a: "Yes, supervisors have the ability to monitor ongoing calls in real-time, flag specific conversations, and even receive alerts based on predefined criteria like silence or keywords." },
+    { q: "Is it easy to integrate with my CRM or dialer?", a: "Yes, Callisto integrates smoothly with major CRMs, auto dialers, and PBX systems through our robust APIs, ensuring seamless workflows across your communications stack." },
+  ],
 };
 
 const FEATURE_IMAGES = [
@@ -92,10 +102,10 @@ export default function CallistoVoiceLogger() {
     <div className="bg-white text-slate-900 flex flex-col min-h-screen">
       <Navbar />
 
-      {/* Hero Section */}
+      {/* --- FULL-HEIGHT HERO SECTION --- */}
       <section className="relative w-full min-h-[100dvh] flex flex-col overflow-hidden bg-[#0A1F44]">
         
-        {/* --- VIDEO BACKGROUND --- */}
+        {/* Video Background */}
         <video
           autoPlay
           loop
@@ -106,13 +116,13 @@ export default function CallistoVoiceLogger() {
           <source src={PAGE_DATA.heroVideo} type="video/mp4" />
         </video>
 
-        {/* Gradient Overlay */}
+        {/* Lighter Gradient Overlay to let the video shine through */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44]/90 via-[#0A1F44]/10 to-[#0A1F44]/2 z-10 pointer-events-none" />
         
-        {/* Spacer for Navbar */}
+        {/* Invisible Spacer to clear the fixed Navbar */}
         <div className="w-full h-24 lg:h-32 shrink-0 pointer-events-none z-10"></div>
-
-        {/* Main Hero Content */}
+        
+        {/* Main Hero Content (Centered) */}
         <div className="relative z-20 flex-grow flex flex-col justify-center w-full max-w-7xl mx-auto px-4 sm:px-6 pb-12 sm:pb-16">
           <nav className="flex items-center gap-1.5 text-xs text-blue-200 mb-6">
             <Link className="hover:text-white transition-colors" to="/">Home</Link>
@@ -144,7 +154,7 @@ export default function CallistoVoiceLogger() {
           </div>
         </div>
 
-        {/* BOTTOM STATS BAR */}
+        {/* --- BOTTOM STATS BAR --- */}
         <div className="relative z-30 w-full shrink-0 border-t border-white/10 bg-[#0A1F44]/40 backdrop-blur-md py-6 mt-auto">
           <div className="max-w-[1400px] mx-auto grid grid-cols-3 divide-x divide-white/10">
             {PAGE_DATA.stats.map((s, i) => (
@@ -162,11 +172,23 @@ export default function CallistoVoiceLogger() {
 
       </section>
 
+      {/* --- TWO-COLUMN OVERVIEW SECTION --- */}
       <section className="py-24 bg-white overflow-hidden border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-16 lg:gap-20 xl:gap-28 items-center">
+          
+          {/* LEFT COLUMN: Image Container */}
+          <div className="relative order-2 lg:order-1 w-full flex items-center justify-center">
+            <img 
+              src={PAGE_DATA.overviewImage} 
+              alt={`${PAGE_DATA.title} Overview`}
+              className="w-full h-auto object-contain transition-transform duration-700 hover:scale-105 drop-shadow-xl rounded-xl"
+            />
+          </div>
+
+          {/* RIGHT COLUMN: Text */}
+          <div className="relative z-10 order-1 lg:order-2">
             <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-4">— Overview</div>
-            <h2 className="font-heading font-bold text-3xl sm:text-4xl text-slate-900 leading-snug mb-8">
+            <h2 className="font-heading font-bold text-3xl sm:text-4xl text-slate-900 leading-snug mb-6">
               The Intelligence Behind Modern <span className="text-blue-600">Call Recording</span>
             </h2>
             <div className="space-y-6 text-lg text-slate-600 leading-relaxed text-justify">
@@ -174,7 +196,15 @@ export default function CallistoVoiceLogger() {
                 <p key={i}>{p}</p>
               ))}
             </div>
+            <div className="mt-10">
+              <Link to="/#contact">
+                <Button className="bg-[#0A1F44] hover:bg-blue-700 text-white px-8 h-14 text-base rounded-md shadow-lg transition-transform hover:-translate-y-1" size="lg">
+                  Book A Demo
+                </Button>
+              </Link>
+            </div>
           </div>
+
         </div>
       </section>
 
@@ -308,6 +338,28 @@ export default function CallistoVoiceLogger() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* --- FAQ SECTION --- */}
+      <section className="py-24 bg-white border-t border-slate-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-4">— FAQ</div>
+            <h2 className="font-heading font-black text-3xl sm:text-4xl text-slate-900">Common Questions</h2>
+          </div>
+          <Accordion type="single" collapsible className="w-full">
+            {PAGE_DATA.faqs.map((f, i) => (
+              <AccordionItem key={i} value={`faq-${i}`} className="bg-slate-50 rounded-xl border border-slate-100 mb-3 px-6 shadow-sm data-[state=open]:shadow-md transition-shadow">
+                <AccordionTrigger className="text-left font-heading font-bold text-slate-900 hover:text-blue-700 hover:no-underline py-5">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-slate-600 leading-relaxed pb-5">
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 

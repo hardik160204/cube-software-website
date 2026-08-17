@@ -6,6 +6,7 @@ import {
   Radio, UserCog, CalendarClock, Disc, Bell, Plug, 
   ShieldCheck, Headphones, BrainCircuit
 } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { Button } from "../components/ui/button";
 import Navbar from "../components/Navbar";
 import { Footer } from "../components/HomeSections2";
@@ -44,6 +45,14 @@ const PAGE_DATA = {
     "Works with existing DID numbers",
   ],
   useCases: ["Board & investor calls", "Multi-branch stand-ups", "Training webinars (audio)", "Crisis coordination lines"],
+  faqs: [
+    { q: "What is Cube Conference Bridge?", a: "It is a full-featured audio conferencing software component that integrates with your existing PBX or SIP infrastructure, allowing you to host multi-party calls securely." },
+    { q: "Do participants need to download an app to join?", a: "No, participants can simply dial in using their standard phone or mobile device, eliminating the need for third-party apps or software downloads." },
+    { q: "Is there a limit to the number of participants?", a: "Our platform is highly scalable and can comfortably support hundreds of concurrent participants across multiple secure rooms." },
+    { q: "Can I record the conference calls?", a: "Yes, the system features automatic recording capabilities, ensuring every conference session is archived securely and is easily shareable." },
+    { q: "What moderator controls are available?", a: "Moderators have full control over the room, including the ability to mute all, eject participants, lock the room, initiate lecture mode, and conduct roll calls." },
+    { q: "Are there any recurring per-minute fees?", a: "No. Because the bridge operates on your own infrastructure (or as a hosted service by Cube), you eliminate the costly per-minute fees typically charged by third-party conferencing providers." },
+  ],
 };
 
 const FEATURE_IMAGES = [
@@ -308,6 +317,28 @@ export default function ConferenceBridge() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* --- FAQ SECTION --- */}
+      <section className="py-24 bg-white border-t border-slate-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-4">— FAQ</div>
+            <h2 className="font-heading font-black text-3xl sm:text-4xl text-slate-900">Common Questions</h2>
+          </div>
+          <Accordion type="single" collapsible className="w-full">
+            {PAGE_DATA.faqs.map((f, i) => (
+              <AccordionItem key={i} value={`faq-${i}`} className="bg-slate-50 rounded-xl border border-slate-100 mb-3 px-6 shadow-sm data-[state=open]:shadow-md transition-shadow">
+                <AccordionTrigger className="text-left font-heading font-bold text-slate-900 hover:text-blue-700 hover:no-underline py-5">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-slate-600 leading-relaxed pb-5">
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 

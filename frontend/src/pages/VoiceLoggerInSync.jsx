@@ -6,6 +6,7 @@ import {
   DatabaseZap, Search, Gauge, ShieldCheck, Layers, BarChart3, 
   Plug, Headphones, BrainCircuit
 } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { Button } from "../components/ui/button";
 import Navbar from "../components/Navbar";
 import { Footer } from "../components/HomeSections2";
@@ -45,6 +46,14 @@ const PAGE_DATA = {
     "Scales with unlimited branch nodes",
   ],
   useCases: ["Multi-branch banks", "Insurance networks", "Retail chain call desks", "Government departments"],
+  faqs: [
+    { q: "What is Voice Logger InSync?", a: "Voice Logger InSync is an automated data synchronization tool that replicates voice recordings, voicemail, and telecom data from multiple branch locations to a centralized headquarters repository." },
+    { q: "How does it handle limited branch bandwidth?", a: "InSync features intelligent bandwidth throttling and scheduled sync windows, allowing you to replicate heavy audio files during off-peak hours without disrupting daytime branch connectivity." },
+    { q: "Is the transferred data secure?", a: "Yes, all data transfers use encrypted protocols and include integrity verification via checksums, guaranteeing that no recordings are lost, corrupted, or altered in transit." },
+    { q: "What types of data can it synchronize?", a: "InSync supports multi-product replication, including voice logs, voicemails, fax server documents, and call accounting data." },
+    { q: "Can I search across all branches from one interface?", a: "Yes, once synchronized, HQ compliance and QA teams get a single, unified search window to query recordings across every location, extension, and date range." },
+    { q: "What happens if a branch network goes down?", a: "Since InSync creates a centralized backup, your critical recordings survive local hardware or network failures, acting as a robust disaster recovery mechanism." },
+  ],
 };
 
 const FEATURE_IMAGES = [
@@ -108,7 +117,7 @@ export default function VoiceLoggerInSync() {
         </video>
 
         {/* Lighter Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44]/90 via-[#0A1F44]/10 to-[#0A1F44]/2 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44]/90 via-[#0A1F44]/40 to-[#0A1F44]/10 z-10 pointer-events-none" />
         
         {/* Invisible Spacer to clear the fixed Navbar */}
         <div className="w-full h-24 lg:h-32 shrink-0 pointer-events-none z-10"></div>
@@ -163,16 +172,16 @@ export default function VoiceLoggerInSync() {
 
       </section>
 
-      {/* --- FIXED TWO-COLUMN OVERVIEW SECTION (FULL IMAGE VISIBILITY) --- */}
+      {/* --- REBUILT TWO-COLUMN OVERVIEW SECTION --- */}
       <section className="py-24 bg-white overflow-hidden border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-16 lg:gap-20 xl:gap-28 items-center">
           
-          {/* LEFT COLUMN: Clean Image Container */}
-          <div className="relative order-2 lg:order-1 w-full flex items-center justify-center">
+          {/* LEFT COLUMN: Image */}
+          <div className="relative order-2 lg:order-1 w-full rounded-3xl overflow-hidden shadow-2xl bg-slate-50 border border-slate-100 p-4 sm:p-8 flex items-center justify-center min-h-[350px] sm:min-h-[450px]">
             <img 
               src={PAGE_DATA.overviewImage} 
               alt={`${PAGE_DATA.title} Overview`}
-              className="w-full h-auto object-contain transition-transform duration-700 hover:scale-105 drop-shadow-xl"
+              className="w-full h-auto object-contain transition-transform duration-700 hover:scale-105 rounded-xl"
             />
           </div>
 
@@ -332,9 +341,31 @@ export default function VoiceLoggerInSync() {
         </div>
       </section>
 
+      {/* --- FAQ SECTION --- */}
+      <section className="py-24 bg-white border-t border-slate-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-4">— FAQ</div>
+            <h2 className="font-heading font-black text-3xl sm:text-4xl text-slate-900">Common Questions</h2>
+          </div>
+          <Accordion type="single" collapsible className="w-full">
+            {PAGE_DATA.faqs.map((f, i) => (
+              <AccordionItem key={i} value={`faq-${i}`} className="bg-slate-50 rounded-xl border border-slate-100 mb-3 px-6 shadow-sm data-[state=open]:shadow-md transition-shadow">
+                <AccordionTrigger className="text-left font-heading font-bold text-slate-900 hover:text-blue-700 hover:no-underline py-5">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-slate-600 leading-relaxed pb-5">
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
       <section className="bg-white py-10 border-y border-slate-200 border-dashed">
         <div className="max-w-7xl mx-auto px-4 text-center text-slate-400">
-          <p className="font-mono text-sm">[ Reserved Space for Call-to-Action graphics or Integrations list ]</p>
+          <p className="font-mono text-sm">[ Reserved Space for Central Sync Architecture / Network Flow ]</p>
         </div>
       </section>
 

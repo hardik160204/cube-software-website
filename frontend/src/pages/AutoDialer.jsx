@@ -6,6 +6,7 @@ import {
   PhoneOutgoing, Bot, ListChecks, BarChart3, ShieldCheck, 
   Headphones, BrainCircuit, PlayCircle, FastForward, Plug
 } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { Button } from "../components/ui/button";
 import Navbar from "../components/Navbar";
 import { Footer } from "../components/HomeSections2";
@@ -17,8 +18,8 @@ import OurProducts from "../components/OurProducts";
 const PAGE_DATA = {
   title: "Auto Dialer",
   tagline: "Maximize agent talk time and campaign ROI with an intelligent predictive, progressive, and preview dialing engine.",
-  heroVideo: "/auto-dialer-bg.mp4", // <-- UPDATE THIS TO YOUR EXACT VIDEO FILE NAME
-  overviewImage: "/auto-dialer-overview.png", // <-- UPDATE THIS TO YOUR LEFT-SIDE OVERVIEW IMAGE
+  heroVideo: "/auto-dialer-bg.mp4", 
+  overviewImage: "/auto-dialer-overview.png", 
   stats: [
     { value: "300%", label: "Talk Time Increase" },
     { value: "AI", label: "Machine Detection" },
@@ -45,6 +46,14 @@ const PAGE_DATA = {
     "Deploy highly targeted campaigns in minutes",
   ],
   useCases: ["Telesales & Lead Generation", "Debt Collection Agencies", "Political & Survey Campaigns", "Proactive Customer Service"],
+  faqs: [
+    { q: "What is the difference between Predictive, Progressive, and Preview dialing?", a: "Predictive dialing uses AI to dial ahead based on agent availability. Progressive dials one call per available agent to ensure zero dropped calls. Preview allows the agent to review the customer's information before initiating the call themselves." },
+    { q: "Does the dialer detect answering machines automatically?", a: "Yes. Our Smart Answering Machine Detection (AMD) instantly filters out voicemails, busy signals, and disconnected numbers, ensuring your agents only spend their time speaking to live humans." },
+    { q: "How does the Auto Dialer handle Do-Not-Call (DNC) lists?", a: "The system features automated DNC list scrubbing. You can upload local or national DNC registries, and the dialer will automatically block outgoing calls to those numbers, ensuring strict regulatory compliance." },
+    { q: "Can I integrate the dialer with my existing CRM?", a: "Absolutely. Our Auto Dialer offers native integrations and APIs for popular platforms like Salesforce, Zoho, and Freshdesk. When a call connects, the customer's details will instantly 'pop' on the agent's screen." },
+    { q: "Can I run multiple campaigns at the same time?", a: "Yes, our Campaign Management module allows supervisors to upload different lead lists, set custom dialing rules, and run multiple concurrent campaigns while monitoring everything through real-time wallboards." },
+    { q: "Is the dialer suitable for both small teams and large BPOs?", a: "Yes, the architecture is highly scalable. It can easily accommodate a 5-seat local telesales team or scale up to handle over 10,000 concurrent calls for a massive enterprise BPO floor." },
+  ],
 };
 
 const FEATURE_IMAGES = [
@@ -199,12 +208,6 @@ export default function AutoDialer() {
         </div>
       </section>
 
-      <section className="bg-slate-50 py-10 border-b border-slate-200 border-dashed">
-        <div className="max-w-7xl mx-auto px-4 text-center text-slate-400">
-          <p className="font-mono text-sm"></p>
-        </div>
-      </section>
-
       <section className="pt-24 pb-12 bg-[#FAFAFA] overflow-hidden relative">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           <motion.div
@@ -332,9 +335,25 @@ export default function AutoDialer() {
         </div>
       </section>
 
-      <section className="bg-white py-10 border-y border-slate-200 border-dashed">
-        <div className="max-w-7xl mx-auto px-4 text-center text-slate-400">
-          <p className="font-mono text-sm">[ Reserved Space for Call-to-Action graphics or Integrations list ]</p>
+      {/* --- FAQ SECTION --- */}
+      <section className="py-24 bg-white border-t border-slate-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-4">— FAQ</div>
+            <h2 className="font-heading font-black text-3xl sm:text-4xl text-slate-900">Common Questions</h2>
+          </div>
+          <Accordion type="single" collapsible className="w-full">
+            {PAGE_DATA.faqs.map((f, i) => (
+              <AccordionItem key={i} value={`faq-${i}`} className="bg-slate-50 rounded-xl border border-slate-100 mb-3 px-6 shadow-sm data-[state=open]:shadow-md transition-shadow">
+                <AccordionTrigger className="text-left font-heading font-bold text-slate-900 hover:text-blue-700 hover:no-underline py-5">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-slate-600 leading-relaxed pb-5">
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 

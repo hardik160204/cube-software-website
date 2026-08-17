@@ -12,6 +12,7 @@ import {
   AtSign, Laptop, Briefcase, Phone, AppWindow, Headphones, BrainCircuit,
   Headset, Bot, MousePointerClick, History, LineChart, UserCheck, PhoneOff, Inbox
 } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { Button } from "../components/ui/button";
 import Navbar from "../components/Navbar";
 import { Footer } from "../components/HomeSections2";
@@ -50,6 +51,14 @@ const PAGE_DATA = {
     "Scales from 5-seat teams to 1,000-seat BPO floors",
   ],
   useCases: ["BPO & KPO floors", "Telesales and collections", "Customer support desks", "Political & survey campaigns"],
+  faqs: [
+    { q: "What is a Cloud Contact Center Solution?", a: "It is a comprehensive, network-based platform that handles inbound and outbound customer communications across multiple channels without the need for extensive on-premise hardware infrastructure." },
+    { q: "Does this solution support remote or work-from-home agents?", a: "Yes, our Cloud Contact Center is fully web-based. Agents can securely log in from anywhere using a standard internet browser and a headset, making it perfect for distributed or remote teams." },
+    { q: "What kind of dialers are included?", a: "The suite includes a powerful auto dialer engine equipped with Predictive, Progressive, and Preview pacing modes, ensuring maximum agent talk time and flexible campaign execution." },
+    { q: "Can it integrate with our existing CRM software?", a: "Absolutely. We offer seamless API and native integrations with popular CRMs like Salesforce, Zoho, Freshdesk, and customized enterprise platforms for instant screen-pops and automated data syncing." },
+    { q: "How does the Intelligent ACD route calls?", a: "Our Automatic Call Distributor (ACD) uses advanced skill-based, priority, and least-idle routing algorithms to connect customers to the most qualified available agent instantly." },
+    { q: "Is call recording included in the platform?", a: "Yes, 100% of interactions are recorded and logged. Supervisors can monitor live calls, utilize whisper/barge-in features, and review historical recordings for QA, training, and compliance." },
+  ],
 };
 
 const FEATURE_IMAGES = [
@@ -560,6 +569,28 @@ export default function CloudContactCenter() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* --- FAQ SECTION --- */}
+      <section className="py-24 bg-white border-t border-slate-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-4">— FAQ</div>
+            <h2 className="font-heading font-black text-3xl sm:text-4xl text-slate-900">Common Questions</h2>
+          </div>
+          <Accordion type="single" collapsible className="w-full">
+            {PAGE_DATA.faqs.map((f, i) => (
+              <AccordionItem key={i} value={`faq-${i}`} className="bg-slate-50 rounded-xl border border-slate-100 mb-3 px-6 shadow-sm data-[state=open]:shadow-md transition-shadow">
+                <AccordionTrigger className="text-left font-heading font-bold text-slate-900 hover:text-blue-700 hover:no-underline py-5">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-slate-600 leading-relaxed pb-5">
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 
