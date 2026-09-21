@@ -6,7 +6,8 @@ import {
   PhoneOutgoing, Bot, ListChecks, BarChart3, ShieldCheck, 
   Headphones, BrainCircuit, PlayCircle, FastForward, Plug,
   PhoneCall, AlertTriangle, UserCog, Clock, Users,
-  ShoppingBag, ShoppingCart, Landmark, Cloud, Building, HeartPulse, Building2, Zap
+  ShoppingBag, ShoppingCart, Landmark, Cloud, Building, HeartPulse, Building2, Zap,
+  Phone, PhoneOff, TrendingUp, Circle
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 import { Button } from "../components/ui/button";
@@ -363,82 +364,275 @@ export default function AutoDialer() {
       <section className="py-24 bg-[#F8FAFC] border-b border-slate-200 relative overflow-hidden">
         
         {/* Subtle background glow effects */}
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-100 rounded-full blur-[100px] opacity-50 pointer-events-none" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-50 rounded-full blur-[80px] opacity-60 pointer-events-none" />
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-100/50 rounded-full blur-[100px] opacity-60 pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-[80px] opacity-70 pointer-events-none" />
 
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 relative z-10">
           
           {/* Section Header */}
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 font-semibold text-sm mb-6">
-              <Zap size={16} className="fill-blue-600" /> Advanced AutoDialer
+            <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 font-bold text-sm mb-6 border border-blue-100 shadow-sm">
+              <Zap size={16} className="text-blue-600 fill-blue-600" /> Advanced AutoDialer
             </div>
-            <h2 className="font-heading font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight text-slate-900 leading-tight mb-4">
+            <h2 className="font-heading font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight text-slate-900 leading-tight mb-5">
               Experience Real-Time Productivity Gains with <br className="hidden sm:block" />
               <span className="text-blue-600">Advanced AutoDialer</span>
             </h2>
-            <p className="text-slate-500 text-lg">
+            <p className="text-slate-500 text-lg leading-relaxed">
               Automate your outbound calling, connect faster, and empower your agents <br className="hidden sm:block"/> to handle more conversations — all in real time.
             </p>
           </div>
 
-          {/* --- ROUTING DIAGRAM GRAPHIC --- */}
-          <div className="w-full flex justify-center mb-24">
-            {/* Note: Save the diagram image from your designer as "routing-diagram.png" in your public folder and update the src below */}
-            <img 
-              src="/routing-diagram.png" 
-              alt="Auto Dialer Call Routing Diagram" 
-              className="w-full max-w-[1100px] h-auto drop-shadow-2xl rounded-2xl"
-              style={{
-                /* Fallback styling just in case the image isn't loaded yet, ensures the layout doesn't break */
-                minHeight: '300px',
-                backgroundColor: '#ffffff',
-                objectFit: 'contain'
-              }}
-            />
-          </div>
+          {/* --- ROUTING DIAGRAM GRAPHIC COMPONENT --- */}
+          <div className="w-full flex justify-center mb-24 mt-12 relative">
+            
+            {/* DESKTOP LAYOUT (Flexbox guarantees no overlap) */}
+            <div className="hidden lg:flex w-full max-w-[1150px] items-center justify-between">
+              
+              {/* 1. Left Pills Column (Fixed Width) */}
+              <div className="flex flex-col gap-5 w-[260px] z-20 shrink-0">
+                {/* Pill 1 */}
+                <div className="flex items-center gap-4 bg-white p-3 pr-6 rounded-2xl shadow-sm border border-slate-100">
+                  <div className="w-11 h-11 rounded-full bg-emerald-500 text-white flex items-center justify-center shrink-0">
+                    <Phone size={18} />
+                  </div>
+                  <div>
+                    <div className="text-[14px] font-bold text-slate-800 leading-tight">Dialing...</div>
+                    <div className="text-[12px] text-slate-400 font-medium mt-0.5">+91 98765 43210</div>
+                  </div>
+                </div>
+                {/* Pill 2 */}
+                <div className="flex items-center gap-4 bg-white p-3 pr-6 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-slate-50">
+                  <div className="w-11 h-11 rounded-full bg-teal-500 text-white flex items-center justify-center shrink-0">
+                    <PhoneCall size={18} />
+                  </div>
+                  <div>
+                    <div className="text-[14px] font-bold text-slate-800 leading-tight">Connected</div>
+                    <div className="text-[12px] text-slate-400 font-medium mt-0.5">+91 87654 32109</div>
+                  </div>
+                </div>
+                {/* Pill 3 */}
+                <div className="flex items-center gap-4 bg-white p-3 pr-6 rounded-2xl shadow-sm border border-slate-100">
+                  <div className="w-11 h-11 rounded-full bg-blue-500 text-white flex items-center justify-center shrink-0">
+                    <PhoneOutgoing size={18} />
+                  </div>
+                  <div>
+                    <div className="text-[14px] font-bold text-slate-800 leading-tight">Talking</div>
+                    <div className="text-[12px] text-slate-400 font-medium mt-0.5">+91 76543 21098</div>
+                  </div>
+                </div>
+                {/* Pill 4 */}
+                <div className="flex items-center gap-4 bg-white p-3 pr-6 rounded-2xl shadow-sm border border-slate-100 opacity-70">
+                  <div className="w-11 h-11 rounded-full bg-slate-400 text-white flex items-center justify-center shrink-0">
+                    <PhoneOff size={18} />
+                  </div>
+                  <div>
+                    <div className="text-[14px] font-bold text-slate-800 leading-tight">Next Call</div>
+                    <div className="text-[12px] text-slate-400 font-medium mt-0.5">+91 65432 10987</div>
+                  </div>
+                </div>
+              </div>
 
-          {/* --- BENEFIT CARDS (EXACT MATCH TO IMAGE) --- */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {PRODUCTIVITY_BENEFITS.map((b, i) => {
-              // Exact color matching from the target design
-              const colorStyles = {
-                blue: { bg: "bg-blue-50", text: "text-blue-500", dash: "bg-blue-500" },
-                green: { bg: "bg-emerald-50", text: "text-emerald-500", dash: "bg-emerald-500" },
-                purple: { bg: "bg-purple-50", text: "text-purple-500", dash: "bg-purple-500" },
-                amber: { bg: "bg-amber-50", text: "text-amber-500", dash: "bg-amber-500" },
-                teal: { bg: "bg-teal-50", text: "text-teal-500", dash: "bg-teal-500" },
-              };
+              {/* 2. Connecting Lines (Fills gap seamlessly) */}
+              <div className="w-[100px] xl:w-[130px] h-[280px] z-10 shrink-0">
+                <svg width="100%" height="100%" viewBox="0 0 100 280" fill="none" preserveAspectRatio="none">
+                  <path d="M0 30 C 50 30, 50 140, 100 140" stroke="#93C5FD" strokeWidth="2" strokeDasharray="4 4" />
+                  <path d="M0 105 C 50 105, 50 140, 100 140" stroke="#93C5FD" strokeWidth="2" />
+                  <path d="M0 175 C 50 175, 50 140, 100 140" stroke="#93C5FD" strokeWidth="2" />
+                  <path d="M0 250 C 50 250, 50 140, 100 140" stroke="#93C5FD" strokeWidth="2" strokeDasharray="4 4" />
+                </svg>
+              </div>
 
-              return (
-                <motion.div 
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="bg-white p-7 rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 text-left flex flex-col h-full hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] transition-shadow duration-300"
-                >
-                  {/* Pale background rounded icon container */}
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shrink-0 ${colorStyles[b.color].bg} ${colorStyles[b.color].text}`}>
-                    <b.icon size={26} strokeWidth={2.5} />
+              {/* 3. Center Node (AutoDialer) */}
+              <div className="flex flex-col items-center z-20 shrink-0 w-[160px]">
+                <div className="w-32 h-32 bg-blue-50/80 rounded-full flex items-center justify-center">
+                  <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center shadow-inner">
+                    <div className="w-[72px] h-[72px] bg-blue-600 rounded-full flex items-center justify-center text-white shadow-[0_10px_25px_rgba(37,99,235,0.4)]">
+                      <Phone size={32} className="fill-white" />
+                    </div>
+                  </div>
+                </div>
+                <h3 className="font-heading font-black text-slate-800 text-lg mt-4">AutoDialer</h3>
+                <p className="text-[12px] font-medium text-slate-500">Intelligent • Fast • Scalable</p>
+              </div>
+
+              {/* 4. Arrow Right */}
+              <div className="w-[50px] flex justify-center text-blue-400 shrink-0">
+                <ArrowRight size={28} strokeWidth={2} />
+              </div>
+
+              {/* 5. Dashboard + Agent Image Container */}
+              <div className="flex flex-1 items-center relative z-20 max-w-[500px]">
+                {/* Dashboard */}
+                <div className="bg-white rounded-[20px] shadow-[0_15px_40px_rgba(0,0,0,0.08)] border border-slate-100 p-5 w-[320px] z-30 shrink-0">
+                  <div className="flex items-center gap-2 mb-5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <span className="font-bold text-[12px] text-slate-800">Live Agent Dashboard</span>
                   </div>
                   
-                  {/* Left aligned title */}
-                  <h3 className="font-heading font-bold text-[17px] text-slate-900 mb-4 leading-snug">
-                    {b.title}
-                  </h3>
+                  {/* Stats */}
+                  <div className="grid grid-cols-3 gap-3 mb-5 pb-5 border-b border-slate-50">
+                    <div>
+                      <div className="text-[10px] text-slate-400 font-medium mb-1">Calls Today</div>
+                      <div className="font-bold text-slate-800 text-base leading-none mb-1">642</div>
+                      <div className="text-[9px] font-bold text-emerald-500 flex items-center gap-0.5"><TrendingUp size={9} /> +32%</div>
+                    </div>
+                    <div>
+                      <div className="text-[10px] text-slate-400 font-medium mb-1">Connected</div>
+                      <div className="font-bold text-slate-800 text-base leading-none mb-1">587</div>
+                      <div className="text-[9px] font-bold text-emerald-500 flex items-center gap-0.5"><TrendingUp size={9} /> +28%</div>
+                    </div>
+                    <div>
+                      <div className="text-[10px] text-slate-400 font-medium mb-1">Talk Time</div>
+                      <div className="font-bold text-slate-800 text-base leading-none mb-1">8h 24m</div>
+                      <div className="text-[9px] font-bold text-emerald-500 flex items-center gap-0.5"><TrendingUp size={9} /> +41%</div>
+                    </div>
+                  </div>
+
+                  <div className="text-[11px] font-bold text-slate-800 mb-3">Live Calls</div>
                   
-                  {/* Left aligned description */}
-                  <p className="text-[13.5px] text-slate-500 leading-relaxed mb-8">
-                    {b.desc}
-                  </p>
+                  {/* List Items */}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-[10px]">RS</div>
+                        <div>
+                          <div className="text-[11px] font-bold text-slate-800 leading-none mb-1">Rahul Sharma</div>
+                          <div className="text-[9px] text-slate-400">+91 98765</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="text-[10px] text-slate-500 font-mono">02:34</div>
+                        <div className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-600 text-[9px] font-bold w-[60px] text-center">Connected</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-[10px]">PM</div>
+                        <div>
+                          <div className="text-[11px] font-bold text-slate-800 leading-none mb-1">Priya Mehta</div>
+                          <div className="text-[9px] text-slate-400">+91 87654</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="text-[10px] text-slate-500 font-mono">01:12</div>
+                        <div className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-600 text-[9px] font-bold w-[60px] text-center">Connected</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-[10px]">AV</div>
+                        <div>
+                          <div className="text-[11px] font-bold text-slate-800 leading-none mb-1">Amit Verma</div>
+                          <div className="text-[9px] text-slate-400">+91 76543</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="text-[10px] text-blue-600 font-bold font-mono">00:48</div>
+                        <div className="px-2 py-0.5 rounded-full bg-blue-100 text-blue-600 text-[9px] font-bold w-[60px] text-center">Talking</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Agent Image */}
+                <div className="relative w-[240px] h-[260px] -ml-8 mt-6 z-10 shrink-0 flex items-end">
+                  <div className="absolute inset-0 bg-blue-200 rounded-t-full shadow-inner opacity-80 z-0 overflow-hidden">
+                    <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-200 rounded-full mix-blend-multiply blur-xl translate-x-1/2 -translate-y-1/2"></div>
+                  </div>
+                  <img 
+                    src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=600&q=80" 
+                    alt="Happy Call Center Agent" 
+                    className="w-full h-[95%] object-cover object-top rounded-t-full z-10 relative"
+                  />
                   
-                  {/* The small colored horizontal dash at the bottom */}
-                  <div className={`mt-auto w-8 h-[3px] rounded-full ${colorStyles[b.color].dash}`} />
-                </motion.div>
-              );
-            })}
+                  {/* Floating Badge */}
+                  <div className="absolute -top-4 -right-4 bg-white rounded-xl shadow-lg p-2 flex items-center gap-2 border border-slate-50 z-30">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-500 text-white flex items-center justify-center shadow-sm">
+                      <TrendingUp size={16} strokeWidth={2.5} />
+                    </div>
+                    <span className="text-[11px] font-black text-slate-800 leading-tight pr-1">
+                      More Calls<br/>Handled
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* MOBILE LAYOUT (Stacking to prevent broken lines) */}
+            <div className="flex lg:hidden flex-col items-center gap-10 w-full">
+               {/* Center Node First on Mobile */}
+               <div className="flex flex-col items-center z-20">
+                <div className="w-32 h-32 bg-blue-50/80 rounded-full flex items-center justify-center">
+                  <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center shadow-inner">
+                    <div className="w-[72px] h-[72px] bg-blue-600 rounded-full flex items-center justify-center text-white shadow-[0_10px_25px_rgba(37,99,235,0.4)]">
+                      <Phone size={32} className="fill-white" />
+                    </div>
+                  </div>
+                </div>
+                <h3 className="font-heading font-black text-slate-800 text-lg mt-4">AutoDialer</h3>
+              </div>
+              
+              {/* Dashboard Mockup */}
+              <div className="bg-white rounded-[20px] shadow-[0_15px_40px_rgba(0,0,0,0.08)] border border-slate-100 p-5 w-full max-w-[320px] z-30">
+                  <div className="flex items-center gap-2 mb-5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <span className="font-bold text-[12px] text-slate-800">Live Agent Dashboard</span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3 mb-5 pb-5 border-b border-slate-50">
+                    <div>
+                      <div className="font-bold text-slate-800 text-base leading-none mb-1">642</div>
+                      <div className="text-[10px] text-slate-400 font-medium">Calls Today</div>
+                    </div>
+                    <div>
+                      <div className="font-bold text-slate-800 text-base leading-none mb-1">587</div>
+                      <div className="text-[10px] text-slate-400 font-medium">Connected</div>
+                    </div>
+                    <div>
+                      <div className="font-bold text-slate-800 text-base leading-none mb-1">8h 24m</div>
+                      <div className="text-[10px] text-slate-400 font-medium">Talk Time</div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            
+          </div>
+
+          {/* --- BENEFIT CARDS (BOTTOM ROW) --- */}
+          <div className="max-w-[1400px] mx-auto relative z-10 mt-10 lg:mt-0">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+              {PRODUCTIVITY_BENEFITS.map((b, i) => {
+                const colorStyles = {
+                  blue: { bg: "bg-blue-50", text: "text-blue-500", dash: "bg-blue-500" },
+                  green: { bg: "bg-emerald-50", text: "text-emerald-500", dash: "bg-emerald-500" },
+                  purple: { bg: "bg-purple-50", text: "text-purple-500", dash: "bg-purple-500" },
+                  amber: { bg: "bg-amber-50", text: "text-amber-500", dash: "bg-amber-500" },
+                  teal: { bg: "bg-teal-50", text: "text-teal-500", dash: "bg-teal-500" },
+                };
+
+                return (
+                  <motion.div 
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                    className="bg-white p-7 rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 text-left flex flex-col h-full hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] transition-shadow duration-300 relative z-20"
+                  >
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shrink-0 ${colorStyles[b.color].bg} ${colorStyles[b.color].text}`}>
+                      <b.icon size={26} strokeWidth={2.5} />
+                    </div>
+                    <h3 className="font-heading font-bold text-[17px] text-slate-900 mb-4 leading-snug">
+                      {b.title}
+                    </h3>
+                    <p className="text-[13.5px] text-slate-500 leading-relaxed mb-8">
+                      {b.desc}
+                    </p>
+                    <div className={`mt-auto w-8 h-[3px] rounded-full ${colorStyles[b.color].dash}`} />
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
 
         </div>
@@ -710,7 +904,29 @@ export default function AutoDialer() {
           </div>
         </div>
       </section>
-      
+
+      {/* --- FAQ SECTION --- */}
+      <section className="py-24 bg-slate-50 border-t border-slate-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-4">— FAQ</div>
+            <h2 className="font-heading font-black text-3xl sm:text-4xl text-slate-900">Common Questions</h2>
+          </div>
+          <Accordion type="single" collapsible className="w-full">
+            {PAGE_DATA.faqs.map((f, i) => (
+              <AccordionItem key={i} value={`faq-${i}`} className="bg-white rounded-xl border border-slate-100 mb-3 px-6 shadow-sm data-[state=open]:shadow-md transition-shadow">
+                <AccordionTrigger className="text-left font-heading font-bold text-slate-900 hover:text-blue-700 hover:no-underline py-5">
+                  {f.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-slate-600 leading-relaxed pb-5">
+                  {f.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
       {/* --- CTA: NEED MORE THAN AN AUTO DIALER --- */}
       <section className="py-20 bg-slate-50 border-t border-slate-200">
         <div className="max-w-[1300px] mx-auto px-4 sm:px-6">
@@ -752,46 +968,6 @@ export default function AutoDialer() {
             </div>
 
           </div>
-        </div>
-      </section>
-
-      {/* --- FAQ SECTION --- */}
-      <section className="py-24 bg-slate-50 border-t border-slate-200">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-4">— FAQ</div>
-            <h2 className="font-heading font-black text-3xl sm:text-4xl text-slate-900">Common Questions</h2>
-          </div>
-          <Accordion type="single" collapsible className="w-full">
-            {PAGE_DATA.faqs.map((f, i) => (
-              <AccordionItem key={i} value={`faq-${i}`} className="bg-white rounded-xl border border-slate-100 mb-3 px-6 shadow-sm data-[state=open]:shadow-md transition-shadow">
-                <AccordionTrigger className="text-left font-heading font-bold text-slate-900 hover:text-blue-700 hover:no-underline py-5">
-                  {f.q}
-                </AccordionTrigger>
-                <AccordionContent className="text-slate-600 leading-relaxed pb-5">
-                  {f.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </section>
-
-      <section className="py-16 bg-[#0A1F44]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-          <div>
-            <h2 className="font-heading font-black text-3xl sm:text-4xl text-white tracking-tight">
-              Ready to deploy {PAGE_DATA.title}?
-            </h2>
-            <p className="mt-3 text-blue-200 max-w-xl text-justify">
-              Talk to our telephony experts and get a tailored demo for your business within 24 hours.
-            </p>
-          </div>
-          <Link className="shrink-0" to="/#contact">
-            <Button className="bg-blue-600 hover:bg-blue-500 text-white px-9 h-12 rounded-md shadow-lg transition-transform hover:-translate-y-0.5" size="lg">
-              Book a Free Demo <ArrowRight className="ml-1.5" size={16} />
-            </Button>
-          </Link>
         </div>
       </section>
 
