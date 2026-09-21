@@ -598,7 +598,7 @@ export default function AutoDialer() {
             
           </div>
 
-          {/* --- BENEFIT CARDS (BOTTOM ROW) --- */}
+{/* --- BENEFIT CARDS (BOTTOM ROW) --- */}
           <div className="max-w-[1400px] mx-auto relative z-10 mt-10 lg:mt-0">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
               {PRODUCTIVITY_BENEFITS.map((b, i) => {
@@ -617,9 +617,9 @@ export default function AutoDialer() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
-                    className="bg-white p-7 rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 text-left flex flex-col h-full hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] transition-shadow duration-300 relative z-20"
+                    className="bg-white p-7 rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 text-left flex flex-col h-full hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-300 relative z-20 cursor-pointer group"
                   >
-                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shrink-0 ${colorStyles[b.color].bg} ${colorStyles[b.color].text}`}>
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shrink-0 transition-transform duration-300 group-hover:scale-110 ${colorStyles[b.color].bg} ${colorStyles[b.color].text}`}>
                       <b.icon size={26} strokeWidth={2.5} />
                     </div>
                     <h3 className="font-heading font-bold text-[17px] text-slate-900 mb-4 leading-snug">
@@ -628,7 +628,7 @@ export default function AutoDialer() {
                     <p className="text-[13.5px] text-slate-500 leading-relaxed mb-8">
                       {b.desc}
                     </p>
-                    <div className={`mt-auto w-8 h-[3px] rounded-full ${colorStyles[b.color].dash}`} />
+                    <div className={`mt-auto w-8 h-[3px] rounded-full transition-all duration-300 group-hover:w-12 ${colorStyles[b.color].dash}`} />
                   </motion.div>
                 );
               })}
