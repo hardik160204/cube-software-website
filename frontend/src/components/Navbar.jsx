@@ -5,7 +5,7 @@ import {
   Bot, PhoneCall, Building, MessageSquare, Headset, BrainCircuit, 
   ShieldCheck, AudioLines, PhoneOutgoing, Radio, Headphones, 
   LayoutDashboard, Landmark, Activity, Megaphone, MonitorPlay,
-  Mic, Database, Receipt
+  Mic, Database, Receipt, Cloud
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
@@ -48,6 +48,8 @@ const SERVICES_MEGA_DATA = [
     label: "Calling Solutions",
     icon: PhoneCall,
     items: [
+      // NEW ADDITION: Cloud Contact Center added to Calling Solutions
+      { icon: Cloud, title: "Cloud Contact Center", desc: "Complete omnichannel contact center", href: "/services/cloud-contact-center" },
       { icon: PhoneOutgoing, title: "Auto Dialer", desc: "Predictive, Progressive & Preview dialing engine", href: "/services/auto-dialer" },
       { icon: Radio, title: "IVRS Services", desc: "Custom IVR solutions built from scratch", href: "/services/ivrs" },
       { icon: Headphones, title: "Conference Bridge", desc: "Full-featured secure audio conferencing", href: "/services/conference-bridge" },

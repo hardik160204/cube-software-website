@@ -38,7 +38,7 @@ const SLIDES = [
   },
   {
     id: 2,
-    videoSrc: "/cube-main.mp4", // QuickCall Graphic Background
+    videoSrc: "/", // QuickCall Graphic Background
     //pill: "• ENHANCING COMMUNICATION CAPABILITIES",
     title: (
       <div className="flex flex-col items-center justify-center gap-1">

@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import Home from "./pages/Home";
 import AboutPage from "./pages/AboutPage";
 import ClientVoices from "./pages/ClientVoices";
+import CubeCloudCCS from './pages/CubeCloudCCS';
 import CloudContactCenter from "./pages/CloudContactCenter";
 import VoiceLoggerInSync from "./pages/VoiceLoggerInSync";
 import CubeVoiceMail from "./pages/CubeVoiceMail";
@@ -30,6 +31,7 @@ function App() {
           <Route path="/pricing" element={<PricingPage />} /> 
           <Route path="/login" element={<LoginPage />} /> 
           <Route path="/client-voices" element={<ClientVoices />} />
+          <Route path="/services/cloud-contact-center" element={<CubeCloudCCS />} />
           <Route path="/services/cloud-contact-center" element={<CloudContactCenter />} />
           <Route path="/services/voice-logger-insync" element={<VoiceLoggerInSync />} />
           <Route path="/services/cube-voice-mail" element={<CubeVoiceMail />} />

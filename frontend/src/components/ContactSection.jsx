@@ -207,7 +207,7 @@ export default function ContactSection() {
         {/* BOTTOM SECTION: Google Maps Embed */}
         <div className="mt-20 w-full h-[400px] sm:h-[500px] rounded-[2rem] overflow-hidden shadow-2xl shadow-slate-200/50 border border-slate-100">
           <iframe 
-            src="https://maps.google.com/maps?q=A-26,%20Sector%2063,%20Noida,%20Uttar%20Pradesh%20201301&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+            src="https://maps.google.com/maps?q=Cube%20Software%20Pvt.%20Ltd.,%20Sector%2063,%20Noida&t=&z=15&ie=UTF8&iwloc=&output=embed" 
             width="100%" 
             height="100%" 
             style={{ border: 0 }} 
