@@ -165,7 +165,7 @@ export default function CubeCloudCCS() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover z-0 opacity-80"
         >
-          <source src="/cube-main.mp4" type="video/mp4" />
+          <source src="/cube-main2.mp4" type="video/mp4" />
         </video>
 
         {/* Gradient Overlay to ensure text readability (Left to Right) */}
