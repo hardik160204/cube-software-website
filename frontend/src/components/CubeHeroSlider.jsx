@@ -2,6 +2,35 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, ArrowRight, Calendar, MapPin, Wifi, Settings, TrendingUp } from "lucide-react";
 
+// --- Helper component for the "spinning up and coming to a halt" effect ---
+const AnimatedCounter = ({ end, suffix = "", decimals = 0 }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let startTime = null;
+    const duration = 2500; // Animation duration in milliseconds (2.5 seconds)
+
+    const animate = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      
+      // easeOutQuart equation for a smooth deceleration
+      const easeOut = 1 - Math.pow(1 - progress, 4);
+      
+      setCount((end * easeOut).toFixed(decimals));
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [end, decimals]);
+
+  return <span>{count}{suffix}</span>;
+};
+// -------------------------------------------------------------------------------
+
 const SLIDES = [
   {
     id: 1,
@@ -47,23 +76,6 @@ const SLIDES = [
         </span>
       </div>
     ),
-    /*subtitle: (
-      <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-sm sm:text-base text-blue-100 mt-4">
-        <span className="flex items-center gap-1.5"><Calendar size={16}/> Upcoming Event 2026 (Rescheduled)</span>
-        <span className="hidden sm:inline">|</span>
-        <span className="flex items-center gap-1.5"><MapPin size={16}/> New Event Dates to Be Announced Soon</span>
-      </div>
-    ),
-    buttons: (
-      <div className="flex items-center justify-center mt-6 sm:mt-8">
-        <button 
-          type="button"
-          className="bg-[#1f638b] hover:bg-[#13425e] text-white font-semibold text-base px-8 py-3 rounded-full shadow-lg transition-transform hover:-translate-y-0.5 cursor-pointer"
-        >
-          Schedule an Early Conversation
-        </button>
-      </div>
-    ),*/
     expect: false, // Hides the "What to Expect" row
   }
 ];
@@ -137,7 +149,7 @@ export default function CubeHeroSlider({ onBookDemo }) {
           <ChevronRight size={24} />
         </button>
 
-        {/* INVISIBLE TOP SPACER (Pushes content safely below the fixed Navbar - tightened to save vertical space) */}
+        {/* INVISIBLE TOP SPACER */}
         <div className="w-full h-16 lg:h-24 shrink-0 pointer-events-none z-10"></div>
 
         {/* SLIDER MAIN CONTENT */}
@@ -216,7 +228,7 @@ export default function CubeHeroSlider({ onBookDemo }) {
             
             <div className="text-center px-2 sm:px-4 pb-4 md:pb-0">
               <div className="font-heading font-black text-3xl sm:text-4xl text-white mb-1 drop-shadow-md">
-                35+
+                <AnimatedCounter end={35} suffix="+" />
               </div>
               <div className="font-semibold tracking-wider uppercase text-blue-200/80 text-xs sm:text-sm">
                  Years of Innovation
@@ -225,7 +237,7 @@ export default function CubeHeroSlider({ onBookDemo }) {
             
             <div className="text-center px-2 sm:px-4 pb-4 md:pb-0">
               <div className="font-heading font-black text-3xl sm:text-4xl text-white mb-1 drop-shadow-md">
-                10+
+                <AnimatedCounter end={10} suffix="+" />
               </div>
               <div className="font-semibold tracking-wider uppercase text-blue-200/80 text-xs sm:text-sm">
                 Countries
@@ -234,7 +246,7 @@ export default function CubeHeroSlider({ onBookDemo }) {
             
             <div className="text-center px-2 sm:px-4">
               <div className="font-heading font-black text-3xl sm:text-4xl text-white mb-1 drop-shadow-md">
-                5000+
+                <AnimatedCounter end={5000} suffix="+" />
               </div>
               <div className="font-semibold tracking-wider uppercase text-blue-200/80 text-xs sm:text-sm">
                 Active Users
@@ -243,7 +255,7 @@ export default function CubeHeroSlider({ onBookDemo }) {
             
             <div className="text-center px-2 sm:px-4">
               <div className="font-heading font-black text-3xl sm:text-4xl text-white mb-1 drop-shadow-md">
-                99.5%
+                <AnimatedCounter end={99.5} decimals={1} suffix="%" />
               </div>
               <div className="font-semibold tracking-wider uppercase text-blue-200/80 text-xs sm:text-sm">
                 Uptime SLA
@@ -282,22 +294,30 @@ export default function CubeHeroSlider({ onBookDemo }) {
           {/* 4 Large Glassmorphism Stat Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] py-16 px-8 flex flex-col items-center justify-center hover:-translate-y-2 transition-all duration-500 shadow-2xl hover:bg-white/10 hover:border-blue-500/30 group cursor-default">
-              <div className="font-heading font-black text-6xl sm:text-7xl text-white mb-4 group-hover:text-blue-400 transition-colors drop-shadow-md">35+</div>
+              <div className="font-heading font-black text-6xl sm:text-7xl text-white mb-4 group-hover:text-blue-400 transition-colors drop-shadow-md">
+                <AnimatedCounter end={35} suffix="+" />
+              </div>
               <div className="text-blue-100/80 text-lg sm:text-xl font-medium tracking-wide">Years of Innovation</div>
             </div>
             
             <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] py-16 px-8 flex flex-col items-center justify-center hover:-translate-y-2 transition-all duration-500 shadow-2xl hover:bg-white/10 hover:border-blue-500/30 group cursor-default">
-              <div className="font-heading font-black text-6xl sm:text-7xl text-white mb-4 group-hover:text-blue-400 transition-colors drop-shadow-md">5000+</div>
+              <div className="font-heading font-black text-6xl sm:text-7xl text-white mb-4 group-hover:text-blue-400 transition-colors drop-shadow-md">
+                <AnimatedCounter end={5000} suffix="+" />
+              </div>
               <div className="text-blue-100/80 text-lg sm:text-xl font-medium tracking-wide">Active Users</div>
             </div>
             
             <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] py-16 px-8 flex flex-col items-center justify-center hover:-translate-y-2 transition-all duration-500 shadow-2xl hover:bg-white/10 hover:border-blue-500/30 group cursor-default">
-              <div className="font-heading font-black text-6xl sm:text-7xl text-white mb-4 group-hover:text-blue-400 transition-colors drop-shadow-md">10+</div>
+              <div className="font-heading font-black text-6xl sm:text-7xl text-white mb-4 group-hover:text-blue-400 transition-colors drop-shadow-md">
+                <AnimatedCounter end={10} suffix="+" />
+              </div>
               <div className="text-blue-100/80 text-lg sm:text-xl font-medium tracking-wide">Countries</div>
             </div>
             
             <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] py-16 px-8 flex flex-col items-center justify-center hover:-translate-y-2 transition-all duration-500 shadow-2xl hover:bg-white/10 hover:border-blue-500/30 group cursor-default">
-              <div className="font-heading font-black text-6xl sm:text-7xl text-white mb-4 group-hover:text-blue-400 transition-colors drop-shadow-md">99.5%</div>
+              <div className="font-heading font-black text-6xl sm:text-7xl text-white mb-4 group-hover:text-blue-400 transition-colors drop-shadow-md">
+                <AnimatedCounter end={99.5} decimals={1} suffix="%" />
+              </div>
               <div className="text-blue-100/80 text-lg sm:text-xl font-medium tracking-wide">Uptime SLA</div>
             </div>
           </div>
