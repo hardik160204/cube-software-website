@@ -32,20 +32,20 @@ const MENU_ITEMS = [
 // MEGA MENU DATA: SERVICES
 // =========================================================================
 const SERVICES_MEGA_DATA = [
-  {
+ /* / {
     id: "ai-solutions",
     label: "AI Solutions",
     icon: Bot,
     items: [
-      { icon: Headset, title: "AI Contact Center", desc: "AI-Enabled Contact Center Solution", href: "/services/cloud-contact-center" },
+      { icon: Headset, title: "AI Contact Center", desc: "AI Enabled Contact Center Solution", href: "/services/ai-contact-center"},
       { icon: BrainCircuit, title: "AI Voice Agent", desc: "Conversational Voice AI Agent for Sales & Support", href: "/#contact" },
       { icon: ShieldCheck, title: "Ticket Management (SanTMS)", desc: "AI-enabled Helpdesk and ticket management solution", href: "/#contact" },
       { icon: AudioLines, title: "AI Noise Cancellation (SanClarity)", desc: "Remove Background Noise in Real Time", href: "/#contact" },
     ]
-  },
+  },/ */
   {
     id: "calling-solutions",
-    label: "Calling Solutions",
+    label: "Cloud Services",
     icon: PhoneCall,
     items: [
       // NEW ADDITION: Cloud Contact Center added to Calling Solutions

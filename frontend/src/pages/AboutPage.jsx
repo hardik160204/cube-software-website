@@ -80,10 +80,18 @@ const AboutPage = () => {
             of the world's leading telecom vendors.
           </p>
           
-          <div className="mt-8 animate-fade-up">
+          {/* UPDATED: Buttons Container (Side by Side) */}
+          <div className="mt-8 animate-fade-up flex flex-wrap items-center gap-4">
             <Link to="/#contact">
               <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white px-8 h-12 rounded-md shadow-lg transition-transform hover:-translate-y-0.5">
                 Work With Us <ArrowRight size={16} className="ml-1.5" />
+              </Button>
+            </Link>
+            
+            {/* NEW: Transparent Meet Our Team Button */}
+            <Link to="/meet-our-team">
+              <Button size="lg" className="bg-transparent border border-white/30 text-white hover:bg-white/10 px-8 h-12 rounded-md transition-all">
+                Meet Our Team <ArrowRight size={16} className="ml-1.5" />
               </Button>
             </Link>
           </div>

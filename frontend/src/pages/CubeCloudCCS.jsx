@@ -18,21 +18,21 @@ import { Footer } from "../components/HomeSections2";
 
 // 15 Small Service Cards Data
 const CLOUD_SERVICES = [
-  { icon: Mic, title: "IVR", desc: "Interactive Voice Response system for automated intelligent routing.", color: "blue" },
-  { icon: PhoneMissed, title: "Missed Call Service", desc: "Engage customers easily with zero-cost missed call campaigns.", color: "blue" },
-  { icon: PhoneForwarded, title: "Auto Dialer", desc: "Automate outbound calls to maximize your agents' talk time.", color: "blue" },
-  { icon: Megaphone, title: "Bulk Voice Calls", desc: "Broadcast voice messages to thousands of customers instantly.", color: "blue" },
-  { icon: MessageCircle, title: "Whatsapp Chat Bot", desc: "Automate customer support and notifications on WhatsApp 24/7.", color: "blue" },
-  { icon: Bot, title: "Web Chat Bot", desc: "AI-powered web widget for instant visitor engagement and help.", color: "blue" },
-  { icon: Users, title: "CRM Integration", desc: "Manage leads and customer interactions seamlessly in one place.", color: "blue" },
-  { icon: Headphones, title: "Toll Free Number", desc: "Provide a free, professional contact method for your customers.", color: "blue" },
-  { icon: PhoneCall, title: "Virtual Number", desc: "Localize your brand's presence with dedicated virtual numbers.", color: "blue" },
-  { icon: Database, title: "Call Recording", desc: "Securely record and monitor business calls for quality assurance.", color: "blue" },
-  { icon: Zap, title: "Click to Call", desc: "Enable instant calling directly from your website or mobile app.", color: "blue" },
-  { icon: Network, title: "Smart Call Routing", desc: "Intelligent skill-based and time-based agent call routing.", color: "blue" },
-  { icon: ShieldCheck, title: "Number Masking", desc: "Protect customer and agent privacy with secure number masking.", color: "blue" },
-  { icon: BarChart, title: "Live Analytics", desc: "Real-time wallboards and detailed historical call reports.", color: "blue" },
-  { icon: ClipboardList, title: "Quality Analysis", desc: "Evaluate interactions and monitor agent performance to maintain high service standards.", color: "blue" }
+  { icon: Mic, title: "IVR", desc: "Interactive Voice Response system for automated intelligent routing.", color: "blue", path: "/services/ivr" },
+  { icon: PhoneMissed, title: "Missed Call Service", desc: "Engage customers easily with zero-cost missed call campaigns.", color: "blue", path: "/services/missed-call" },
+  { icon: PhoneForwarded, title: "Auto Dialer", desc: "Automate outbound calls to maximize your agents' talk time.", color: "blue", path: "/services/auto-dialer" },
+  { icon: Megaphone, title: "Bulk Voice Calls", desc: "Broadcast voice messages to thousands of customers instantly.", color: "blue", path: "/services/bulk-voice-call" },
+  { icon: MessageCircle, title: "Whatsapp Chat Bot", desc: "Automate customer support and notifications on WhatsApp 24/7.", color: "blue", path: "/services/whatsapp-bot" },
+  { icon: Bot, title: "Web Chat Bot", desc: "AI-powered web widget for instant visitor engagement and help.", color: "blue", path: "/services/web-chat-bot" },
+  { icon: Users, title: "CRM Integration", desc: "Manage leads and customer interactions seamlessly in one place.", color: "blue", path: "/services/crm-integration" },
+  { icon: Headphones, title: "Toll Free Number", desc: "Provide a free, professional contact method for your customers.", color: "blue", path: "/services/toll-free-number" },
+  { icon: PhoneCall, title: "Virtual Number", desc: "Localize your brand's presence with dedicated virtual numbers.", color: "blue", path: "/services/virtual-number" },
+  { icon: Database, title: "Call Recording", desc: "Securely record and monitor business calls for quality assurance.", color: "blue", path: "/services/call-recording" },
+  { icon: Zap, title: "Click to Call", desc: "Enable instant calling directly from your website or mobile app.", color: "blue", path: "/services/click-to-call" },
+  { icon: Network, title: "Smart Call Routing", desc: "Intelligent skill-based and time-based agent call routing.", color: "blue", path: "/services/smart-call-routing" },
+  { icon: ShieldCheck, title: "Number Masking", desc: "Protect customer and agent privacy with secure number masking.", color: "blue", path: "/services/number-masking" },
+  { icon: BarChart, title: "Live Analytics", desc: "Real-time wallboards and detailed historical call reports.", color: "blue", path: "/services/live-analytics" },
+  { icon: ClipboardList, title: "Quality Analysis", desc: "Evaluate interactions and monitor agent performance to maintain high service standards.", color: "blue", path: "/services/quality-analysis" }
 ];
 
 const BENEFITS_DATA = [
@@ -299,7 +299,7 @@ export default function CubeCloudCCS() {
       </section>
 
       {/* =========================================================
-          BENEFITS SECTION
+          WHY CHOOSe CUBE CLOUD?
           ========================================================= */}
       <section className="pt-24 pb-10 bg-white border-b border-slate-100 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
@@ -329,16 +329,16 @@ export default function CubeCloudCCS() {
 
           <div className="lg:col-span-7">
             <img 
-              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" 
+              src="../ccsmain.jpeg" 
               alt="Cloud Call Center Analytics" 
-              className="rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-100 w-full object-cover"
+              className="rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-100 w-full h-full object-cover"
             />
           </div>
 
         </div>
       </section>
 
-      {/* =========================================================
+{/* =========================================================
           15 SERVICES GRID SECTION (Small 5-Column Cards)
           ========================================================= */}
       <section className="pt-12 pb-24 bg-slate-50 border-b border-slate-200">
@@ -363,18 +363,31 @@ export default function CubeCloudCCS() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: (i % 5) * 0.1 }}
-                  className="bg-white p-7 rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 text-left flex flex-col h-full hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-300 relative z-20 cursor-pointer group"
+                  className="bg-white p-7 rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 text-left flex flex-col h-full hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-300 relative z-20 group"
                 >
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shrink-0 transition-transform duration-300 group-hover:scale-110 ${colorStyles[service.color].bg} ${colorStyles[service.color].text}`}>
-                    <service.icon size={26} strokeWidth={2.5} />
-                  </div>
-                  <h3 className="font-heading font-bold text-[17px] text-slate-900 mb-4 leading-snug">
-                    {service.title}
-                  </h3>
-                  <p className="text-[13.5px] text-slate-500 leading-relaxed mb-8">
-                    {service.desc}
-                  </p>
-                  <div className={`mt-auto w-8 h-[3px] rounded-full transition-all duration-300 group-hover:w-12 ${colorStyles[service.color].dash}`} />
+                  {/* Wrap the entire card inner content in a Link */}
+                  <Link to={service.path} className="flex flex-col h-full w-full outline-none">
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shrink-0 transition-transform duration-300 group-hover:scale-110 ${colorStyles[service.color].bg} ${colorStyles[service.color].text}`}>
+                      <service.icon size={26} strokeWidth={2.5} />
+                    </div>
+                    
+                    <h3 className="font-heading font-bold text-[17px] text-slate-900 mb-4 leading-snug group-hover:text-blue-600 transition-colors">
+                      {service.title}
+                    </h3>
+                    
+                    <p className="text-[13.5px] text-slate-500 leading-relaxed mb-8">
+                      {service.desc}
+                    </p>
+                    
+                    {/* Bottom Section: Blue Dash & View More Link */}
+                    <div className="mt-auto flex items-center justify-between w-full">
+                      <div className={`w-8 h-[3px] rounded-full transition-all duration-300 group-hover:w-12 ${colorStyles[service.color].dash}`} />
+                      
+                      <span className="text-[13px] font-bold text-blue-600 flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
+                        View More <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </div>
+                  </Link>
                 </motion.div>
               );
             })}
