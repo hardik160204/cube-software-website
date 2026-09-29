@@ -136,7 +136,7 @@ export default function MeetOurTeamPage() {
               {
                 name: "Praveen Varshney",
                 role: "Director",
-                image: "praveen-sir-image.webp",
+                image: "praveensir-image.png",
                 bio: "Visionary leader driving innovation in cloud telecommunications for over 20 years. Praveen spearheads our strategic growth, consistently forging enterprise partnerships that define the future of global connectivity.",
                 linkedin: "#"
               },
@@ -155,11 +155,11 @@ export default function MeetOurTeamPage() {
                 linkedin: "#"
               },
               {
-                name: "Vivek Kumar Gupta",
+                name: "Vivek Gupta",
                 role: "Chief Operating Officer",
                 image: "vivek-sir-image.webp",
                 bio: "Mastermind behind our seamless day-to-day operations and unmatched customer success delivery. Vivek streamlines cross-functional team efficiencies to ensure rapid product deployment.",
-                linkedin: "#"
+                linkedin: "https://www.linkedin.com/in/vivek-gupta-056b5230"
               },
               {
                 name: "Surendra Kumar",

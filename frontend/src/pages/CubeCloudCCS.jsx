@@ -36,10 +36,10 @@ const CLOUD_SERVICES = [
 ];
 
 const BENEFITS_DATA = [
-  { title: "Zero Hardware Costs", desc: "No bulky PBX hardware required. Operate entirely from the cloud with just a laptop and internet connection." },
-  { title: "Work From Anywhere", desc: "Agents can log in and securely handle customer calls from the office, home, or anywhere in the world." },
-  { title: "Rapid Scalability", desc: "Add or remove agent licenses instantly. Scale up during peak seasons without worrying about infrastructure." },
-  { title: "99.99% Uptime Guarantee", desc: "Enterprise-grade infrastructure ensures your contact center is always online, secure, and ready to take calls." }
+  { title: "AI-Powered Cloud Telephony", desc: "AI-Powered Cloud Telephony for Smarter Customer Conversations" },
+  { title: "Seamless CRM Integrations", desc: "Connect your CRM and business applications with powerful cloud communication capabilities." },
+  { title: "Customized Solution", desc: "Flexible, customized solutions designed around your requirements and deployed quickly." },
+  { title: "Work From Anywhere", desc: " Agents can log in and securely handle customer calls from the office, home, or anywhere." }
 ];
 
 // USP Section Data
@@ -309,7 +309,9 @@ export default function CubeCloudCCS() {
               Why Choose Cube Cloud Telephony?
             </h2>
             <p className="text-slate-600 text-lg leading-relaxed mb-10 text-justify">
-              Traditional PBX systems drag you down with heavy maintenance, physical limitations, and high upfront costs. Step into the future of scalable communications.
+              Experience. Ownership. Flexibility. Innovation., Best In Class Quality High-efficiency infrastructure with robust quality controls for reliable 24×7 operations.
+
+End-to-End Communication Platform — From voice infrastructure and dialers to CRM, AI, analytics, WhatsApp/social channels and integrations, customers can build their communication ecosystem with one technology partner.
             </p>
             
             <div className="space-y-6">
@@ -329,7 +331,7 @@ export default function CubeCloudCCS() {
 
           <div className="lg:col-span-7">
             <img 
-              src="../ccsmain.jpeg" 
+              src="../ccsMain.jpeg" 
               alt="Cloud Call Center Analytics" 
               className="rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-100 w-full h-full object-cover"
             />

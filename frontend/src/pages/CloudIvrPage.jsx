@@ -30,10 +30,10 @@ export default function CloudIvrPage() {
     <div className="bg-white text-slate-900 flex flex-col min-h-screen">
       <Navbar />
 
-      {/* =========================================================
-          1. HERO SECTION (Dark Blue Theme with Vector Composition)
+{/* =========================================================
+          1. HERO SECTION (Dark Blue Theme with Vector Image)
           ========================================================= */}
-      <section className="relative w-full pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-[#0A1F44]">
+      <section className="relative w-full pt-32 pb-20 lg:pt-40 lg:pb-20 overflow-hidden bg-[#0A1F44]">
         {/* Subtle background glow */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44] via-[#0A1F44] to-blue-900/40 z-0" />
         
@@ -47,55 +47,22 @@ export default function CloudIvrPage() {
             <p className="text-lg text-blue-100 leading-relaxed mb-8 max-w-xl">
               Improve your customer's communication experience with a professional <strong>interactive voice response (IVR)</strong> greeting by Cloudshope.
             </p>
-            <Button className="bg-[#0e79d6] hover:bg-[#190272] text-white px-8 h-12 rounded-full shadow-lg transition-transform hover:-translate-y-0.5 text-lg font-bold">
+            <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white px-8 h-12 rounded-md shadow-lg transition-transform hover:-translate-y-0.5">
               Free Trial
             </Button>
           </div>
 
-          {/* Right Vector Block (Robot & Smartphone) */}
-          <div className="lg:w-1/2 flex justify-center relative">
-            <div className="relative w-[350px] h-[350px] flex items-center justify-center">
-               
-               {/* Smartphone Base */}
-               <div className="absolute w-[220px] h-[380px] bg-slate-800 rounded-3xl border-4 border-slate-700 transform rotate-[25deg] translate-y-12 shadow-2xl overflow-hidden z-10">
-                  <div className="w-full h-8 bg-slate-900 flex justify-center items-center">
-                    <div className="w-16 h-1.5 bg-slate-700 rounded-full"></div>
-                  </div>
-                  <div className="w-full h-full bg-gradient-to-b from-blue-900 to-slate-900 p-5">
-                     <div className="w-full h-2 bg-blue-500/30 rounded-full mb-4"></div>
-                     <div className="w-3/4 h-2 bg-blue-500/30 rounded-full mb-4"></div>
-                     <div className="w-5/6 h-2 bg-blue-500/30 rounded-full"></div>
-                  </div>
-               </div>
-
-               {/* Hovering Robot Graphic */}
-               <div className="absolute z-20 flex flex-col items-center transform -translate-y-8 animate-bounce drop-shadow-2xl" style={{ animationDuration: '4s' }}>
-                  <div className="w-28 h-28 bg-gradient-to-br from-green-400 to-blue-500 rounded-full shadow-[0_0_50px_rgba(52,211,153,0.4)] flex items-center justify-center border-4 border-white/20">
-                     <Bot size={56} className="text-white" />
-                  </div>
-                  {/* Glowing base under robot */}
-                  <div className="w-32 h-6 bg-green-400/20 rounded-full blur-xl mt-4"></div>
-               </div>
-
-               {/* Floating UI Element - Ratings */}
-               <div className="absolute z-30 -left-6 top-16 bg-slate-800 p-3 rounded-xl border border-slate-600 shadow-xl transform -rotate-12 animate-pulse" style={{ animationDuration: '3s' }}>
-                  <div className="flex gap-1 mb-2">
-                     {[1,2,3,4,5].map(star => <div key={star} className="w-3 h-3 bg-yellow-400 rounded-sm rotate-45"></div>)}
-                  </div>
-                  <div className="w-16 h-1.5 bg-slate-400 rounded-full"></div>
-               </div>
-
-               {/* Floating UI Element - Call Icon */}
-               <div className="absolute z-30 -right-2 bottom-20 bg-blue-600 p-4 rounded-full shadow-xl transform rotate-12">
-                  <Phone size={24} className="text-white" />
-               </div>
-
-               {/* Floating UI Element - Message Icon */}
-               <div className="absolute z-30 right-4 top-12 bg-[#10b981] p-3 rounded-full shadow-xl transform -rotate-6">
-                  <MessageSquare size={20} className="text-white" />
-               </div>
-            </div>
+          {/* Right Vector Block (Clean Image Container) */}
+          <div className="lg:w-1/2 flex justify-center lg:justify-end relative">
+             <div className="relative w-full max-w-[500px]">
+                <img 
+                  src="/ivr-hero-illustration.png" // <-- UPDATE THIS to your actual image file path/name
+                  alt="Interactive Voice Response (IVR) Illustration" 
+                  className="w-full h-auto object-contain drop-shadow-2xl relative z-10"
+                />
+             </div>
           </div>
+          
         </div>
       </section>
 

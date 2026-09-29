@@ -21,10 +21,10 @@ export default function CloudAutoDialerPage() {
     <div className="bg-white text-slate-900 flex flex-col min-h-screen">
       <Navbar />
 
-      {/* =========================================================
-          1. HERO SECTION (Dark Blue Theme & Vector Art)
+{/* =========================================================
+          1. HERO SECTION (Dark Blue Theme & Image Placeholder)
           ========================================================= */}
-      <section className="relative w-full pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-[#0A1F44]">
+      <section className="relative w-full pt-32 pb-20 lg:pt-40 lg:pb-12 overflow-hidden bg-[#0A1F44]">
         <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44] via-[#0A1F44] to-blue-900/40 z-0" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col lg:flex-row items-center gap-12">
@@ -37,35 +37,26 @@ export default function CloudAutoDialerPage() {
               Automate outbound calls and maximize your agents' talk time. Eliminate manual dialing, detect voicemails, and boost your sales team's productivity.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button className="bg-[#10b981] hover:bg-[#059669] text-white px-8 h-12 rounded-full shadow-lg transition-transform hover:-translate-y-0.5 text-lg font-bold">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white px-8 h-12 rounded-md shadow-lg transition-transform hover:-translate-y-0.5">
                 Start Free Trial
               </Button>
             </div>
           </div>
 
-          <div className="lg:w-1/2 flex justify-center relative">
-            <div className="relative w-[350px] h-[350px] flex items-center justify-center">
-               
-               <div className="absolute w-[280px] h-[280px] bg-slate-800 rounded-full border-4 border-slate-700 shadow-2xl flex items-center justify-center z-10">
-                  <div className="w-[200px] h-[200px] bg-gradient-to-br from-blue-900 to-slate-900 rounded-full flex items-center justify-center border border-blue-500/30">
-                     <PhoneForwarded size={80} className="text-blue-400 animate-pulse" />
-                  </div>
-               </div>
-
-               <div className="absolute z-20 top-4 right-10 bg-green-500 p-4 rounded-full shadow-[0_0_30px_rgba(16,185,129,0.4)] animate-bounce" style={{ animationDuration: '3s' }}>
-                  <TrendingUp size={24} className="text-white" />
-               </div>
-
-               <div className="absolute z-20 bottom-10 left-4 bg-blue-500 p-4 rounded-full shadow-[0_0_30px_rgba(59,130,246,0.4)] animate-bounce" style={{ animationDuration: '4s' }}>
-                  <Users size={24} className="text-white" />
-               </div>
-
-               <svg className="absolute inset-0 w-full h-full z-0" viewBox="0 0 350 350">
-                  <circle cx="175" cy="175" r="150" fill="none" stroke="#1e293b" strokeWidth="2" strokeDasharray="10 10" className="animate-[spin_20s_linear_infinite]" />
-                  <circle cx="175" cy="175" r="110" fill="none" stroke="#3b82f6" strokeWidth="1" strokeDasharray="5 5" opacity="0.5" className="animate-[spin_15s_linear_infinite_reverse]" />
-               </svg>
-            </div>
+          <div className="lg:w-1/2 flex justify-center lg:justify-end relative">
+             {/* 
+               Cleaned up container for the transparent PNG or image placeholder. 
+               All spinning and bouncing animations are removed.
+             */}
+             <div className="relative w-full max-w-[550px]">
+                <img 
+                  src="/auto-dialer-hero.png" // <-- UPDATE THIS to your actual image file path/name
+                  alt="Auto Dialer Illustration" 
+                  className="w-full h-auto object-contain drop-shadow-2xl relative z-10"
+                />
+             </div>
           </div>
+          
         </div>
       </section>
 
