@@ -45,7 +45,7 @@ export default function CloudIvrPage() {
               Interactive Voice <br/>Response <span className="text-blue-400">(IVR) System</span>
             </h1>
             <p className="text-lg text-blue-100 leading-relaxed mb-8 max-w-xl">
-              Improve your customer's communication experience with a professional <strong>interactive voice response (IVR)</strong> greeting by Cloudshope.
+              Give every caller a fast, professional, and personalized start with Cube Software’s <strong>intelligent IVR solutions</strong> Route calls efficiently, reduce wait times, and ensure customers reach the right team—every time.
             </p>
             <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white px-8 h-12 rounded-md shadow-lg transition-transform hover:-translate-y-0.5">
               Free Trial
@@ -167,7 +167,7 @@ export default function CloudIvrPage() {
               </div>
               <h3 className="font-bold text-xl text-slate-900 mb-3">Smart call routing</h3>
               <p className="text-slate-600 text-[15px] leading-relaxed">
-                IVR systems can be used to smartly route your calls in a time-based and team-based manner[cite: 30].
+                IVR systems can be used to smartly route your calls in a time-based and team-based manner.
               </p>
             </div>
 
@@ -177,7 +177,7 @@ export default function CloudIvrPage() {
               </div>
               <h3 className="font-bold text-xl text-slate-900 mb-3">Sound professional</h3>
               <p className="text-slate-600 text-[15px] leading-relaxed">
-                Every customer gets a prime user experience with a clear and concise welcome greeting[cite: 30].
+                Every customer gets a prime user experience with a clear and concise welcome greeting.
               </p>
             </div>
 
@@ -187,7 +187,7 @@ export default function CloudIvrPage() {
               </div>
               <h3 className="font-bold text-xl text-slate-900 mb-3">Route calls with ease</h3>
               <p className="text-slate-600 text-[15px] leading-relaxed">
-                Just dial press in a few keys to get directed to your desired channel[cite: 30].
+                Just dial press in a few keys to get directed to your desired channel.
               </p>
             </div>
 
@@ -197,7 +197,7 @@ export default function CloudIvrPage() {
               </div>
               <h3 className="font-bold text-xl text-slate-900 mb-3">Support remote working</h3>
               <p className="text-slate-600 text-[15px] leading-relaxed">
-                Work in any region without worry with Cloudshope's IVR Number[cite: 31].
+                Work in any region without worry with Cube's IVR Number.
               </p>
             </div>
 
@@ -207,7 +207,7 @@ export default function CloudIvrPage() {
               </div>
               <h3 className="font-bold text-xl text-slate-900 mb-3">Scale with ease</h3>
               <p className="text-slate-600 text-[15px] leading-relaxed">
-                The Cloudshope's IVR comes with a choice of adding/ removing agents at the click of a button. You can also use it to scale your calls without any worries![cite: 31]
+                The Cube's IVR comes with a choice of adding/ removing agents at the click of a button. You can also use it to scale your calls without any worries!
               </p>
             </div>
 
@@ -217,7 +217,7 @@ export default function CloudIvrPage() {
               </div>
               <h3 className="font-bold text-xl text-slate-900 mb-3">Reports and analytics</h3>
               <p className="text-slate-600 text-[15px] leading-relaxed">
-                Real-time agent-wise reporting and call analytics[cite: 31].
+                Real-time agent-wise reporting and call analytics.
               </p>
             </div>
 
@@ -227,7 +227,7 @@ export default function CloudIvrPage() {
               </div>
               <h3 className="font-bold text-xl text-slate-900 mb-3">Ivr Service for banking</h3>
               <p className="text-slate-600 text-[15px] leading-relaxed">
-                The financial sector is changing at a faster pace, with customer expectations changing dramatically[cite: 31].
+                The financial sector is changing at a faster pace, with customer expectations changing dramatically.
               </p>
             </div>
 

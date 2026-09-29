@@ -30,7 +30,7 @@ export default function CloudBulkVoiceCallPage() {
           headlines and the custom Bulk Voice Calls vector illustration.
           ========================================================= */}
       {/* Reduced pb-20 and lg:pb-28 to pb-12 and lg:pb-16 to tighten the space below the hero */}
-      <section className="relative w-full pt-32 pb-12 lg:pt-40 lg:pb-40 overflow-hidden bg-[#0A1F44]">
+      <section className="relative w-full pt-32 pb-12 lg:pt-40 lg:pb-12 overflow-hidden bg-[#0A1F44]">
         <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44] via-[#0A1F44] to-blue-900/40 z-0" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col lg:flex-row items-center gap-12">
@@ -57,7 +57,7 @@ export default function CloudBulkVoiceCallPage() {
              */}
              <div className="relative w-full max-w-[950px]">
                 <img 
-                  src="/bulk-calling-obd-new.png" // <-- UPDATE THIS to your actual image file path/name
+                  src="/bulk-voice-call-hero.png" // <-- UPDATE THIS to your actual image file path/name
                   alt="Bulk Voice Calls Illustration" 
                   className="w-full h-auto object-contain drop-shadow-2xl relative z-10"
                 />
