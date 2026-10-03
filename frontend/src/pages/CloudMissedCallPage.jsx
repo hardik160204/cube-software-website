@@ -37,7 +37,7 @@ export default function CloudMissedCallPage() {
           
           <div className="lg:w-1/2 shrink-0">
             <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
-              Smart Cloud <br/><span className="text-blue-400">Missed Call Service</span>
+              <br/><span className="text-blue-400">Missed Call Service</span>
             </h1>
             <p className="text-lg text-blue-100 leading-relaxed mb-8 max-w-xl">
               Capture high-quality leads at zero cost to your customers. Run instant verification campaigns, gather feedback, and generate instant opt-ins with a single missed call.
@@ -67,47 +67,44 @@ export default function CloudMissedCallPage() {
         </div>
       </section>
 
-      {/* =========================================================
+{/* =========================================================
           SECTION 2: WHAT IS MISSED CALL SERVICE? 
-          Description: White background, split layout with 4 square
-          feature blocks on the left and descriptive text on the right.
+          Description: White background, split layout with SVG graphic
+          on the left and descriptive text on the right.
           ========================================================= */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center gap-16">
-          <div className="lg:w-1/2 relative">
-            <div className="aspect-square max-h-[400px] bg-blue-50 rounded-full shadow-inner overflow-hidden relative flex items-center justify-center border-8 border-slate-50">
-               <div className="grid grid-cols-2 gap-4 p-8 w-full h-full">
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300">
-                    <Smartphone size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">Dial In</span>
-                 </div>
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-red-500 hover:bg-red-500 hover:text-white transition-colors duration-300">
-                    <PhoneMissed size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">Auto-Disconnect</span>
-                 </div>
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-slate-400 hover:bg-slate-700 hover:text-white transition-colors duration-300">
-                    <MessageSquare size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">Instant SMS</span>
-                 </div>
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-blue-400 hover:bg-blue-400 hover:text-white transition-colors duration-300">
-                    <Database size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">CRM Capture</span>
-                 </div>
-               </div>
+      <section className="py-20 lg:py-28 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          
+          {/* LEFT SIDE: The new SVG Image */}
+          <div className="lg:w-1/2 flex justify-center w-full relative">
+            {/* Subtle background glow to make the SVG pop */}
+            <div className="absolute inset-0 bg-blue-50 rounded-full blur-3xl opacity-50 transform scale-75 pointer-events-none"></div>
+            
+            <img 
+              src="/missed-call-service-illustration.svg" /* <-- Update this to your actual SVG filename */
+              alt="Missed Call Service" 
+              className="w-full max-w-[550px] h-auto object-contain relative z-10 transition-transform duration-700 hover:scale-105"
+            />
+          </div>
+
+          {/* RIGHT SIDE: Text Content */}
+          <div className="lg:w-1/2 w-full text-left">
+            <h2 className="font-heading font-black text-4xl sm:text-5xl text-slate-900 leading-tight mb-8 relative inline-block">
+              Zero-Cost <span className="text-blue-600">Lead Generation</span>
+              {/* Green underline accent */}
+              <span className="absolute -bottom-3 left-0 w-16 h-1.5 bg-emerald-500 rounded-full"></span>
+            </h2>
+            
+            <div className="space-y-6 text-[17px] text-slate-600 leading-relaxed mt-4 text-justify">
+              <p>
+                A Missed Call Service provides a dedicated 10-digit virtual number or toll-free number for your business. When a customer dials this number, the call is automatically disconnected after one ring.
+              </p>
+              <p>
+                Because the call doesn't connect, there is absolutely zero cost to the caller. Meanwhile, your system instantly captures their caller ID, time, and location, allowing you to trigger automated text messages or schedule outbound agent callbacks.
+              </p>
             </div>
           </div>
-          <div className="lg:w-1/2">
-            <h2 className="font-heading font-black text-3xl sm:text-4xl text-slate-800 mb-6 relative inline-block">
-              Zero-Cost <span className="text-blue-600">Lead Generation</span>
-              <span className="absolute -bottom-2 left-0 w-16 h-1 bg-green-500 rounded-full"></span>
-            </h2>
-            <p className="text-slate-600 leading-relaxed mb-6">
-              A Missed Call Service provides a dedicated 10-digit virtual number or toll-free number for your business. When a customer dials this number, the call is automatically disconnected after one ring.
-            </p>
-            <p className="text-slate-600 leading-relaxed mb-8">
-              Because the call doesn't connect, there is absolutely zero cost to the caller. Meanwhile, your system instantly captures their caller ID, time, and location, allowing you to trigger automated text messages or schedule outbound agent callbacks.
-            </p>
-          </div>
+
         </div>
       </section>
 
@@ -116,7 +113,7 @@ export default function CloudMissedCallPage() {
           Description: Light blue background grid with 6 cards
           showing the main business use cases.
           ========================================================= */}
-      <section className="py-20 bg-blue-50/50">
+      <section className="py-10 bg-blue-50/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
             <h2 className="font-heading font-black text-3xl sm:text-4xl text-blue-900 mb-4">

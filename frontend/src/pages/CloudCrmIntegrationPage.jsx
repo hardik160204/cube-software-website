@@ -25,104 +25,83 @@ export default function CloudCrmIntegrationPage() {
           ========================================================= */}
       <Navbar />
 
-      {/* =========================================================
+{/* =========================================================
           SECTION 1: HERO SECTION 
           Description: Dark blue background (#0A1F44) with main 
-          headlines and the animated CRM Integration vector graphic.
+          headlines and the static CRM Integration vector image.
           ========================================================= */}
-      <section className="relative w-full pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-[#0A1F44]">
+      <section className="relative w-full pt-32 pb-20 lg:pt-40 lg:pb-12 overflow-hidden bg-[#0A1F44]">
         <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44] via-[#0A1F44] to-blue-900/40 z-0" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col lg:flex-row items-center gap-12">
           
           <div className="lg:w-1/2">
             <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
-              Smart Cloud <br/><span className="text-blue-400">CRM Integration</span>
+              <span className="text-blue-400">CRM Integration</span>
             </h1>
             <p className="text-lg text-blue-100 leading-relaxed mb-8 max-w-xl">
               Unify your communications and customer data. Connect your cloud telephony seamlessly with Salesforce, HubSpot, Zoho, and custom ERPs to empower your sales and support teams.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button className="bg-[#10b981] hover:bg-[#059669] text-white px-8 h-12 rounded-full shadow-lg transition-transform hover:-translate-y-0.5 text-lg font-bold">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white px-8 h-12 rounded-md shadow-lg transition-transform hover:-translate-y-0.5">
                 Explore Integrations
               </Button>
             </div>
           </div>
 
-          <div className="lg:w-1/2 flex justify-center relative">
-            <div className="relative w-[350px] h-[350px] flex items-center justify-center">
-               {/* Core Vector - Database / Sync Base */}
-               <div className="absolute w-[280px] h-[280px] bg-slate-800 rounded-full border-4 border-slate-700 shadow-2xl flex items-center justify-center z-10">
-                  <div className="w-[200px] h-[200px] bg-gradient-to-br from-blue-900 to-slate-900 rounded-full flex items-center justify-center border border-blue-500/30">
-                     <Database size={80} className="text-blue-400" />
-                     <div className="absolute inset-0 flex items-center justify-center animate-[spin_4s_linear_infinite]">
-                        <RefreshCw size={120} className="text-[#10b981] opacity-50" strokeWidth={1} />
-                     </div>
-                  </div>
-               </div>
-               
-               {/* Floating Orbital Vectors */}
-               <div className="absolute z-20 top-4 right-10 bg-[#10b981] p-4 rounded-full shadow-[0_0_30px_rgba(16,185,129,0.4)] animate-bounce" style={{ animationDuration: '3s' }}>
-                  <LinkIcon size={24} className="text-white" />
-               </div>
-               <div className="absolute z-20 bottom-10 left-4 bg-blue-500 p-4 rounded-full shadow-[0_0_30px_rgba(59,130,246,0.4)] animate-bounce" style={{ animationDuration: '4s' }}>
-                  <Network size={24} className="text-white" />
-               </div>
-
-               {/* Radiating Signal Rings */}
-               <svg className="absolute inset-0 w-full h-full z-0" viewBox="0 0 350 350">
-                  <circle cx="175" cy="175" r="150" fill="none" stroke="#3b82f6" strokeWidth="2" strokeDasharray="15 15" className="animate-[spin_10s_linear_infinite]" opacity="0.6" />
-                  <circle cx="175" cy="175" r="110" fill="none" stroke="#10b981" strokeWidth="2" strokeDasharray="10 10" opacity="0.4" className="animate-[spin_8s_linear_infinite_reverse]" />
-               </svg>
+          <div className="lg:w-1/2 flex justify-center lg:justify-end relative">
+            <div className="relative w-full max-w-[500px]">
+              {/* STATIC IMAGE PLACEHOLDER */}
+              <img 
+                src="/crm-integration-hero.svg" /* <-- Update this to your actual image filename */
+                alt="CRM Integration" 
+                className="w-full h-auto object-contain drop-shadow-2xl relative z-10 transition-transform lg:scale-105 lg:origin-right hover:scale-110 duration-700"
+              />
             </div>
           </div>
+          
         </div>
       </section>
 
-      {/* =========================================================
-          SECTION 2: WHAT IS CRM INTEGRATION? 
-          Description: White background, split layout with 4 square
-          feature blocks on the left and descriptive text on the right.
+{/* =========================================================
+          CRM INTEGRATION SECTION
           ========================================================= */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center gap-16">
-          <div className="lg:w-1/2 relative">
-            <div className="aspect-square max-h-[400px] bg-blue-50 rounded-full shadow-inner overflow-hidden relative flex items-center justify-center border-8 border-slate-50">
-               <div className="grid grid-cols-2 gap-4 p-8 w-full h-full">
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300">
-                    <PhoneCall size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">Telephony</span>
-                 </div>
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-colors duration-300">
-                    <RefreshCw size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">Auto-Sync</span>
-                 </div>
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-slate-400 hover:bg-slate-700 hover:text-white transition-colors duration-300">
-                    <Database size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">Database</span>
-                 </div>
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-purple-400 hover:bg-purple-500 hover:text-white transition-colors duration-300">
-                    <UserCheck size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">Client ID</span>
-                 </div>
-               </div>
+      <section className="py-20 lg:py-28 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          
+          {/* LEFT SIDE: The new SVG Image */}
+          <div className="lg:w-1/2 flex justify-center w-full relative">
+            {/* Optional subtle background glow to make the SVG pop */}
+            <div className="absolute inset-0 bg-blue-50 rounded-full blur-3xl opacity-50 transform scale-75 pointer-events-none"></div>
+            
+            <img 
+              src="/crm-integration-illustration.svg" /* <-- Update this to your actual SVG filename */
+              alt="CRM Integration Telephony" 
+              className="w-full max-w-[550px] h-auto object-contain relative z-10 transition-transform duration-700 hover:scale-105"
+            />
+          </div>
+
+          {/* RIGHT SIDE: Text Content */}
+          <div className="lg:w-1/2 w-full text-left">
+            <h2 className="font-heading font-black text-4xl sm:text-5xl text-slate-900 leading-tight mb-8">
+              Bridge the Gap Between <span className="text-blue-600">Calls</span> <br />
+              <span className="text-blue-600 relative inline-block">
+                & Data
+              </span>
+            </h2>
+            
+            <div className="space-y-6 text-[17px] text-slate-600 leading-relaxed">
+              <p>
+                CRM Integration connects your cloud telephony platform directly into your Customer Relationship Management software. Instead of agents manually toggling between a dialer and a database, everything happens in one unified interface.
+              </p>
+              <p>
+                Every incoming call automatically fetches the caller's profile, every outgoing call can be made with a single click, and all call logs and recordings are instantly pushed back into the customer's CRM record.
+              </p>
             </div>
           </div>
-          <div className="lg:w-1/2">
-            <h2 className="font-heading font-black text-3xl sm:text-4xl text-slate-800 mb-6 relative inline-block">
-              Bridge the Gap Between <span className="text-blue-600">Calls & Data</span>
-              <span className="absolute -bottom-2 left-0 w-16 h-1 bg-green-500 rounded-full"></span>
-            </h2>
-            <p className="text-slate-600 leading-relaxed mb-6">
-              CRM Integration connects your cloud telephony platform directly into your Customer Relationship Management software. Instead of agents manually toggling between a dialer and a database, everything happens in one unified interface.
-            </p>
-            <p className="text-slate-600 leading-relaxed mb-8">
-              Every incoming call automatically fetches the caller's profile, every outgoing call can be made with a single click, and all call logs and recordings are instantly pushed back into the customer's CRM record.
-            </p>
-          </div>
+
         </div>
       </section>
-
       {/* =========================================================
           SECTION 3: HOW DO BUSINESSES USE IT? 
           Description: Light blue background grid with 6 cards

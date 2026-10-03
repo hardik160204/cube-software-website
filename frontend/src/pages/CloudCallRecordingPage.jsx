@@ -37,7 +37,7 @@ export default function CloudCallRecordingPage() {
           
           <div className="lg:w-1/2">
             <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
-              Smart Cloud <br/><span className="text-blue-400">Call Recording</span>
+              <br/><span className="text-blue-400">Call Recording</span>
             </h1>
             <p className="text-lg text-blue-100 leading-relaxed mb-8 max-w-xl">
               Securely capture, store, and analyze 100% of your business conversations. Ensure compliance, resolve disputes instantly, and train your agents with crystal-clear audio logs.

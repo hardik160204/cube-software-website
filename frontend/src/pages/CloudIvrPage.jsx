@@ -74,15 +74,15 @@ export default function CloudIvrPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
             <h2 className="font-heading font-black text-3xl sm:text-4xl text-blue-900 mb-4">
-              How do <span className="text-blue-600">businesses</span> use IVR?
+              How do businesses use <span className="text-blue-600">IVRS?</span>
             </h2>
-            <p className="text-slate-500 relative inline-block pb-3">
-              IVRs help businesses by creating a comfortable interactive environment for the users.
+            <p className="text-red-900 relative inline-block pb-3">
+              IVRs help businesses create a convenient, interactive experience for customers by routing calls, answering common questions, and providing self-service options.
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-green-500 rounded-full"></span>
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-justify">
             {[
               { icon: BarChart, title: "Improve efficiency", desc: "Automating your calls via an IVR system not only helps in streamlining your processes but also provides your staff the freedom to focus on other important activities." },
               { icon: Database, title: "Automated checking for order status", desc: "Tracking orders is easier than ever with the new IVR technology. Customers can track their orders by calling the provided contact number and punching in their user ID." },
@@ -159,7 +159,7 @@ export default function CloudIvrPage() {
           </h2>
           <div className="w-12 h-1 bg-green-500 rounded-full mx-auto mb-20"></div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-16 text-left">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-16 text-justify">
             
             <div className="flex flex-col items-start px-4 group">
               <div className="w-20 h-20 mb-6 flex items-center justify-center group-hover:-translate-y-1 transition-transform">
@@ -314,7 +314,7 @@ export default function CloudIvrPage() {
           </h2>
           <div className="w-12 h-1 bg-green-500 rounded-full mx-auto mb-16"></div>
 
-          <div className="flex flex-col md:flex-row gap-12 text-left">
+          <div className="flex flex-col md:flex-row gap-12 text-justify">
              <div className="w-full md:w-1/2 p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-lg transition-shadow">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
                    <Bell className="text-blue-500" size={32} />

@@ -36,7 +36,7 @@ export default function CloudWebChatBotPage() {
           
           <div className="lg:w-1/2">
             <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
-              Smart Cloud <br/><span className="text-blue-400">Web Chat Bot</span>
+              <br/><span className="text-blue-400">Web Chat Bot</span>
             </h1>
             <p className="text-lg text-blue-100 leading-relaxed mb-8 max-w-xl">
               Convert your website visitors into loyal customers instantly. Deploy an intelligent AI chatbot to automate support, capture leads, and provide 24/7 assistance directly on your site.

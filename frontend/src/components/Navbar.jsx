@@ -5,7 +5,7 @@ import {
   Bot, PhoneCall, Building, MessageSquare, Headset, BrainCircuit, 
   ShieldCheck, AudioLines, PhoneOutgoing, Radio, Headphones, 
   LayoutDashboard, Landmark, Activity, Megaphone, MonitorPlay,
-  Mic, Database, Receipt, Cloud
+  Mic, Database, Receipt, Cloud, ConciergeBell, HeartPulse, TowerControl
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
@@ -25,7 +25,7 @@ const MENU_ITEMS = [
   { label: "Pricing", href: "/pricing" },
   { label: "Industries", href: "#industries" },
   { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 // =========================================================================
@@ -57,14 +57,17 @@ const SERVICES_MEGA_DATA = [
       { icon: MonitorPlay, title: "Screen Logger", desc: "Multi-PC screen recording over the network", href: "/services/screen-logger" },
     ]
   },
-  {
+{
     id: "industry-solutions",
     label: "Industry Solutions",
     icon: Building,
     items: [
-      { icon: Landmark, title: "Banking & Finance", desc: "Secure calling and automated debt collection", href: "/#contact" },
-      { icon: Activity, title: "Healthcare", desc: "Patient reminders and helpdesk automation", href: "/#contact" },
-      { icon: Building, title: "Real Estate", desc: "Lead follow-up and site visit scheduling", href: "/#contact" },
+      { icon: Headset, title: "BPO – KPO", desc: "High-volume dialing & monitoring", href: "/industries/bpo" },
+      { icon: Landmark, title: "Financial Services", desc: "Compliant recording & secure calling", href: "/industries/finance" },
+      { icon: ConciergeBell, title: "Hospitality", desc: "Innovative desk & booking solutions", href: "/industries/hospitality" },
+      { icon: HeartPulse, title: "Healthcare", desc: "Patient-first communication suites", href: "/industries/healthcare" },
+      { icon: Building, title: "Real Estate", desc: "Lead follow-up and site visit scheduling", href: "/industries/real-estate" },
+      { icon: TowerControl, title: "Telecom", desc: "Carrier-grade telecom solutions", href: "/industries/telecom" },
     ]
   },
   {
@@ -178,7 +181,7 @@ const Navbar = ({ onBookDemo }) => {
     
     // Exact path matching for active states
     if (link.label === "Services") {
-      return ["/services/cloud-contact-center", "/services/auto-dialer", "/services/ivrs"].some(path => location.pathname.includes(path));
+      return ["/services/cloud-contact-center", "/services/auto-dialer", "/services/ivrs", "/industries/"].some(path => location.pathname.includes(path));
     }
     if (link.label === "Products") {
       return ["/services/voice-logger", "/services/call-billing", "/services/screen-logger", "/services/voice-mail", "/services/conference-bridge", "/services/voice-logger-insync"].some(path => location.pathname.includes(path));

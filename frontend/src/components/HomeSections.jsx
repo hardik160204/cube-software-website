@@ -44,7 +44,7 @@ const TESTIMONIALS = [
 ];
 
 const FAQS = [
-  { q: "What services does Cube Software provide?", a: "We offer a complete range of communication solutions including Cloud PBX, dialers (inbound/outbound/blended), voice loggers, screen loggers, IVRS, conference bridges, call billing software, voice mail systems, SIP trunking and CRM integrations." },
+  { q: "What services does Cube Software provide and why?", a: "We offer a complete range of communication solutions including Cloud PBX, dialers (inbound/outbound/blended), voice loggers, screen loggers, IVRS, conference bridges, call billing software, voice mail systems, SIP trunking and CRM integrations." },
   { q: "Which Citys do you support?", a: "We provide numbers and voice solutions across India: Bengaluru, Mumbai, Delhi, Gurugram, Noida, Ahmedabad, Pune, and many more regions, along with 140 & 160 lines." },
   { q: "Can I get local and toll-free numbers?", a: "We provide local, national, international DID, toll-free, and vanity numbers to meet your business and market requirements." },
   { q: "How quickly can numbers be activated?", a: "Most numbers are activated within minutes after verification and payment. Some states may require documentation based on local telecom regulations." },

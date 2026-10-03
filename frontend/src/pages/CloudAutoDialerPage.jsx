@@ -60,45 +60,47 @@ export default function CloudAutoDialerPage() {
         </div>
       </section>
 
-      {/* =========================================================
+{/* =========================================================
           2. WHAT IS AN AUTO DIALER? 
+          Description: White background, split layout with SVG graphic
+          on the left and descriptive text on the right.
           ========================================================= */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center gap-16">
-          <div className="lg:w-1/2 relative">
-            <div className="aspect-square max-h-[400px] bg-blue-50 rounded-full shadow-inner overflow-hidden relative flex items-center justify-center border-8 border-slate-50">
-               <div className="grid grid-cols-2 gap-4 p-8 w-full h-full">
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300">
-                    <Headset size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">Agent Ready</span>
-                 </div>
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-colors duration-300">
-                    <PhoneCall size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">Dialing...</span>
-                 </div>
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-slate-400 hover:bg-slate-700 hover:text-white transition-colors duration-300">
-                    <Clock size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">Voicemail Drop</span>
-                 </div>
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-blue-400 hover:bg-blue-400 hover:text-white transition-colors duration-300">
-                    <Database size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">CRM Sync</span>
-                 </div>
-               </div>
+      <section className="py-20 lg:py-28 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          
+          {/* LEFT SIDE: The new SVG Image */}
+          <div className="lg:w-1/2 flex justify-center w-full relative">
+            {/* Subtle background glow to make the SVG pop */}
+            <div className="absolute inset-0 bg-blue-50 rounded-full blur-3xl opacity-50 transform scale-75 pointer-events-none"></div>
+            
+            <img 
+              src="/outbound-campaign-illustration.svg" /* <-- Update this to your actual SVG filename */
+              alt="Auto Dialer System" 
+              className="w-full max-w-[550px] h-auto object-contain relative z-10 transition-transform duration-700 hover:scale-105"
+            />
+          </div>
+
+          {/* RIGHT SIDE: Text Content */}
+          <div className="lg:w-1/2 w-full text-left">
+            <h2 className="font-heading font-black text-4xl sm:text-5xl text-blue-800 leading-tight mb-8 relative inline-block">
+              Supercharge your <br />
+              <span className="text-blue-600">
+                Outbound Campaigns
+              </span>
+              {/* Green underline accent */}
+              <span className="absolute -bottom-3 left-0 w-16 h-1.5 bg-emerald-500 rounded-full"></span>
+            </h2>
+            
+            <div className="space-y-6 text-[17px] text-slate-600 leading-relaxed mt-4">
+              <p>
+                An auto dialer is an automated software system that dials phone numbers from a compiled list. Once the call is answered, the system either plays a recorded message or connects the call to a live agent.
+              </p>
+              <p>
+                By filtering out busy signals, voicemails, and disconnected numbers, auto dialers ensure your agents spend their time doing what they do best: talking to real prospects.
+              </p>
             </div>
           </div>
-          <div className="lg:w-1/2">
-            <h2 className="font-heading font-black text-3xl sm:text-4xl text-blue-800 mb-6 relative inline-block">
-              Supercharge your <span className="text-blue-600">Outbound Campaigns</span>
-              <span className="absolute -bottom-2 left-0 w-16 h-1 bg-green-500 rounded-full"></span>
-            </h2>
-            <p className="text-slate-600 leading-relaxed mb-6">
-              An auto dialer is an automated software system that dials phone numbers from a compiled list. Once the call is answered, the system either plays a recorded message or connects the call to a live agent.
-            </p>
-            <p className="text-slate-600 leading-relaxed mb-8">
-              By filtering out busy signals, voicemails, and disconnected numbers, auto dialers ensure your agents spend their time doing what they do best: talking to real prospects.
-            </p>
-          </div>
+
         </div>
       </section>
 
@@ -137,7 +139,7 @@ export default function CloudAutoDialerPage() {
         </div>
       </section>
 
-      {/* =========================================================
+{/* =========================================================
           4. HOW IT WORKS 
           ========================================================= */}
       <section className="py-24 bg-gradient-to-r from-blue-600 to-blue-500">
@@ -149,35 +151,59 @@ export default function CloudAutoDialerPage() {
             <div className="w-12 h-1 bg-green-400 rounded-full mx-auto"></div>
           </div>
 
-          <div className="space-y-12">
+          <div className="space-y-12 lg:space-y-24">
             {[
-              { step: 1, title: "Upload Contact Lists", desc: "Easily upload your target contact lists or sync them directly from your existing CRM database." },
-              { step: 2, title: "System Dials Automatically", desc: "The predictive algorithm dials numbers in the background, filtering out voicemails and busy signals." },
-              { step: 3, title: "Instant Agent Connection", desc: "The moment a live customer answers, the call is instantly routed to an available agent with the customer's data on screen." }
+              { 
+                step: 1, 
+                title: "Upload Contact Lists", 
+                desc: "Easily upload your target contact lists or sync them directly from your existing CRM database.",
+                image: "/auto-dialer-how-it-works-1.png" 
+              },
+              { 
+                step: 2, 
+                title: "System Dials Automatically", 
+                desc: "The predictive algorithm dials numbers in the background, filtering out voicemails and busy signals.",
+                image: "/auto-dialer-how-it-works-2.png" // Update with your actual second vector image name
+              },
+              { 
+                step: 3, 
+                title: "Instant Agent Connection", 
+                desc: "The moment a live customer answers, the call is instantly routed to an available agent with the customer's data on screen.",
+                image: "/auto-dialer-how-it-works-3.png" // Update with your actual third vector image name
+              }
             ].map((item, i) => (
               <div key={i} className={`flex flex-col ${i % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 lg:gap-16`}>
-                <div className="w-full md:w-1/2 flex justify-center">
-                   <div className="w-48 h-48 bg-white/10 rounded-full flex items-center justify-center border-4 border-white/20 backdrop-blur-sm">
-                      <PhoneForwarded size={64} className="text-white opacity-80" />
-                   </div>
+                
+                {/* IMAGE CONTAINER - Completely transparent, no box, no background */}
+                <div className="w-full md:w-1/2 flex justify-center items-center">
+                  <img 
+                    src={item.image} 
+                    alt={item.title} 
+                    /* Let the transparent vector sit naturally. Added a subtle drop shadow to make the vector pop against the blue */
+                    className="w-48 sm:w-64 md:w-72 h-auto object-contain transition-transform duration-700 hover:scale-105 drop-shadow-xl"
+                  />
                 </div>
+
+                {/* TEXT CONTAINER */}
                 <div className="w-full md:w-1/2">
-                  <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-10 h-10 bg-white text-blue-600 font-black rounded-full flex items-center justify-center text-xl shrink-0">
+                  <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 sm:p-10 border border-white/20 shadow-xl hover:bg-white/15 transition-colors">
+                    <div className="flex items-center gap-5 mb-4">
+                      <div className="w-12 h-12 bg-white text-blue-600 font-black rounded-full flex items-center justify-center text-2xl shrink-0 shadow-md">
                         {item.step}
                       </div>
-                      <h3 className="font-bold text-xl text-white">{item.title}</h3>
+                      <h3 className="font-bold text-2xl text-white">{item.title}</h3>
                     </div>
-                    <p className="text-blue-100 leading-relaxed ml-14">{item.desc}</p>
+                    <p className="text-blue-100 text-lg leading-relaxed ml-[68px]">
+                      {item.desc}
+                    </p>
                   </div>
                 </div>
+
               </div>
             ))}
           </div>
         </div>
       </section>
-
       {/* =========================================================
           NEW SECTION: WHY IS AN AUTO DIALER ESSENTIAL
           ========================================================= */}

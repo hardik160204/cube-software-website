@@ -37,7 +37,7 @@ export default function CloudVirtualNumberPage() {
           
           <div className="lg:w-1/2">
             <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
-              Smart Cloud <br/><span className="text-blue-400">Virtual Numbers</span>
+              <br/><span className="text-blue-400">Virtual Numbers</span>
             </h1>
             <p className="text-lg text-blue-100 leading-relaxed mb-8 max-w-xl">
               Establish a local presence anywhere in the world without a physical office. Route calls intelligently, track marketing ROI, and never miss a business opportunity.

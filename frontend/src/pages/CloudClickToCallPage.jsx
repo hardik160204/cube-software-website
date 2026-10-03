@@ -37,7 +37,7 @@ export default function CloudClickToCallPage() {
           
           <div className="lg:w-1/2">
             <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
-              Smart Cloud <br/><span className="text-blue-400">Click to Call</span>
+              <br/><span className="text-blue-400">Click to Call</span>
             </h1>
             <p className="text-lg text-blue-100 leading-relaxed mb-8 max-w-xl">
               Connect with customers instantly. Embed a click-to-call button on your website, app, or CRM to bridge calls instantly, eliminate dial times, and boost conversion rates.

@@ -24,61 +24,41 @@ export default function CloudQualityAnalysisPage() {
           ========================================================= */}
       <Navbar />
 
-      {/* =========================================================
+{/* =========================================================
           SECTION 1: HERO SECTION 
           Description: Dark blue background (#0A1F44) with main 
-          headlines and the animated QA vector graphic.
+          headlines and the static QA vector image.
           ========================================================= */}
-      <section className="relative w-full pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-[#0A1F44]">
+      <section className="relative w-full pt-32 pb-20 lg:pt-40 lg:pb-12 overflow-hidden bg-[#0A1F44]">
         <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44] via-[#0A1F44] to-blue-900/40 z-0" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col lg:flex-row items-center gap-12">
           
           <div className="lg:w-1/2">
             <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
-              Smart Cloud <br/><span className="text-blue-400">Quality Analysis</span>
+              <span className="text-blue-400">Quality Analysis</span>
             </h1>
             <p className="text-lg text-blue-100 leading-relaxed mb-8 max-w-xl">
               Ensure every conversation meets your highest standards. Evaluate agent performance, ensure compliance, and deliver actionable coaching using comprehensive call scoring and analytics.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button className="bg-[#10b981] hover:bg-[#059669] text-white px-8 h-12 rounded-full shadow-lg transition-transform hover:-translate-y-0.5 text-lg font-bold">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white px-8 h-12 rounded-md shadow-lg transition-transform hover:-translate-y-0.5">
                 Start Evaluating
               </Button>
             </div>
           </div>
 
-          <div className="lg:w-1/2 flex justify-center relative">
-            <div className="relative w-[350px] h-[350px] flex items-center justify-center">
-               {/* Core Vector - QA / Clipboard Base */}
-               <div className="absolute w-[280px] h-[280px] bg-slate-800 rounded-full border-4 border-slate-700 shadow-2xl flex items-center justify-center z-10">
-                  <div className="w-[200px] h-[200px] bg-gradient-to-br from-blue-900 to-slate-900 rounded-full flex flex-col items-center justify-center border border-blue-500/30">
-                     <ClipboardCheck size={60} className="text-[#10b981] animate-pulse mb-2" />
-                     <div className="flex gap-1 mt-2">
-                       <Star size={16} className="text-yellow-400 fill-yellow-400" />
-                       <Star size={16} className="text-yellow-400 fill-yellow-400" />
-                       <Star size={16} className="text-yellow-400 fill-yellow-400" />
-                       <Star size={16} className="text-yellow-400 fill-yellow-400" />
-                       <Star size={16} className="text-yellow-400 fill-yellow-400 opacity-50" />
-                     </div>
-                  </div>
-               </div>
-               
-               {/* Floating Orbital Vectors */}
-               <div className="absolute z-20 top-4 right-10 bg-blue-500 p-4 rounded-full shadow-[0_0_30px_rgba(59,130,246,0.4)] animate-bounce" style={{ animationDuration: '3s' }}>
-                  <Award size={24} className="text-white" />
-               </div>
-               <div className="absolute z-20 bottom-10 left-4 bg-purple-500 p-4 rounded-full shadow-[0_0_30px_rgba(168,85,247,0.4)] animate-bounce" style={{ animationDuration: '4s' }}>
-                  <Ear size={24} className="text-white" />
-               </div>
-
-               {/* Radiating Signal Rings */}
-               <svg className="absolute inset-0 w-full h-full z-0" viewBox="0 0 350 350">
-                  <circle cx="175" cy="175" r="150" fill="none" stroke="#3b82f6" strokeWidth="2" strokeDasharray="15 15" className="animate-[spin_10s_linear_infinite]" opacity="0.6" />
-                  <circle cx="175" cy="175" r="110" fill="none" stroke="#10b981" strokeWidth="2" strokeDasharray="10 10" opacity="0.4" className="animate-[spin_8s_linear_infinite_reverse]" />
-               </svg>
+          <div className="lg:w-1/2 flex justify-center lg:justify-end relative">
+            <div className="relative w-full max-w-[500px]">
+              {/* STATIC IMAGE PLACEHOLDER */}
+              <img 
+                src="/qa-hero-vector.svg" /* <-- Update this to your actual image filename */
+                alt="Quality Analysis" 
+                className="w-full h-auto object-contain drop-shadow-2xl relative z-10 transition-transform lg:scale-105 lg:origin-right hover:scale-110 duration-700"
+              />
             </div>
           </div>
+          
         </div>
       </section>
 

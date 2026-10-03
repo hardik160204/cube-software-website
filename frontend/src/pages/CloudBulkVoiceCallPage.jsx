@@ -30,14 +30,14 @@ export default function CloudBulkVoiceCallPage() {
           headlines and the custom Bulk Voice Calls vector illustration.
           ========================================================= */}
       {/* Reduced pb-20 and lg:pb-28 to pb-12 and lg:pb-16 to tighten the space below the hero */}
-      <section className="relative w-full pt-32 pb-12 lg:pt-40 lg:pb-12 overflow-hidden bg-[#0A1F44]">
+      <section className="relative w-full pt-32 pb-12 lg:pt-40 lg:pb- overflow-hidden bg-[#0A1F44]">
         <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44] via-[#0A1F44] to-blue-900/40 z-0" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col lg:flex-row items-center gap-12">
           
           <div className="lg:w-1/2">
             <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
-              Smart Cloud <br/><span className="text-blue-400">Bulk Voice Calls</span>
+              <br/><span className="text-blue-400">Bulk Voice Calls</span>
             </h1>
             <p className="text-lg text-blue-100 leading-relaxed mb-8 max-w-xl">
               Reach thousands of customers instantly with pre-recorded voice messages. Automate your announcements, promotional offers, and reminders with just one click.
@@ -66,47 +66,45 @@ export default function CloudBulkVoiceCallPage() {
           
         </div>
       </section>
-      {/* =========================================================
-          SECTION 2: WHAT IS A BULK VOICE CALL? 
-          Description: White background, split layout with 4 square
-          feature blocks on the left and descriptive text on the right.
+{/* =========================================================
+          MASS COMMUNICATION SECTION
           ========================================================= */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center gap-16">
-          <div className="lg:w-1/2 relative">
-            <div className="aspect-square max-h-[400px] bg-blue-50 rounded-full shadow-inner overflow-hidden relative flex items-center justify-center border-8 border-slate-50">
-               <div className="grid grid-cols-2 gap-4 p-8 w-full h-full">
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300">
-                    <Volume2 size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">Record</span>
-                 </div>
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-colors duration-300">
-                    <UploadCloud size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">Upload Base</span>
-                 </div>
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-slate-400 hover:bg-slate-700 hover:text-white transition-colors duration-300">
-                    <Megaphone size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">Broadcast</span>
-                 </div>
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-blue-400 hover:bg-blue-400 hover:text-white transition-colors duration-300">
-                    <BarChart size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">Track Output</span>
-                 </div>
-               </div>
+      <section className="py-20 lg:py-28 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          
+          {/* LEFT SIDE: The new SVG Image */}
+          <div className="lg:w-1/2 flex justify-center w-full relative">
+            {/* Optional subtle background glow to make the SVG pop */}
+            <div className="absolute inset-0 bg-blue-50 rounded-full blur-3xl opacity-50 transform scale-75 pointer-events-none"></div>
+            
+            <img 
+              src="/mass-communication-illustration.svg" 
+              alt="Bulk Voice Call Broadcasting" 
+              className="w-full max-w-[550px] h-auto object-contain relative z-10 transition-transform duration-700 hover:scale-105"
+            />
+          </div>
+
+          {/* RIGHT SIDE: Text Content */}
+          <div className="lg:w-1/2 w-full text-left">
+            <h2 className="font-heading font-black text-4xl sm:text-5xl text-slate-900 leading-tight mb-8">
+              Mass Communication <br />
+              <span className="text-blue-600 relative inline-block">
+                Made Simple
+                {/* Green underline accent from your screenshot */}
+                <span className="absolute -bottom-2 left-0 w-1/3 h-1.5 bg-emerald-500 rounded-full"></span>
+              </span>
+            </h2>
+            
+            <div className="space-y-6 text-[17px] text-slate-600 leading-relaxed">
+              <p>
+                Bulk Voice Calling, also known as voice broadcasting, is a technology that allows you to send a pre-recorded voice message to hundreds or thousands of call recipients simultaneously.
+              </p>
+              <p>
+                It is the most cost-effective and rapid way to deliver alerts, promotional offers, political campaigns, and reminders, ensuring your message is heard in your own voice, adding a personal touch to your mass outreach.
+              </p>
             </div>
           </div>
-          <div className="lg:w-1/2">
-            <h2 className="font-heading font-black text-3xl sm:text-4xl text-slate-800 mb-6 relative inline-block">
-              Mass Communication <span className="text-blue-600">Made Simple</span>
-              <span className="absolute -bottom-2 left-0 w-16 h-1 bg-green-500 rounded-full"></span>
-            </h2>
-            <p className="text-slate-600 leading-relaxed mb-6">
-              Bulk Voice Calling, also known as voice broadcasting, is a technology that allows you to send a pre-recorded voice message to hundreds or thousands of call recipients simultaneously.
-            </p>
-            <p className="text-slate-600 leading-relaxed mb-8">
-              It is the most cost-effective and rapid way to deliver alerts, promotional offers, political campaigns, and reminders, ensuring your message is heard in your own voice, adding a personal touch to your mass outreach.
-            </p>
-          </div>
+
         </div>
       </section>
 

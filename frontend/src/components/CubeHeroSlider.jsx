@@ -63,7 +63,7 @@ const SLIDES = [
         </button>
       </div>
     ),
-    expect: true, // Shows the "What to Expect" row
+    expect: false, // Shows the "What to Expect" row
   },
   {
     id: 2,

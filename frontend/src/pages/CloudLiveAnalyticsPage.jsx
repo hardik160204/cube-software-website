@@ -24,10 +24,10 @@ export default function CloudLiveAnalyticsPage() {
           ========================================================= */}
       <Navbar />
 
-      {/* =========================================================
+{/* =========================================================
           SECTION 1: HERO SECTION 
           Description: Dark blue background (#0A1F44) with main 
-          headlines and the animated Analytics vector graphic.
+          headlines and the static Analytics vector image.
           ========================================================= */}
       <section className="relative w-full pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-[#0A1F44]">
         <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44] via-[#0A1F44] to-blue-900/40 z-0" />
@@ -42,43 +42,23 @@ export default function CloudLiveAnalyticsPage() {
               Turn your call data into actionable insights. Monitor live queues, track agent performance, and visualize comprehensive reporting dashboards to make data-driven decisions instantly.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Button className="bg-[#10b981] hover:bg-[#059669] text-white px-8 h-12 rounded-full shadow-lg transition-transform hover:-translate-y-0.5 text-lg font-bold">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white px-8 h-12 rounded-md shadow-lg transition-transform hover:-translate-y-0.5">
                 View Live Dashboard
               </Button>
             </div>
           </div>
 
-          <div className="lg:w-1/2 flex justify-center relative">
-            <div className="relative w-[350px] h-[350px] flex items-center justify-center">
-               {/* Core Vector - Chart / Activity Base */}
-               <div className="absolute w-[280px] h-[280px] bg-slate-800 rounded-full border-4 border-slate-700 shadow-2xl flex items-center justify-center z-10">
-                  <div className="w-[200px] h-[200px] bg-gradient-to-br from-blue-900 to-slate-900 rounded-full flex flex-col items-center justify-center border border-blue-500/30 overflow-hidden relative">
-                     <Activity size={80} className="text-[#10b981] animate-pulse z-10" />
-                     {/* Animated Chart Bars */}
-                     <div className="absolute bottom-0 left-0 w-full flex items-end justify-around px-4 opacity-30 h-24">
-                        <div className="w-4 bg-blue-400 rounded-t-sm h-1/3 animate-[pulse_2s_infinite]"></div>
-                        <div className="w-4 bg-purple-400 rounded-t-sm h-2/3 animate-[pulse_3s_infinite]"></div>
-                        <div className="w-4 bg-green-400 rounded-t-sm h-full animate-[pulse_1.5s_infinite]"></div>
-                        <div className="w-4 bg-blue-400 rounded-t-sm h-1/2 animate-[pulse_2.5s_infinite]"></div>
-                     </div>
-                  </div>
-               </div>
-               
-               {/* Floating Orbital Vectors */}
-               <div className="absolute z-20 top-4 right-10 bg-purple-500 p-4 rounded-full shadow-[0_0_30px_rgba(168,85,247,0.4)] animate-bounce" style={{ animationDuration: '3s' }}>
-                  <PieChart size={24} className="text-white" />
-               </div>
-               <div className="absolute z-20 bottom-10 left-4 bg-blue-500 p-4 rounded-full shadow-[0_0_30px_rgba(59,130,246,0.4)] animate-bounce" style={{ animationDuration: '4s' }}>
-                  <Monitor size={24} className="text-white" />
-               </div>
-
-               {/* Radiating Signal Rings */}
-               <svg className="absolute inset-0 w-full h-full z-0" viewBox="0 0 350 350">
-                  <circle cx="175" cy="175" r="150" fill="none" stroke="#3b82f6" strokeWidth="2" strokeDasharray="15 15" className="animate-[spin_10s_linear_infinite]" opacity="0.6" />
-                  <circle cx="175" cy="175" r="110" fill="none" stroke="#10b981" strokeWidth="2" strokeDasharray="10 10" opacity="0.4" className="animate-[spin_8s_linear_infinite_reverse]" />
-               </svg>
+          <div className="lg:w-1/2 flex justify-center lg:justify-end relative">
+            <div className="relative w-full max-w-[500px]">
+              {/* STATIC IMAGE PLACEHOLDER */}
+              <img 
+                src="/analytics-hero-vector.svg" /* <-- Update this to your actual image filename */
+                alt="Real-Time Analytics" 
+                className="w-full h-auto object-contain drop-shadow-2xl relative z-10 transition-transform lg:scale-105 lg:origin-right hover:scale-110 duration-700"
+              />
             </div>
           </div>
+          
         </div>
       </section>
 

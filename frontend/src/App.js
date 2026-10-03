@@ -36,6 +36,10 @@ import FloatingChatWidget from "./components/FloatingChatWidget";
 import PopupContactForm from "./components/PopupContactForm";
 import MeetOurTeamPage from "./pages/MeetOurTeamPage";
 import CareerPage from "./pages/CareerPage";
+import ContactPage from './components/ContactPage';
+import FinanceIndustryPage from './pages/FinanceIndustryPage';
+import BPOIndustryPage from './pages/BPOIndustryPage';
+import HealthcareIndustryPage from './pages/HealthcareIndustryPage';
 
 // Helper component to manage global layout elements based on the route
 const GlobalLayout = () => {
@@ -123,6 +127,10 @@ function App() {
           <Route path="/services/:slug" element={<ServicePage />} />
           <Route path="/meet-our-team" element={<MeetOurTeamPage />} />
           <Route path="/career" element={<CareerPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/industries/finance" element={<FinanceIndustryPage />} />
+          <Route path="/industries/bpo" element={<BPOIndustryPage />} />
+          <Route path="/industries/healthcare" element={<HealthcareIndustryPage />} />
           
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

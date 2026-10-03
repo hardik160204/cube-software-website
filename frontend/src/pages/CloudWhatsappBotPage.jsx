@@ -36,7 +36,7 @@ export default function CloudWhatsappBotPage() {
           
           <div className="lg:w-1/2">
             <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
-              Smart Cloud <br/><span className="text-[#25D366]">WhatsApp API & Bot</span>
+              <br/><span className="text-[#25D366]">WhatsApp API & Bot</span>
             </h1>
             <p className="text-lg text-blue-100 leading-relaxed mb-8 max-w-xl">
               Engage your customers where they already are. Build intelligent conversational workflows, automate customer support, and drive sales 24/7 through the official WhatsApp Business API.

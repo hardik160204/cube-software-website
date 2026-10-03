@@ -37,7 +37,7 @@ export default function CloudTollFreeNumberPage() {
           
           <div className="lg:w-1/2">
             <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
-              Smart Cloud <br/><span className="text-blue-400">Toll Free Numbers</span>
+              <br/><span className="text-blue-400">Toll Free Numbers</span>
             </h1>
             <p className="text-lg text-blue-100 leading-relaxed mb-8 max-w-xl">
               Build a premium brand image and enhance customer satisfaction. Provide your callers with a free, memorable 1800 number integrated directly with our cloud telephony suite.
@@ -77,47 +77,47 @@ export default function CloudTollFreeNumberPage() {
         </div>
       </section>
 
-      {/* =========================================================
+{/* =========================================================
           SECTION 2: WHAT IS A TOLL FREE NUMBER? 
-          Description: White background, split layout with 4 square
-          feature blocks on the left and descriptive text on the right.
+          Description: White background, split layout with SVG graphic
+          on the left and descriptive text on the right.
           ========================================================= */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center gap-16">
-          <div className="lg:w-1/2 relative">
-            <div className="aspect-square max-h-[400px] bg-blue-50 rounded-full shadow-inner overflow-hidden relative flex items-center justify-center border-8 border-slate-50">
-               <div className="grid grid-cols-2 gap-4 p-8 w-full h-full">
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-colors duration-300">
-                    <PhoneIncoming size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">Zero Cost</span>
-                 </div>
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-colors duration-300">
-                    <Star size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">Premium Image</span>
-                 </div>
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-slate-400 hover:bg-slate-700 hover:text-white transition-colors duration-300">
-                    <Globe size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">National Reach</span>
-                 </div>
-                 <div className="bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center justify-center text-purple-400 hover:bg-purple-500 hover:text-white transition-colors duration-300">
-                    <Network size={40} className="mb-2" />
-                    <span className="font-bold text-sm mt-2">Smart Routing</span>
-                 </div>
-               </div>
+      <section className="py-20 lg:py-28 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          
+          {/* LEFT SIDE: The new SVG Image */}
+          <div className="lg:w-1/2 flex justify-center w-full relative">
+            {/* Subtle background glow to make the SVG pop */}
+            <div className="absolute inset-0 bg-blue-50 rounded-full blur-3xl opacity-50 transform scale-75 pointer-events-none"></div>
+            
+            <img 
+              src="/toll-free-illustration.svg" /* <-- Update this to your actual SVG filename */
+              alt="Toll-Free Number Connectivity" 
+              className="w-full max-w-[550px] h-auto object-contain relative z-10 transition-transform duration-700 hover:scale-105"
+            />
+          </div>
+
+          {/* RIGHT SIDE: Text Content */}
+          <div className="lg:w-1/2 w-full text-left">
+            <h2 className="font-heading font-black text-4xl sm:text-5xl text-slate-900 leading-tight mb-8 relative inline-block">
+              Empower Callers with <br />
+              <span className="text-blue-600">
+                Free Connectivity
+              </span>
+              {/* Green underline accent */}
+              <span className="absolute -bottom-3 left-0 w-16 h-1.5 bg-emerald-500 rounded-full"></span>
+            </h2>
+            
+            <div className="space-y-6 text-[17px] text-slate-600 leading-relaxed mt-4">
+              <p>
+                A Toll-Free Number (typically starting with 1800) allows your customers to call your business without being charged for the call. The cost of the connection is borne entirely by your business.
+              </p>
+              <p>
+                Offering a toll-free number removes the friction of call charges, significantly increasing incoming queries. It portrays your company as an established, customer-centric enterprise with a reliable national presence.
+              </p>
             </div>
           </div>
-          <div className="lg:w-1/2">
-            <h2 className="font-heading font-black text-3xl sm:text-4xl text-slate-800 mb-6 relative inline-block">
-              Empower Callers with <span className="text-blue-600">Free Connectivity</span>
-              <span className="absolute -bottom-2 left-0 w-16 h-1 bg-green-500 rounded-full"></span>
-            </h2>
-            <p className="text-slate-600 leading-relaxed mb-6">
-              A Toll-Free Number (typically starting with 1800) allows your customers to call your business without being charged for the call. The cost of the connection is borne entirely by your business.
-            </p>
-            <p className="text-slate-600 leading-relaxed mb-8">
-              Offering a toll-free number removes the friction of call charges, significantly increasing incoming queries. It portrays your company as an established, customer-centric enterprise with a reliable national presence.
-            </p>
-          </div>
+
         </div>
       </section>
 

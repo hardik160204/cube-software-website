@@ -6,9 +6,15 @@ import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import Navbar from "../components/Navbar";
 import CubeHeroSlider from "../components/CubeHeroSlider";
 
-import { WhySection } from "../components/HomeSections"; 
-import { ClientsSection, IndustriesSection, FAQSection, Footer } from "../components/HomeSections2";
-import ContactSection from "../components/ContactSection";
+// Updated this import to pull the new IndustryCarouselSection from HomeSections2
+import { 
+  IndustryCarouselSection, 
+  ClientsSection, 
+  IndustriesSection, 
+  FAQSection, 
+  Footer 
+} from "../components/HomeSections2";
+
 import OurProducts from "../components/OurProducts"; 
 
 // --- HOMEPAGE TESTIMONIALS DATA (WITH LOGOS) ---
@@ -211,9 +217,9 @@ const Home = () => {
     }
   }, [location]);
 
+  // Fallback for Book Demo buttons to direct to the new contact page
   const scrollToContact = () => {
-    const el = document.querySelector("#contact");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    window.location.href = "/contact";
   };
 
   return (
@@ -224,7 +230,11 @@ const Home = () => {
       
       <ClientsSection />
       
-      <WhySection />
+      {/* 
+        NEW INDUSTRY CAROUSEL
+        Successfully swapped in place of the old WhySection 
+      */}
+      <IndustryCarouselSection />
 
       {/* Grid Component */}
       <OurProducts /> 
@@ -235,7 +245,7 @@ const Home = () => {
       <IndustriesSection />
       <FAQSection />
       
-      <ContactSection /> 
+      {/* ContactSection removed from homepage as it now has a dedicated page */}
       
       <Footer />
     </div>

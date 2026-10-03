@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Headset, Landmark, ConciergeBell, HeartPulse, TowerControl,
   MapPin, Phone, Mail, Send, CircleDollarSign, Zap, Route, Settings2,
   PhoneCall, Mic, Receipt, MonitorPlay, Voicemail, AudioLines, Radio, DatabaseZap, 
-  ArrowRight, ChevronLeft, ChevronRight,
+  ArrowRight, ChevronLeft, ChevronRight, ArrowUpRight, ArrowDownRight,
   Facebook, Linkedin, Instagram
 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
@@ -31,7 +31,6 @@ const INDUSTRIES = [
   { icon: "TowerControl", title: "Telecom", description: "Pioneers in telecom solutions since 1990 with home-grown software trusted worldwide." },
 ];
 
-// Split the logos into Clients and Partners for the two-line marquee
 const CLIENT_LOGOS = [
   '/1.jpg', '/2.png', '/4.png', '/5.jpeg', 
   '/6.png', '/7.png', '/upsc.png', '/cars24.png', '/Yatra.png'
@@ -54,21 +53,13 @@ const FAQS = [
   { q: "How do I get started?", a: "Getting started is easy. Contact our sales team or request a demo through our website. Our experts will help you choose the right solution based on your business needs, call volume, and future growth." },
 ];
 
-const WHY_ITEMS = [
-  { icon: "CircleDollarSign", title: "Cut Costs by 80%", description: "Upgrade to cloud telephony and leave expensive legacy hardware behind." },
-  { icon: "Zap", title: "Plug-and-Play Setup", description: "Instant setup. Zero headaches" },
-  { icon: "Route", title: "AI-Powered Routing", description: "Distribute calls intelligently with routing engines tuned by three decades of telephony expertise." },
-  { icon: "Settings2", title: "Built to Customise", description: "Shape the platform around your workflows — from IVR trees to wallboards, everything is configurable." },
-];
-
 const MARQUEE_ITEMS = [
   "Voice Without Limits.", "Connect More. Pay Less.", "35+ Years of Telephony Excellence.",
   "Enterprise Features. Small Business Pricing.", "Simply Better Telephony.",
 ];
 
-// Fallback dummy icon for Building2 since it was removed to prevent errors
+// Fallback dummy icon for Building2 
 const Building2 = ({ size, className }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><path d="M9 22v-4h6v4"></path><path d="M8 6h.01"></path><path d="M16 6h.01"></path><path d="M12 6h.01"></path><path d="M12 10h.01"></path><path d="M12 14h.01"></path><path d="M16 10h.01"></path><path d="M16 14h.01"></path><path d="M8 10h.01"></path><path d="M8 14h.01"></path></svg>;
-
 
 const ICONS = {
   Headset, Landmark, ConciergeBell, HeartPulse, Building2, TowerControl,
@@ -76,7 +67,59 @@ const ICONS = {
   Voicemail, AudioLines, Radio, DatabaseZap
 };
 
-// --- DATA FOR THE NEW SERVICES CAROUSEL ---
+// --- NEW DATA: INDUSTRY CAROUSEL & STATS ---
+const INDUSTRY_CAROUSEL_DATA = [
+  {
+    id: "bpo",
+    title: "BPO & Call Centers",
+    desc: "Handle massive call volumes efficiently with advanced predictive dialers, voice logging, and real-time monitoring.",
+    image: "https://images.unsplash.com/photo-1596524430615-b46475ddff6e?auto=format&fit=crop&w=1200&q=80",
+    href: "/industries/bpo"
+  },
+  {
+    id: "finance",
+    title: "Banks & Financial",
+    desc: "Ensure 100% compliance with secure voice recording, automated debt collection IVRs, and secure trunking.",
+    image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80",
+    href: "/industries/finance"
+  },
+  {
+    id: "hospitality",
+    title: "Hotels & Accommodations",
+    desc: "Handle bookings, guest inquiries, and internal communications effortlessly with an intelligent business phone system.",
+    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
+    href: "/industries/hospitality"
+  },
+  {
+    id: "healthcare",
+    title: "Healthcare Solutions",
+    desc: "Automate patient reminders, handle emergency routing, and manage clinic helpdesks seamlessly 24/7.",
+    image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1200&q=80",
+    href: "/industries/healthcare"
+  }
+];
+
+const INDUSTRY_STATS = [
+  {
+    value: "14%",
+    trend: "up",
+    title: "Increased Issue Resolution",
+    desc: "Cube's cloud platform drastically increases the number of client queries resolved per hour."
+  },
+  {
+    value: "25%",
+    trend: "up",
+    title: "Faster System Setup Speed",
+    desc: "Reduces the time to deploy telephony infrastructure and set up new remote users."
+  },
+  {
+    value: "41%",
+    trend: "down",
+    title: "Reduction in Telephony Expenses",
+    desc: "Monthly telecom bills drop significantly after switching from legacy landlines to Cube's SIP."
+  }
+];
+
 const CAROUSEL_DATA = [
   {
     id: "cloud-contact-center",
@@ -110,7 +153,6 @@ const CAROUSEL_DATA = [
   }
 ];
 
-// --- COMPONENTS ---
 export const SectionLabel = ({ children }) => (
   <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-3">— {children}</div>
 );
@@ -121,48 +163,127 @@ export const SectionTitle = ({ children, className = "" }) => (
   </h2>
 );
 
-const FeatureCard = ({ icon, title, description, accent = "blue", link }) => {
-  const Icon = ICONS[icon];
-  const accents = {
-    blue: "bg-blue-50 text-blue-700 group-hover:bg-blue-700",
-    red: "bg-red-50 text-red-600 group-hover:bg-red-600",
-    amber: "bg-amber-50 text-amber-500 group-hover:bg-amber-500",
+
+// =========================================================
+// NEW: INDUSTRY CAROUSEL SECTION (Replaces "Why Cube")
+// =========================================================
+export const IndustryCarouselSection = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev === INDUSTRY_CAROUSEL_DATA.length - 1 ? 0 : prev + 1));
   };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev === 0 ? INDUSTRY_CAROUSEL_DATA.length - 1 : prev - 1));
+  };
+
+  const activeSlide = INDUSTRY_CAROUSEL_DATA[currentIndex];
+
   return (
-    <div className="group bg-white rounded-2xl border border-slate-100 p-8 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300">
-      <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-colors duration-300 group-hover:text-white ${accents[accent]}`}>
-        {Icon && <Icon size={22} />}
+    <section className="py-24 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        
+        {/* Top Header & Navigation Container */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-10 gap-6">
+          <div className="max-w-2xl">
+            <div className="text-blue-600 text-xs font-bold tracking-[0.15em] uppercase mb-3">
+              TAILORED TO YOUR NEED
+            </div>
+            <h2 className="font-heading font-black text-4xl sm:text-5xl text-[#0A1F44] leading-tight">
+              A Virtual Phone System for Businesses of All Types & Sizes
+            </h2>
+          </div>
+
+          {/* Carousel Controls */}
+          <div className="flex items-center gap-4 shrink-0 bg-slate-50 p-2 rounded-full border border-slate-100">
+            <button 
+              onClick={prevSlide}
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-[#0A1F44] text-white hover:bg-blue-600 transition-colors"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <div className="font-bold text-sm text-slate-700 min-w-[3rem] text-center">
+              {currentIndex + 1} / {INDUSTRY_CAROUSEL_DATA.length}
+            </div>
+            <button 
+              onClick={nextSlide}
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-[#0A1F44] text-white hover:bg-blue-600 transition-colors"
+            >
+              <ChevronRight size={20} />
+            </button>
+          </div>
+        </div>
+
+        {/* Large Image Card */}
+        <div className="relative w-full h-[400px] lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl group">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              className="absolute inset-0 w-full h-full"
+            >
+              {/* Background Image */}
+              <img 
+                src={activeSlide.image} 
+                alt={activeSlide.title} 
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              />
+              
+              {/* Dark Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A1F44]/90 via-[#0A1F44]/40 to-transparent"></div>
+              
+              {/* Card Content (Bottom Left) */}
+              <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div className="max-w-xl">
+                  <h3 className="font-heading font-black text-3xl sm:text-4xl text-white mb-4">
+                    {activeSlide.title}
+                  </h3>
+                  <p className="text-lg text-blue-100/90 leading-relaxed">
+                    {activeSlide.desc}
+                  </p>
+                </div>
+                
+                {/* Explore Button */}
+                <Link to={activeSlide.href} className="shrink-0">
+                  <button className="w-14 h-14 rounded-full bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center shadow-lg transition-transform hover:-translate-y-1">
+                    <ArrowRight size={24} />
+                  </button>
+                </Link>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Bottom Statistics */}
+        <div className="grid md:grid-cols-3 gap-10 mt-16 pt-10 border-t border-slate-100">
+          {INDUSTRY_STATS.map((stat, i) => (
+            <div key={i} className="flex flex-col">
+              <div className="flex items-end gap-2 mb-3">
+                <span className="font-heading font-black text-4xl text-[#0A1F44] leading-none">
+                  {stat.value}
+                </span>
+                {stat.trend === "up" ? (
+                  <ArrowUpRight size={28} className="text-emerald-500 stroke-[3px]" />
+                ) : (
+                  <ArrowDownRight size={28} className="text-red-500 stroke-[3px]" />
+                )}
+              </div>
+              <h4 className="font-bold text-slate-900 text-lg mb-2">{stat.title}</h4>
+              <p className="text-sm text-slate-600 leading-relaxed">{stat.desc}</p>
+            </div>
+          ))}
+        </div>
+
       </div>
-      <h3 className="font-heading font-bold text-lg text-slate-900 mb-2">{title}</h3>
-      <p className="text-sm text-slate-600 leading-relaxed">{description}</p>
-      {link && (
-        <Link to={link} className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-blue-700 hover:text-blue-800 group/link">
-          Read More <ArrowRight size={14} className="transition-transform group-hover/link:translate-x-1" />
-        </Link>
-      )}
-    </div>
+    </section>
   );
 };
 
-export const WhySection = () => (
-  <section id="about" className="py-20 lg:py-28 bg-white">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6">
-      <SectionLabel>Why Cube Software</SectionLabel>
-      <SectionTitle className="max-w-3xl">Built for the businesses redefining communication</SectionTitle>
-      <p className="mt-4 text-slate-600 max-w-2xl">
-        For over 35+ years we have engineered Computer Telephony Integration software that works
-        seamlessly with the communication stacks of leading international telecom vendors.
-      </p>
-      <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {WHY_ITEMS.map((w, i) => (
-          <FeatureCard key={w.title} {...w} accent={["blue", "red", "amber", "blue"][i]} />
-        ))}
-      </div>
-    </div>
-  </section>
-);
 
-// --- THE NEW CAROUSEL SECTION ---
 export const ProductsSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsToShow, setCardsToShow] = useState(3);
@@ -308,7 +429,6 @@ export const IndustriesSection = () => (
 
 export const ClientsSection = () => (
   <section className="py-16 lg:py-24 border-y border-slate-100 bg-[#FAFAFA] overflow-hidden relative">
-    {/* Side fade gradients for smooth scrolling effect */}
     <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#FAFAFA] to-transparent z-10 pointer-events-none" />
     <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#FAFAFA] to-transparent z-10 pointer-events-none" />
     
@@ -317,7 +437,6 @@ export const ClientsSection = () => (
     </div>
 
     <div className="flex flex-col gap-12 sm:gap-16">
-      {/* Row 1: Clientele moving Left */}
       <div className="flex w-max">
         <motion.div 
           animate={{ x: ["0%", "-50%"] }} 
@@ -332,7 +451,6 @@ export const ClientsSection = () => (
         </motion.div>
       </div>
 
-      {/* Row 2: Partners moving Right */}
       <div className="flex w-max">
         <motion.div 
           animate={{ x: ["-50%", "0%"] }} 
@@ -349,8 +467,6 @@ export const ClientsSection = () => (
     </div>
   </section>
 );
-
-
 
 export const FAQSection = () => (
   <section id="faq" className="py-20 lg:py-28 bg-slate-50">
@@ -449,7 +565,6 @@ export const Footer = () => (
           across the globe for dialers, voice logging, Screen recording, IVR with our cloud telephony.
         </p>
         
-        {/* --- SOCIAL MEDIA ICONS --- */}
         <div className="flex items-center gap-4 mt-6">
           <a href="https://www.facebook.com/CSPLNOIDA/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all duration-300">
             <Facebook size={18} />
@@ -485,7 +600,7 @@ export const Footer = () => (
           {[
             { l: "Industries", h: "/#industries" },
             { l: "FAQ", h: "/#faq" },
-            { l: "Contact", h: "/#contact" },
+            { l: "Contact", h: "/contact" },
           ].map((x) => (
             <li key={x.l}><a href={x.h} className="hover:text-white transition-colors">{x.l}</a></li>
           ))}
