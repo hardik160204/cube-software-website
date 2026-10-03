@@ -331,7 +331,7 @@ End-to-End Communication Platform — From voice infrastructure and dialers to C
 
           <div className="lg:col-span-7">
             <img 
-              src="../ccsMain.jpeg" 
+              src="../ccsmain.jpeg" 
               alt="Cloud Call Center Analytics" 
               className="rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-100 w-full h-full object-cover"
             />
