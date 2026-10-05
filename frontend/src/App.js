@@ -40,6 +40,13 @@ import ContactPage from './components/ContactPage';
 import FinanceIndustryPage from './pages/FinanceIndustryPage';
 import BPOIndustryPage from './pages/BPOIndustryPage';
 import HealthcareIndustryPage from './pages/HealthcareIndustryPage';
+import RealEstateIndustryPage from './pages/RealEstateIndustryPage';
+import TelecomIndustryPage from './pages/TelecomIndustryPage';
+import TravelIndustryPage from './pages/TravelIndustryPage';
+import AdvertisingIndustryPage from './pages/AdvertisingIndustryPage';
+import NGOIndustryPage from './pages/NGOIndustryPage';
+import ElectionIndustryPage from './pages/ElectionIndustryPage';
+import EducationIndustryPage from './pages/EducationIndustryPage';
 
 // Helper component to manage global layout elements based on the route
 const GlobalLayout = () => {
@@ -131,6 +138,14 @@ function App() {
           <Route path="/industries/finance" element={<FinanceIndustryPage />} />
           <Route path="/industries/bpo" element={<BPOIndustryPage />} />
           <Route path="/industries/healthcare" element={<HealthcareIndustryPage />} />
+          <Route path="/industries/real-estate" element={<RealEstateIndustryPage />} />
+          <Route path="/industries/telecom" element={<TelecomIndustryPage />} />
+          <Route path="/industries/travel" element={<TravelIndustryPage />} />
+          <Route path="/industries/advertising" element={<AdvertisingIndustryPage />} />
+          <Route path="/industries/ngo" element={<NGOIndustryPage />} />
+          <Route path="/industries/election" element={<ElectionIndustryPage />} />
+          <Route path="/industries/education" element={<EducationIndustryPage />} />
+          
           
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

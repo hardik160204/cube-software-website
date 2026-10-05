@@ -5,7 +5,8 @@ import {
   Bot, PhoneCall, Building, MessageSquare, Headset, BrainCircuit, 
   ShieldCheck, AudioLines, PhoneOutgoing, Radio, Headphones, 
   LayoutDashboard, Landmark, Activity, Megaphone, MonitorPlay,
-  Mic, Database, Receipt, Cloud, ConciergeBell, HeartPulse, TowerControl
+  Mic, Database, Receipt, Cloud, HeartPulse, TowerControl,
+  Plane, Target, Heart, Flag, GraduationCap
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./ui/button";
@@ -64,10 +65,14 @@ const SERVICES_MEGA_DATA = [
     items: [
       { icon: Headset, title: "BPO – KPO", desc: "High-volume dialing & monitoring", href: "/industries/bpo" },
       { icon: Landmark, title: "Financial Services", desc: "Compliant recording & secure calling", href: "/industries/finance" },
-      { icon: ConciergeBell, title: "Hospitality", desc: "Innovative desk & booking solutions", href: "/industries/hospitality" },
       { icon: HeartPulse, title: "Healthcare", desc: "Patient-first communication suites", href: "/industries/healthcare" },
       { icon: Building, title: "Real Estate", desc: "Lead follow-up and site visit scheduling", href: "/industries/real-estate" },
       { icon: TowerControl, title: "Telecom", desc: "Carrier-grade telecom solutions", href: "/industries/telecom" },
+      { icon: Plane, title: "Travel & Tourism", desc: "Peak season booking support", href: "/industries/travel" },
+      { icon: Target, title: "Advertising", desc: "Campaign tracking & lead generation", href: "/industries/advertising" },
+      { icon: Heart, title: "NGOs", desc: "Awareness & mass fundraising", href: "/industries/ngo" },
+      { icon: Flag, title: "Election Campaigns", desc: "Voter outreach & surveys", href: "/industries/election" },
+      { icon: GraduationCap, title: "Education", desc: "Student engagement & admissions", href: "/industries/education" },
     ]
   },
   {
