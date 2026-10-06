@@ -68,7 +68,7 @@ export default function HealthcareIndustryPage() {
           <div className="lg:w-7/12 flex justify-center lg:justify-end relative">
              <div className="relative w-full max-w-[700px]">
                 <img 
-                  src="/healthcare-industry-hero.svg" /* <-- Update with your Healthcare graphic */
+                  src="/healthcare-nurse-hero.svg" /* <-- Update with your Healthcare graphic */
                   alt="Healthcare Cloud Telephony" 
                   className="w-full h-auto object-contain drop-shadow-2xl relative z-10 transition-transform lg:scale-110 lg:origin-right"
                 />

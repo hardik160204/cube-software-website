@@ -56,7 +56,7 @@ export default function TravelIndustryPage() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Link to="/contact">
-                <Button className="bg-[#10b981] hover:bg-[#059669] text-white px-8 h-12 rounded-full shadow-lg transition-transform hover:-translate-y-0.5 text-lg font-bold">
+                <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white px-8 h-12 rounded-md shadow-lg transition-transform hover:-translate-y-0.5">
                   Book a Demo
                 </Button>
               </Link>
@@ -65,7 +65,7 @@ export default function TravelIndustryPage() {
           <div className="lg:w-7/12 flex justify-center lg:justify-end relative">
              <div className="relative w-full max-w-[700px]">
                 <img 
-                  src="/travel-industry-vector.png" /* <-- Add your image */
+                  src="/travel-industry-hero.svg" /* <-- Add your image */
                   alt="Travel Cloud Telephony" 
                   className="w-full h-auto object-contain drop-shadow-2xl relative z-10 transition-transform lg:scale-110 lg:origin-right"
                 />
