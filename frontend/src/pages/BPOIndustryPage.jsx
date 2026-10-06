@@ -42,18 +42,17 @@ export default function BPOIndustryPage() {
       <Navbar />
 
       {/* HERO SECTION */}
-      <section className="relative w-full pt-32 pb-12 lg:pt-40 lg:pb-16 overflow-hidden bg-[#0A1F44]">
+      <section className="relative w-full pt-32 pb-20 lg:pt-40 lg:pb-12 overflow-hidden bg-[#0A1F44]">
         <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44] via-[#0A1F44] to-blue-900/40 z-0" />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col lg:flex-row items-center gap-12">
           
           {/* Text Content - Left Side */}
-          <div className="lg:w-5/12 shrink-0">
+          <div className="lg:w-1/2 shrink-0">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-sm font-bold tracking-wide uppercase mb-6">
               <Headset size={16} /> BPO & Call Centers
             </div>
             
-            {/* Added relative positioning and z-index to ensure text stays above the image if they overlap slightly on smaller screens */}
             <div className="relative z-20">
               <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
                 Maximize Agent <br/><span className="text-blue-400">Productivity</span>
@@ -72,13 +71,12 @@ export default function BPOIndustryPage() {
           </div>
 
           {/* SVG Image - Right Side */}
-          <div className="lg:w-7/10 flex justify-center lg:justify-end relative mt-12 lg:mt-0">
-             {/* Adjusted the max-width and removed conflicting absolute positioning that might cause cutoff */}
-             <div className="w-full max-w-[650px] xl:max-w-[800px] flex justify-end">
+          <div className="lg:w-1/2 flex justify-center lg:justify-end relative mt-12 lg:mt-0">
+             {/* Reduced max-width to make it smaller as requested */}
+             <div className="relative w-full max-w-[420px]">
                 <img 
                   src="/bpo-call-center-page.svg"
                   alt="BPO Cloud Telephony Live Monitor" 
-                  // Kept object-contain but removed heavy scaling/translating that can cause clipping on the edges
                   className="w-full h-auto object-contain drop-shadow-2xl relative z-10"
                   style={{
                   }}
@@ -87,7 +85,6 @@ export default function BPOIndustryPage() {
           </div>
         </div>
 
-        {/* Add this to your global CSS or inside a style tag if you want the float effect */}
         <style dangerouslySetInnerHTML={{__html: `
           @keyframes float {
             0% { transform: translateY(0px); }

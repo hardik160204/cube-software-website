@@ -58,7 +58,7 @@ export default function HealthcareIndustryPage() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Link to="/contact">
-                <Button className="bg-[#10b981] hover:bg-[#059669] text-white px-8 h-12 rounded-full shadow-lg transition-transform hover:-translate-y-0.5 text-lg font-bold">
+                <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white px-8 h-12 rounded-md shadow-lg transition-transform hover:-translate-y-0.5">
                   Book a Demo
                 </Button>
               </Link>
@@ -68,7 +68,7 @@ export default function HealthcareIndustryPage() {
           <div className="lg:w-7/12 flex justify-center lg:justify-end relative">
              <div className="relative w-full max-w-[700px]">
                 <img 
-                  src="/healthcare-industry-vector.png" /* <-- Update with your Healthcare graphic */
+                  src="/healthcare-industry-hero.svg" /* <-- Update with your Healthcare graphic */
                   alt="Healthcare Cloud Telephony" 
                   className="w-full h-auto object-contain drop-shadow-2xl relative z-10 transition-transform lg:scale-110 lg:origin-right"
                 />

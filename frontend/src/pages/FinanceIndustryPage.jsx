@@ -44,45 +44,61 @@ export default function FinanceIndustryPage() {
 
       {/* =========================================================
           SECTION 1: HERO SECTION 
-          Description: Dark blue background (#0A1F44) with main 
-          headlines and the static image placeholder.
           ========================================================= */}
-      <section className="relative w-full pt-32 pb-12 lg:pt-40 lg:pb-16 overflow-hidden bg-[#0A1F44]">
+      <section className="relative w-full pt-32 pb-20 lg:pt-40 lg:pb-8 overflow-hidden bg-[#0A1F44]">
         <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44] via-[#0A1F44] to-blue-900/40 z-0" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col lg:flex-row items-center gap-12">
           
-          <div className="lg:w-5/12 shrink-0">
+          {/* Text Content - Left Side */}
+          <div className="lg:w-1/2 shrink-0">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-sm font-bold tracking-wide uppercase mb-6">
               <Landmark size={16} /> Financial Services
             </div>
-            <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
-              Secure Cloud Voice <br/><span className="text-blue-400">for Banking & NBFCs</span>
-            </h1>
-            <p className="text-lg text-blue-100 leading-relaxed mb-8">
-              Deliver flawless customer experiences while maintaining absolute regulatory compliance. Cube Software provides encrypted logging, automated collections, and secure cloud PBX for modern financial institutions.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link to="/contact">
-                <Button className="bg-[#10b981] hover:bg-[#059669] text-white px-8 h-12 rounded-full shadow-lg transition-transform hover:-translate-y-0.5 text-lg font-bold">
-                  Book a Demo
-                </Button>
-              </Link>
+            
+            <div className="relative z-20">
+              <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
+                Secure Cloud Voice <br/><span className="text-blue-400">for Banking & NBFCs</span>
+              </h1>
+              <p className="text-lg text-blue-100 leading-relaxed mb-8 pr-4">
+                Deliver flawless customer experiences while maintaining absolute regulatory compliance. Cube Software provides encrypted logging, automated collections, and secure cloud PBX for modern financial institutions.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link to="/contact">
+                  <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white px-8 h-12 rounded-md shadow-lg transition-transform hover:-translate-y-0.5">
+                    Book a Demo
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
 
-          <div className="lg:w-7/12 flex justify-center lg:justify-end relative">
-             <div className="relative w-full max-w-[700px]">
-                {/* STANDARD STATIC IMAGE PLACEHOLDER */}
+          {/* SVG Image - Right Side */}
+          {/* Added negative top margin (lg:-mt-10) to shift the image up and perfectly align it with the text */}
+          <div className="lg:w-1/2 flex justify-center lg:justify-end relative mt-12 lg:-mt-10">
+             {/* Reduced max-width to 440px to make the SVG slightly smaller and perfectly proportioned */}
+             <div className="relative w-full max-w-[440px]">
                 <img 
-                  src="/finance-industry-vector.png" // <-- UPDATE THIS to your actual image file path/name
+                  src="/finance-industry-hero.svg" // <-- UPDATE THIS to your actual image file path/name
                   alt="Financial Services Cloud Telephony" 
-                  className="w-full h-auto object-contain drop-shadow-2xl relative z-10 transition-transform lg:scale-110 lg:origin-right"
+                  className="w-full h-auto object-contain drop-shadow-2xl relative z-10"
+                  style={{
+                    animation: "float 6s ease-in-out infinite"
+                  }}
                 />
              </div>
           </div>
           
         </div>
+
+        {/* Floating Animation Styles */}
+        <style dangerouslySetInnerHTML={{__html: `
+          @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+          }
+        `}} />
       </section>
 
       {/* =========================================================
