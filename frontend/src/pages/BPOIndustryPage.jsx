@@ -45,36 +45,56 @@ export default function BPOIndustryPage() {
       <section className="relative w-full pt-32 pb-12 lg:pt-40 lg:pb-16 overflow-hidden bg-[#0A1F44]">
         <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44] via-[#0A1F44] to-blue-900/40 z-0" />
         
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col lg:flex-row items-center gap-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+          
+          {/* Text Content - Left Side */}
           <div className="lg:w-5/12 shrink-0">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-sm font-bold tracking-wide uppercase mb-6">
               <Headset size={16} /> BPO & Call Centers
             </div>
-            <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
-              Maximize Agent <br/><span className="text-blue-400">Productivity</span>
-            </h1>
-            <p className="text-lg text-blue-100 leading-relaxed mb-8">
-              Handle massive call volumes efficiently with advanced predictive dialers, voice logging, and real-time monitoring built for outsourcing floors of every size.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link to="/contact">
-                <Button className="bg-[#10b981] hover:bg-[#059669] text-white px-8 h-12 rounded-full shadow-lg transition-transform hover:-translate-y-0.5 text-lg font-bold">
-                  Book a Demo
-                </Button>
-              </Link>
+            
+            {/* Added relative positioning and z-index to ensure text stays above the image if they overlap slightly on smaller screens */}
+            <div className="relative z-20">
+              <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-6">
+                Maximize Agent <br/><span className="text-blue-400">Productivity</span>
+              </h1>
+              <p className="text-lg text-blue-100 leading-relaxed mb-8 pr-4">
+                Handle massive call volumes efficiently with advanced predictive dialers, voice logging, and real-time monitoring built for outsourcing floors of every size.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link to="/contact">
+                  <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white px-8 h-12 rounded-md shadow-lg transition-transform hover:-translate-y-0.5">
+                    Book a Demo
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
 
-          <div className="lg:w-7/12 flex justify-center lg:justify-end relative">
-             <div className="relative w-full max-w-[700px]">
+          {/* SVG Image - Right Side */}
+          <div className="lg:w-7/10 flex justify-center lg:justify-end relative mt-12 lg:mt-0">
+             {/* Adjusted the max-width and removed conflicting absolute positioning that might cause cutoff */}
+             <div className="w-full max-w-[650px] xl:max-w-[800px] flex justify-end">
                 <img 
-                  src="/bpo-industry-vector.png" /* <-- Update with your BPO graphic */
-                  alt="BPO Cloud Telephony" 
-                  className="w-full h-auto object-contain drop-shadow-2xl relative z-10 transition-transform lg:scale-110 lg:origin-right"
+                  src="/bpo-call-center-page.svg"
+                  alt="BPO Cloud Telephony Live Monitor" 
+                  // Kept object-contain but removed heavy scaling/translating that can cause clipping on the edges
+                  className="w-full h-auto object-contain drop-shadow-2xl relative z-10"
+                  style={{
+                  }}
                 />
              </div>
           </div>
         </div>
+
+        {/* Add this to your global CSS or inside a style tag if you want the float effect */}
+        <style dangerouslySetInnerHTML={{__html: `
+          @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+          }
+        `}} />
       </section>
 
       {/* KEY CAPABILITIES */}

@@ -34,12 +34,12 @@ const AnimatedCounter = ({ end, suffix = "", decimals = 0 }) => {
 const SLIDES = [
   {
     id: 1,
-    videoSrc: "/new-cube.mp4", // <-- ADD YOUR SECOND VIDEO HERE
+    videoSrc: "/new-cube.mp4",
     pill: "• Enhancing Communication Capabilities.",
     title: (
       <div className="flex flex-col items-center justify-center gap-4 sm:gap-6">
         <span className="block whitespace-normal md:whitespace-nowrap">
-           Powering <span className="text-red-600">Customer Engagement </span> 
+           Powering <span className="text-red-600">Customer Engagement </span>
         </span>
         <span className="block whitespace-normal md:whitespace-nowrap">
           Through Intelligent Communications
@@ -47,35 +47,59 @@ const SLIDES = [
       </div>
     ),
     subtitle: "Accelerate your team collaboration with powerful cloud dialing, comprehensive features, and SIP trunking solutions — engineered for high-performance enterprises.",
+    /*
     buttons: (
       <div className="flex flex-wrap items-center justify-center gap-4 mt-6 sm:mt-8">
-        <button 
+        <button
           type="button"
           className="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-base px-8 py-3 rounded-full shadow-lg transition-transform hover:-translate-y-0.5 cursor-pointer"
         >
           Book Demo
         </button>
-        <button 
+        <button
           type="button"
           className="bg-white hover:bg-slate-50 text-slate-900 font-semibold text-base px-8 py-3 rounded-full shadow-lg transition-transform hover:-translate-y-0.5 flex items-center gap-2 cursor-pointer"
         >
-          Get Started <ArrowRight size={16} />
+          Talk to Our Sales Team <ArrowRight size={16} />
         </button>
       </div>
     ),
-    expect: false, // Shows the "What to Expect" row
+    */
+    expect: true, // Shows the "What to Expect" row
   },
   {
     id: 2,
-    videoSrc: "/", // QuickCall Graphic Background
-    //pill: "• ENHANCING COMMUNICATION CAPABILITIES",
+    videoSrc: "/new-cube.mp4",
+    pill: "• Redefining Communication for the Modern World.",
     title: (
-      <div className="flex flex-col items-center justify-center gap-1">
+      <div className="flex flex-col items-center justify-center gap-4 sm:gap-6">
         <span className="block whitespace-normal md:whitespace-nowrap">
-           <span className="text-blue-500"></span>
+           Turn Your <span className="text-red-600">Call Center</span>
+        </span>
+        <span className="block whitespace-normal md:whitespace-nowrap">
+          Into a Competitive Advantage
         </span>
       </div>
     ),
+    subtitle: "Call center software that just works.Smart routing. Real-time insights. Zero infrastructure headaches. Built for teams who want to move fast and sound sharp.",
+    /*
+    buttons: (
+      <div className="flex flex-wrap items-center justify-center gap-4 mt-6 sm:mt-8">
+        <button
+          type="button"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-base px-8 py-3 rounded-full shadow-lg transition-transform hover:-translate-y-0.5 cursor-pointer"
+        >
+          Book Demo
+        </button>
+        <button
+          type="button"
+          className="bg-white hover:bg-slate-50 text-slate-900 font-semibold text-base px-8 py-3 rounded-full shadow-lg transition-transform hover:-translate-y-0.5 flex items-center gap-2 cursor-pointer"
+        >
+          Talk to Our Sales Team <ArrowRight size={16} />
+        </button>
+      </div>
+    ),
+    */
     expect: false, // Hides the "What to Expect" row
   }
 ];
@@ -84,7 +108,7 @@ export default function CubeHeroSlider({ onBookDemo }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [scrolled, setScrolled] = useState(false);
 
-  // Auto-slide every 8 seconds
+  // Auto-slide every 10 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev === 0 ? 1 : 0));
@@ -112,21 +136,16 @@ export default function CubeHeroSlider({ onBookDemo }) {
       {/* h-[100dvh] strictly locks the height to the viewport so the bottom bar cannot be pushed off-screen */}
       <div className="relative w-full h-[100dvh] flex flex-col overflow-hidden bg-[#0A1F44]">
         
-        {/* DYNAMIC BACKGROUND VIDEOS */}
-        {SLIDES.map((slide, index) => (
-          <video
-            key={slide.id}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000 ease-in-out ${
-              currentIndex === index ? "opacity-100" : "opacity-0 pointer-events-none"
-            }`}
-          >
-            <source src={slide.videoSrc} type="video/mp4" />
-          </video>
-        ))}
+        {/* CONTINUOUS WAVE BACKGROUND VIDEO FOR BOTH SLIDES */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover z-0"
+        >
+          <source src="/new-cube.mp4" type="video/mp4" />
+        </video>
         
         {/* Dark gradient overlay blending seamlessly into the #061229 section below */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A1F44]/90 via-[#0A1F44]/40 to-[#061229] z-0 pointer-events-none"></div>
@@ -184,7 +203,7 @@ export default function CubeHeroSlider({ onBookDemo }) {
                 </div>
               )}
 
-              {/* Buttons */}
+              {/* Buttons (Currently commented out in SLIDES data) */}
               {SLIDES[currentIndex].buttons}
 
               {/* What to Expect (Slide 1 Only) */}
