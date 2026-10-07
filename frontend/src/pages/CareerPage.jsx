@@ -27,14 +27,14 @@ export default function CareerPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 text-center">
           
           <h1 className="font-heading font-medium text-4xl sm:text-5xl lg:text-[54px] text-slate-900 leading-[1.25] mb-8">
-            Join Cube Software, a global <span className="text-[#38bda9]">telecom tech leader,</span> and drive innovation with us!
+            Join Cube Software, a global <span className="text-[#2563eb]">telecom tech leader,</span> and drive innovation with us!
           </h1>
           
           <div className="flex flex-wrap justify-center gap-4">
-            <Button className="bg-[#7ce4c8] hover:bg-[#68d6b9] text-slate-900 px-7 h-11 rounded-full text-sm font-semibold transition-transform hover:-translate-y-0.5 border-none shadow-sm">
+            <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white px-8 h-12 rounded-md shadow-lg transition-transform hover:-translate-y-0.5">
               Explore Open Roles <ArrowRight size={16} className="ml-2" />
             </Button>
-            <Button className="bg-white border border-slate-200 text-slate-800 hover:bg-slate-50 px-7 h-11 rounded-full text-sm font-semibold transition-all shadow-sm">
+            <Button size="lg" className="bg-transparent border border-white/30 text-black hover:bg-white/10 px-8 h-12 rounded-md transition-all">
               Quick Apply <ArrowRight size={16} className="ml-2" />
             </Button>
           </div>

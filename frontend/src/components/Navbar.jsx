@@ -150,10 +150,8 @@ const Navbar = ({ onBookDemo }) => {
       const scrollY = window.scrollY;
       const isHome = location.pathname === "/";
 
-      // FORCE SOLID STATE FOR CONTACT PAGE (WHITE BACKGROUND, DARK TEXT)
-      // This added condition directly handles your contact page visibility fix.
-      // It will immediately set the state to solid and stop processing other scroll logic.
-      if (location.pathname === "/contact") {
+      // FORCE SOLID STATE FOR SPECIFIC PAGES (WHITE BACKGROUND, DARK TEXT)
+      if (location.pathname === "/contact" || location.pathname === "/careers" || location.pathname === "/career") {
         setNavState("solid");
         return;
       }
