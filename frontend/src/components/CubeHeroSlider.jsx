@@ -99,6 +99,40 @@ const SLIDES = [
         */}
       </div>
     )
+  },
+  {
+    id: 3,
+    videoSrc: "/cube-slider-3.mp4", // <-- MOVED YOUR MP4 HERE SO IT PLAYS AS A VIDEO
+    pill: "• Redefining Communication for the Modern World.",
+    title: (
+      <div className="flex flex-col items-center justify-center gap-4 sm:gap-6">
+        <span className="block whitespace-normal md:whitespace-nowrap">
+           Simplify How Your
+        </span>
+        <span className="text-red-600">
+          Business Communicates
+        </span>
+      </div>
+    ),
+    subtitle: "One software platform, one provider, and every communication function you need, fully integrated in the cloud.",
+    buttons: (
+      <div className="flex flex-wrap items-center justify-center gap-4 mt-6 sm:mt-8">
+        {/* Buttons commented out as requested
+        <button
+          type="button"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold text-base px-8 py-3 rounded-full shadow-lg transition-transform hover:-translate-y-0.5 cursor-pointer"
+        >
+          Book Demo
+        </button>
+        <button
+          type="button"
+          className="bg-white hover:bg-slate-50 text-slate-900 font-semibold text-base px-8 py-3 rounded-full shadow-lg transition-transform hover:-translate-y-0.5 flex items-center gap-2 cursor-pointer"
+        >
+          Talk to Our Sales Team <ArrowRight size={16} />
+        </button>
+        */}
+      </div>
+    )
   }
 ];
 
@@ -106,10 +140,10 @@ export default function CubeHeroSlider({ onBookDemo }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [scrolled, setScrolled] = useState(false);
 
-  // Auto-slide every 10 seconds
+  // Auto-slide every 10 seconds (now circles through all 3 slides)
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev === 0 ? 1 : 0));
+      setCurrentIndex((prev) => (prev === SLIDES.length - 1 ? 0 : prev + 1));
     }, 10000);
     return () => clearInterval(timer);
   }, []);
@@ -123,8 +157,8 @@ export default function CubeHeroSlider({ onBookDemo }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const nextSlide = () => setCurrentIndex((prev) => (prev === 0 ? 1 : 0));
-  const prevSlide = () => setCurrentIndex((prev) => (prev === 0 ? 1 : 0));
+  const nextSlide = () => setCurrentIndex((prev) => (prev === SLIDES.length - 1 ? 0 : prev + 1));
+  const prevSlide = () => setCurrentIndex((prev) => (prev === 0 ? SLIDES.length - 1 : prev - 1));
 
   return (
     <>
@@ -134,20 +168,32 @@ export default function CubeHeroSlider({ onBookDemo }) {
       {/* h-[100dvh] strictly locks the height to the viewport so the bottom bar cannot be pushed off-screen */}
       <div className="relative w-full h-[100dvh] flex flex-col overflow-hidden bg-[#0A1F44]">
         
-        {/* DYNAMIC BACKGROUND VIDEOS */}
+        {/* DYNAMIC BACKGROUNDS (VIDEO OR IMAGE CONTAINER) */}
         {SLIDES.map((slide, index) => (
-          <video
+          <div
             key={slide.id}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className={`absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-1000 ease-in-out ${
+            className={`absolute inset-0 w-full h-full z-0 transition-opacity duration-1000 ease-in-out ${
               currentIndex === index ? "opacity-100" : "opacity-0 pointer-events-none"
             }`}
           >
-            <source src={slide.videoSrc} type="video/mp4" />
-          </video>
+            {slide.videoSrc ? (
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              >
+                <source src={slide.videoSrc} type="video/mp4" />
+              </video>
+            ) : slide.imageSrc ? (
+              <img 
+                src={slide.imageSrc} 
+                alt="Slide Background" 
+                className="w-full h-full object-cover opacity-80" 
+              />
+            ) : null}
+          </div>
         ))}
         
         {/* Dark gradient overlay blending seamlessly into the #061229 section below */}
