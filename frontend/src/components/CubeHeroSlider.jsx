@@ -102,8 +102,8 @@ const SLIDES = [
   },
   {
     id: 3,
-    videoSrc: "/cube-slider-3.mp4", // <-- MOVED YOUR MP4 HERE SO IT PLAYS AS A VIDEO
-    pill: "• Redefining Communication for the Modern World.",
+    videoSrc: "/cube-slider-31.mp4", // <-- MOVED YOUR MP4 HERE SO IT PLAYS AS A VIDEO
+    pill: "• Innovating the Future of Contact Center Technology.",
     title: (
       <div className="flex flex-col items-center justify-center gap-4 sm:gap-6">
         <span className="block whitespace-normal md:whitespace-nowrap">

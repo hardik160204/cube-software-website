@@ -113,7 +113,7 @@ const PRODUCTS_MEGA_DATA = [
 ];
 
 const QUICK_LINKS = [
-  { label: "Click to Call", href: "/#contact" },
+  { label: "Click to Call", href: "/services/click-to-call" },
   { label: "Omni-channel Solution", href: "/#contact" },
 ];
 

@@ -48,6 +48,9 @@ import NGOIndustryPage from './pages/NGOIndustryPage';
 import ElectionIndustryPage from './pages/ElectionIndustryPage';
 import EducationIndustryPage from './pages/EducationIndustryPage';
 
+// --> IMPORT THE ROBOT MASCOT HERE <--
+import RobotMascot from "./components/RobotMascot"; 
+
 // Helper component to manage global layout elements based on the route
 const GlobalLayout = () => {
   const location = useLocation();
@@ -152,6 +155,9 @@ function App() {
         
         {/* Render the forms conditionally based on the route */}
         <GlobalLayout />
+
+        {/* --> THE ROBOT MASCOT IS PLACED HERE SO IT APPEARS GLOBALLY <-- */}
+        <RobotMascot />
         
       </BrowserRouter>
       <Toaster position="bottom-right" richColors />

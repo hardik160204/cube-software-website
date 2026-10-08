@@ -24,7 +24,7 @@ import OurProducts from "../components/OurProducts";
 const PAGE_DATA = {
   title: "Contact Center Solution",
   tagline: "Get results with a powerful inbound, outbound and blended cloud contact center solution with full call disposition.",
-  heroVideo: "/cloud-contact-center-bg.mp4", // <-- UPDATE THIS TO YOUR VIDEO FILE
+  heroVideo: "/contact-center-image.png",
   stats: [
     { value: "3x", label: "Agent Productivity" },
     { value: "ACD/IVR/PD", label: "Complete Suite" },
@@ -245,7 +245,8 @@ export default function CloudContactCenter() {
       {/* --- FULL-HEIGHT HERO SECTION --- */}
       <section className="relative w-full min-h-[100dvh] flex flex-col overflow-hidden bg-[#0A1F44]">
         
-        {/* Video Background */}
+        {/* Video Background (Commented out) */}
+        {/*
         <video
           autoPlay
           loop
@@ -255,6 +256,14 @@ export default function CloudContactCenter() {
         >
           <source src={PAGE_DATA.heroVideo} type="video/mp4" />
         </video>
+        */}
+
+        {/* Image replacement for video */}
+        <img
+          src={PAGE_DATA.heroVideo}
+          alt="Contact Center Background"
+          className="absolute inset-0 w-full h-full object-cover object-center z-0 opacity-80"
+        />
 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0A1F44]/90 via-[#0A1F44]/2 to-transparent z-10 pointer-events-none" />
