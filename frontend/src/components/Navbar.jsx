@@ -33,29 +33,15 @@ const MENU_ITEMS = [
 // MEGA MENU DATA: SERVICES
 // =========================================================================
 const SERVICES_MEGA_DATA = [
-  /* / {
-    id: "ai-solutions",
-    label: "AI Solutions",
-    icon: Bot,
-    items: [
-      { icon: Headset, title: "AI Contact Center", desc: "AI Enabled Contact Center Solution", href: "/services/ai-contact-center"},
-      { icon: BrainCircuit, title: "AI Voice Agent", desc: "Conversational Voice AI Agent for Sales & Support", href: "/#contact" },
-      { icon: ShieldCheck, title: "Ticket Management (SanTMS)", desc: "AI-enabled Helpdesk and ticket management solution", href: "/#contact" },
-      { icon: AudioLines, title: "AI Noise Cancellation (SanClarity)", desc: "Remove Background Noise in Real Time", href: "/#contact" },
-    ]
-  },/ */
   {
     id: "calling-solutions",
     label: "Cloud Services",
     icon: PhoneCall,
     items: [
-      // NEW ADDITION: Cloud Contact Center added to Calling Solutions
       { icon: Cloud, title: "Cloud Contact Center", desc: "Complete omnichannel contact center", href: "/services/cloud-contact-center" },
       { icon: PhoneOutgoing, title: "Auto Dialer", desc: "Predictive, Progressive & Preview dialing engine", href: "/services/auto-dialer" },
       { icon: Radio, title: "IVRS Services", desc: "Custom IVR solutions built from scratch", href: "/services/ivrs" },
-      { icon: Headphones, title: "Conference Bridge", desc: "Full-featured secure audio conferencing", href: "/services/conference-bridge" },
-      { icon: LayoutDashboard, title: "Call Billing Software", desc: "Track every extension, trunk and gateway", href: "/services/call-billing" },
-      { icon: MonitorPlay, title: "Screen Logger", desc: "Multi-PC screen recording over the network", href: "/services/screen-logger" },
+      { icon: Headphones, title: "Conference Bridge", desc: "Full-featured secure audio conferencing", href: "/services/conference-bridge" }
     ]
   },
 {
@@ -119,16 +105,16 @@ const PRODUCTS_MEGA_DATA = [
     label: "Billing",
     icon: Receipt,
     items: [
-      { icon: Receipt, title: "Call Billing Software", desc: "Telecom resource & cost management", href: "/services/call-billing" }
+      { icon: Receipt, title: "Call Billing Software Basic", desc: "Essential telecom resource & cost management", href: "/services/call-billing-basic" },
+      { icon: Receipt, title: "Call Billing Software Standard", desc: "Advanced billing rules and departmental tracking", href: "/services/call-billing-standard" },
+      { icon: Receipt, title: "Call Billing Software Enterprise", desc: "Multi-site management with custom API integrations", href: "/services/call-billing-enterprise" }
     ]
   }
 ];
 
 const QUICK_LINKS = [
   { label: "Click to Call", href: "/#contact" },
-  { label: "Video Calling Solution", href: "/#contact" },
   { label: "Omni-channel Solution", href: "/#contact" },
-  { label: "Auto Dialer", href: "/services/auto-dialer" },
 ];
 
 const CONTACT_INFO = {
@@ -352,9 +338,6 @@ const Navbar = ({ onBookDemo }) => {
                                 <h3 className="font-heading font-black text-xl text-slate-800">
                                   {megaData[activeMegaTab].label}
                                 </h3>
-                                <Button variant="outline" size="sm" className="h-8 text-xs font-bold text-blue-600 border-blue-200 hover:bg-blue-50">
-                                  View All <ArrowRight size={14} className="ml-1" />
-                                </Button>
                               </div>
                               
                               <div className="grid grid-cols-2 gap-x-8 gap-y-8">

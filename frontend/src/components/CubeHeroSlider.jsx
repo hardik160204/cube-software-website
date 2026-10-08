@@ -182,6 +182,7 @@ export default function CubeHeroSlider({ onBookDemo }) {
                 loop
                 muted
                 playsInline
+                onCanPlay={(e) => (e.target.playbackRate = 0.3)} // <-- ADD THIS LINE
                 className="w-full h-full object-cover"
               >
                 <source src={slide.videoSrc} type="video/mp4" />
@@ -197,7 +198,7 @@ export default function CubeHeroSlider({ onBookDemo }) {
         ))}
         
         {/* Dark gradient overlay blending seamlessly into the #061229 section below */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A1F44]/90 via-[#0A1F44]/40 to-[#061229] z-0 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A1F44]/90 via-[#0A1F44]/75 to-[#061229] z-0 pointer-events-none"></div>
 
         {/* NAVIGATION ARROWS */}
         <button 
@@ -227,7 +228,7 @@ export default function CubeHeroSlider({ onBookDemo }) {
               key={currentIndex}
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
+              exit={{ opacity: 0, x: -10 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
               className="text-center w-full"
             >

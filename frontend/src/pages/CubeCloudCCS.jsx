@@ -21,18 +21,18 @@ const CLOUD_SERVICES = [
   { icon: Mic, title: "IVR", desc: "Interactive Voice Response system for automated intelligent routing.", color: "blue", path: "/services/ivr" },
   { icon: PhoneMissed, title: "Missed Call Service", desc: "Engage customers easily with zero-cost missed call campaigns.", color: "blue", path: "/services/missed-call" },
   { icon: PhoneForwarded, title: "Auto Dialer", desc: "Automate outbound calls to maximize your agents' talk time.", color: "blue", path: "/services/auto-dialer" },
-  { icon: Megaphone, title: "Bulk Voice Calls", desc: "Broadcast voice messages to thousands of customers instantly.", color: "blue", path: "/services/bulk-voice-call" },
-  { icon: MessageCircle, title: "Whatsapp Chat Bot", desc: "Automate customer support and notifications on WhatsApp 24/7.", color: "blue", path: "/services/whatsapp-bot" },
-  { icon: Bot, title: "Web Chat Bot", desc: "AI-powered web widget for instant visitor engagement and help.", color: "blue", path: "/services/web-chat-bot" },
-  { icon: Users, title: "CRM Integration", desc: "Manage leads and customer interactions seamlessly in one place.", color: "blue", path: "/services/crm-integration" },
-  { icon: Headphones, title: "Toll Free Number", desc: "Provide a free, professional contact method for your customers.", color: "blue", path: "/services/toll-free-number" },
-  { icon: PhoneCall, title: "Virtual Number", desc: "Localize your brand's presence with dedicated virtual numbers.", color: "blue", path: "/services/virtual-number" },
+  { icon: BarChart, title: "Live Analytics", desc: "Real-time wallboards and detailed historical call reports.", color: "blue", path: "/services/live-analytics" },
+  { icon: ClipboardList, title: "Quality Analysis", desc: "Evaluate interactions and monitor agent performance to maintain high service standards.", color: "blue", path: "/services/quality-analysis" },
+   { icon: PhoneCall, title: "Virtual Number", desc: "Localize your brand's presence with dedicated virtual numbers.", color: "blue", path: "/services/virtual-number" },
   { icon: Database, title: "Call Recording", desc: "Securely record and monitor business calls for quality assurance.", color: "blue", path: "/services/call-recording" },
   { icon: Zap, title: "Click to Call", desc: "Enable instant calling directly from your website or mobile app.", color: "blue", path: "/services/click-to-call" },
   { icon: Network, title: "Smart Call Routing", desc: "Intelligent skill-based and time-based agent call routing.", color: "blue", path: "/services/smart-call-routing" },
   { icon: ShieldCheck, title: "Number Masking", desc: "Protect customer and agent privacy with secure number masking.", color: "blue", path: "/services/number-masking" },
-  { icon: BarChart, title: "Live Analytics", desc: "Real-time wallboards and detailed historical call reports.", color: "blue", path: "/services/live-analytics" },
-  { icon: ClipboardList, title: "Quality Analysis", desc: "Evaluate interactions and monitor agent performance to maintain high service standards.", color: "blue", path: "/services/quality-analysis" }
+  { icon: Megaphone, title: "Bulk Voice Calls", desc: "Broadcast voice messages to thousands of customers instantly.", color: "blue", path: "/services/bulk-voice-call" },
+  { icon: MessageCircle, title: "Whatsapp Chat Bot", desc: "Automate customer support and notifications on WhatsApp 24/7.", color: "blue", path: "/services/whatsapp-bot" },
+  { icon: Bot, title: "Web Chat Bot", desc: "AI-powered web widget for instant visitor engagement and help.", color: "blue", path: "/services/web-chat-bot" },
+  { icon: Users, title: "CRM Integration", desc: "Manage leads and customer interactions seamlessly in one place.", color: "blue", path: "/services/crm-integration" },
+  { icon: Headphones, title: "Toll Free Number", desc: "Provide a free, professional contact method for your customers.", color: "blue", path: "/services/toll-free-number" }
 ];
 
 const BENEFITS_DATA = [
@@ -191,7 +191,7 @@ export default function CubeCloudCCS() {
             <br className="hidden sm:block" />
             <span className="text-red-600">with an All-in-One Cloud Solution</span>
           </h1>
-          <p className="mt-5 text-lg text-blue-100 max-w-2xl leading-relaxed animate-fade-up animate-delay-100">
+          <p className="mt-5 text-lg text-blue-100 max-w-2xl leading-relaxed animate-fade-up animate-delay-100 text-justify">
             Accelerate your team collaboration with powerful cloud dialing, comprehensive features, 
             and SIP trunking solutions — engineered for high-performance enterprises.
           </p>
@@ -322,7 +322,7 @@ End-to-End Communication Platform — From voice infrastructure and dialers to C
                   </div>
                   <div>
                     <h4 className="font-bold text-lg mb-1 text-slate-900">{benefit.title}</h4>
-                    <p className="text-slate-600 text-sm leading-relaxed">{benefit.desc}</p>
+                    <p className="text-slate-600 text-sm leading-relaxed text-justify">{benefit.desc}</p>
                   </div>
                 </div>
               ))}
@@ -365,7 +365,7 @@ End-to-End Communication Platform — From voice infrastructure and dialers to C
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.5, delay: (i % 5) * 0.1 }}
-                  className="bg-white p-7 rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 text-left flex flex-col h-full hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-300 relative z-20 group"
+                  className="bg-white p-7 rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col h-full hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-300 relative z-20 group"
                 >
                   {/* Wrap the entire card inner content in a Link */}
                   <Link to={service.path} className="flex flex-col h-full w-full outline-none">
@@ -377,7 +377,7 @@ End-to-End Communication Platform — From voice infrastructure and dialers to C
                       {service.title}
                     </h3>
                     
-                    <p className="text-[13.5px] text-slate-500 leading-relaxed mb-8">
+                    <p className="text-[13.5px] text-slate-500 leading-relaxed mb-8 text-justify">
                       {service.desc}
                     </p>
                     
@@ -431,7 +431,7 @@ End-to-End Communication Platform — From voice infrastructure and dialers to C
                   {usp.bullets.map((bullet, idx) => (
                     <li key={idx} className="flex items-start gap-3 text-[14.5px] text-slate-600">
                       <span className="w-2 h-2 bg-blue-500 mt-1.5 shrink-0 rounded-sm"></span>
-                      <span className="leading-snug">{bullet}</span>
+                      <span className="leading-snug text-justify">{bullet}</span>
                     </li>
                   ))}
                 </ul>
@@ -462,7 +462,7 @@ End-to-End Communication Platform — From voice infrastructure and dialers to C
                 <h2 className="font-heading font-black text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-6">
                   Enhance Your <br/>Operations
                 </h2>
-                <p className="text-[16px] text-blue-100 leading-relaxed">
+                <p className="text-[16px] text-blue-100 leading-relaxed text-justify">
                   94% of Managers state their business security and workflow efficiency have drastically improved after migrating to robust <strong className="text-white">cloud telephony services.</strong>
                 </p>
               </div>
@@ -493,7 +493,7 @@ End-to-End Communication Platform — From voice infrastructure and dialers to C
                       <h4 className="font-bold text-[16px] text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
                         {fact.title}
                       </h4>
-                      <p className="text-[13px] text-slate-500 leading-relaxed flex-grow">
+                      <p className="text-[13px] text-slate-500 leading-relaxed flex-grow text-justify">
                         {fact.desc}
                       </p>
                     </div>
@@ -518,10 +518,10 @@ End-to-End Communication Platform — From voice infrastructure and dialers to C
           <Accordion type="single" collapsible className="w-full">
             {FAQ_DATA.map((f, i) => (
               <AccordionItem key={i} value={`faq-${i}`} className="bg-slate-50 rounded-xl border border-slate-100 mb-3 px-6 shadow-sm data-[state=open]:shadow-md transition-shadow">
-                <AccordionTrigger className="text-left font-heading font-bold text-slate-900 hover:text-blue-700 hover:no-underline py-5">
+                <AccordionTrigger className="text-left font-heading font-bold text-slate-900 hover:text-blue-700 hover:no-underline py-5 text-justify">
                   {f.q}
                 </AccordionTrigger>
-                <AccordionContent className="text-slate-600 leading-relaxed pb-5">
+                <AccordionContent className="text-slate-600 leading-relaxed pb-5 text-justify">
                   {f.a}
                 </AccordionContent>
               </AccordionItem>
@@ -561,7 +561,7 @@ End-to-End Communication Platform — From voice infrastructure and dialers to C
                 To All Your Customers
               </h3>
               
-              <p className="text-blue-100 text-lg leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
+              <p className="text-blue-100 text-lg leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0 text-justify">
                 Connect with our experts today. We will assess your call volume and set up a customized cloud environment for your team. Give your brand a better outlook by using professional cloud services.
               </p>
 

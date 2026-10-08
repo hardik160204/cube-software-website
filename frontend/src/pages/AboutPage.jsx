@@ -70,11 +70,11 @@ const AboutPage = () => {
             <span className="text-white font-semibold">About Us</span>
           </nav>
           
-          <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight max-w-3xl leading-[1.05] animate-fade-up">
+          <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight max-w-3xl leading-[1.05] animate-fade-up text-justify">
             35+ Years of Telephony, Engineered with Passion
           </h1>
           
-          <p className="mt-5 text-lg text-blue-100 max-w-2xl leading-relaxed animate-fade-up">
+          <p className="mt-5 text-lg text-blue-100 max-w-2xl leading-relaxed animate-fade-up text-justify">
             At Cube Software we have been designing Computer Telephony Integration software for over
             three decades — deploying products that work seamlessly with the communication solutions
             of the world's leading telecom vendors.
@@ -106,7 +106,7 @@ const AboutPage = () => {
                 <div className="font-heading font-black text-3xl sm:text-4xl text-white mb-1 drop-shadow-md">
                   {s.value}
                 </div>
-                <div className="font-semibold tracking-wider uppercase text-blue-200/80 text-xs sm:text-sm">
+                <div className="font-semibold tracking-wider uppercase text-blue-200/80 text-xs sm:text-sm text-center">
                   {s.label}
                 </div>
               </div>
@@ -116,56 +116,41 @@ const AboutPage = () => {
 
       </section>
 
-      {/* Story */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-14 items-center">
-          <div>
-            <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-3">— Our Story</div>
-            <h2 className="font-heading font-black text-3xl sm:text-4xl tracking-tight text-slate-900 leading-tight">
-              From CTI pioneers to cloud telephony partners
+      {/* NEW Founder's Message Section replacing Our Story */}
+      <section className="py-24 bg-gradient-to-b from-[#e6f4fc] to-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-14 lg:gap-24 items-center">
+          
+          {/* Left Text Content */}
+          <div className="relative z-10">
+            <h2 className="font-heading font-black text-4xl sm:text-5xl text-slate-800 leading-tight mb-8">
+              Founder's Message
             </h2>
-            <p className="mt-5 text-slate-600 leading-relaxed text-justify">
-              Founded in 1990, Cube Software began building Computer Telephony Integration solutions
-              when the discipline was still in its infancy. Over the years we have shipped a large
-              family of products — dialers, voice loggers, IVR systems, voice mail, billing and
-              conferencing — that integrate seamlessly with equipment from most international
-              telecom vendors.
+            <p className="text-slate-600 text-lg sm:text-xl leading-[1.8] text-justify font-medium">
+              "We at Cube Software are happy to revolutionize the world with the power of cloud telephony. We look forward for developing a cloud telephony network which is reachable to every business, be it a well-established business or new start-up or an entrepreneur. Our strength is our quality of service on which we never compromise."
             </p>
-            <p className="mt-4 text-slate-600 leading-relaxed text-justify">
-              Today that same engineering DNA powers our cloud-hosted telephony suite, serving BPOs,
-              banks, hospitals, hotels, real-estate firms and government departments. Our clientele
-              includes some of the most recognised names in industry — and many have partnered with
-              us for over two decades.
-            </p>
-            <ul className="mt-6 space-y-3">
-              {[
-                "Home-grown products, built and supported in-house",
-                "Compatible with all CTI enabled Pabx for e.g Avaya, Siemens, Mitel, Cisco and more",
-                "On-premise, hosted and hybrid deployment models",
-              ].map((t) => (
-                <li key={t} className="flex items-start gap-2.5 text-slate-700 text-sm">
-                  <CheckCircle2 size={16} className="text-blue-600 mt-0.5 shrink-0" /> {t}
-                </li>
-              ))}
-            </ul>
           </div>
-          <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-br from-blue-100 to-amber-50 rounded-3xl rotate-1" />
-            <img
-              src={IMAGES.team}
-              alt="Cube Software team"
-              className="relative rounded-2xl shadow-2xl border border-slate-100 w-full object-cover aspect-[4/3]"
-              loading="lazy"
-            />
+
+          {/* Right Image Container */}
+          <div className="relative z-10">
+            {/* Added a subtle shadow and rounded corners to match the reference image style */}
+            <div className="rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] bg-white p-2">
+              <img
+                src={IMAGES.team}
+                alt="Cube Software Team Meeting"
+                className="w-full h-auto object-cover rounded-lg aspect-[4/3]"
+                loading="lazy"
+              />
+            </div>
           </div>
+
         </div>
       </section>
 
       {/* Timeline */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-20 bg-slate-50 border-t border-slate-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-3">— Milestones</div>
-          <h2 className="font-heading font-black text-3xl sm:text-4xl tracking-tight text-slate-900">Three decades of firsts</h2>
+          <h2 className="font-heading font-black text-3xl sm:text-4xl tracking-tight text-slate-900 text-justify">Three decades of firsts</h2>
           <div className="mt-12 relative">
             <div className="absolute left-[26px] top-2 bottom-2 w-px bg-blue-200" />
             <div className="space-y-8">
@@ -175,7 +160,7 @@ const AboutPage = () => {
                     {m.year}
                   </div>
                   <div className="bg-white rounded-xl border border-slate-100 p-5 shadow-sm flex-1 hover:shadow-md transition-shadow">
-                    <p className="text-slate-700 text-sm leading-relaxed">{m.text}</p>
+                    <p className="text-slate-700 text-sm leading-relaxed text-justify">{m.text}</p>
                   </div>
                 </div>
               ))}
@@ -185,10 +170,10 @@ const AboutPage = () => {
       </section>
 
       {/* Values */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-3">— Our Values</div>
-          <h2 className="font-heading font-black text-3xl sm:text-4xl tracking-tight text-slate-900">What we stand for</h2>
+          <h2 className="font-heading font-black text-3xl sm:text-4xl tracking-tight text-slate-900 text-justify">What we stand for</h2>
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {VALUES.map((v, i) => {
               const accents = ["bg-blue-50 text-blue-700", "bg-red-50 text-red-600", "bg-amber-50 text-amber-500", "bg-blue-50 text-blue-700"];
@@ -197,8 +182,8 @@ const AboutPage = () => {
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${accents[i]}`}>
                     <v.icon size={22} />
                   </div>
-                  <h3 className="font-heading font-bold text-lg text-slate-900 mb-1.5">{v.title}</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">{v.text}</p>
+                  <h3 className="font-heading font-bold text-lg text-slate-900 mb-1.5 text-justify">{v.title}</h3>
+                  <p className="text-sm text-slate-600 leading-relaxed text-justify">{v.text}</p>
                 </div>
               );
             })}
@@ -212,10 +197,10 @@ const AboutPage = () => {
       <section className="py-16 bg-[#0A1F44]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
           <div>
-            <h2 className="font-heading font-black text-3xl sm:text-4xl text-white tracking-tight">
+            <h2 className="font-heading font-black text-3xl sm:text-4xl text-white tracking-tight text-justify">
               Let's build your communication stack together
             </h2>
-            <p className="mt-3 text-blue-200 max-w-xl">
+            <p className="mt-3 text-blue-200 max-w-xl text-justify">
               Three decades of telephony expertise, one conversation away.
             </p>
           </div>
